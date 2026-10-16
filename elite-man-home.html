@@ -114,9 +114,7 @@ p { margin: 0; }
 .hero-smoke i:nth-child(4) { width: 44vw; height: 30vh; left: 28%; top: -10%; animation-duration: 35s; animation-delay: -4s; }
 @keyframes smoke { 0% { transform: translate3d(-7%, 2%, 0) scale(1); opacity: .6; } 50% { transform: translate3d(3%, -4%, 0) scale(1.1); opacity: .95; } 100% { transform: translate3d(8%, 3%, 0) scale(.96); opacity: .65; } }
 .hero-sub, .hero-line { text-shadow: 0 0 18px #ffffff, 0 0 2px #ffffffcc; }
-.hero-in.smooth { transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
 .fly { text-shadow: 0 0 28px #ffffffb3; }
-.fly.smooth { transition: transform .6s cubic-bezier(.22,.61,.36,1); }
 .hero-in { position: relative; z-index: 2; display: grid; gap: 14px; justify-items: center; padding: calc(var(--hh) + 2vh) 16px 40px; will-change: transform, opacity; }
 .wordmark { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 8vw, 128px); line-height: .95; letter-spacing: 0.2em; padding-left: .2em; text-transform: uppercase; white-space: nowrap; }
 .wordmark span { display: inline-block; }
@@ -925,19 +923,18 @@ footer { background: var(--footer); color: var(--footer-ink); padding-block: 56p
   var fly = document.getElementById("fly"), heroWord = hero.querySelector(".wordmark"), logoB = document.querySelector(".hdr .logo b"), hdr = document.getElementById("hdr");
   var flyStart = null, heroSmoke = document.getElementById("heroSmoke");
   function lerp(a, b, k) { return a + (b - a) * k; }
-  function easeIO(k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
   function measureFly() {
-    var hadSmooth = heroIn.classList.contains("smooth"); heroIn.classList.remove("smooth");
     var prev = heroIn.style.transform; heroIn.style.transform = "none";
     var r = heroWord.getBoundingClientRect(), y = window.scrollY;
-    heroIn.style.transform = prev; void heroIn.offsetWidth; if (hadSmooth) heroIn.classList.add("smooth");
+    heroIn.style.transform = prev;
     flyStart = { cx: r.left + r.width / 2, cy: r.top + y + r.height / 2, fs: parseFloat(getComputedStyle(heroWord).fontSize) };
   }
   function flyFrame(y) {
     if (reduce || !flyStart) return;
-    var p = Math.min(1, Math.max(0, y / (hero.offsetHeight * 0.42))), e = easeIO(p);
-    var lr = logoB.getBoundingClientRect(), tfs = parseFloat(getComputedStyle(logoB).fontSize);
-    var cx = lerp(flyStart.cx, lr.left + lr.width / 2, e), cy = lerp(flyStart.cy, lr.top + lr.height / 2, e), sc = lerp(1, tfs / flyStart.fs, e);
+    // moves with the page pixel for pixel and reaches the logo size exactly when it reaches the logo
+    var lr = logoB.getBoundingClientRect(), tfs = parseFloat(getComputedStyle(logoB).fontSize), ly = lr.top + lr.height / 2;
+    var p = Math.min(1, Math.max(0, y / Math.max(1, flyStart.cy - ly)));
+    var cx = lerp(flyStart.cx, lr.left + lr.width / 2, p), cy = lerp(flyStart.cy, ly, p), sc = lerp(1, tfs / flyStart.fs, p);
     fly.style.transform = "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px) translate(-50%,-50%) scale(" + sc.toFixed(4) + ")";
     hdr.classList.toggle("on-hero", p < 0.96);
     heroIn.style.opacity = String(Math.max(0, 1 - p * 1.6));
@@ -1372,7 +1369,6 @@ footer { background: var(--footer); color: var(--footer-ink); padding-block: 56p
 
   applyLang(); renderMarquee(); renderIG(); measureFly(); onScroll();
   /* Smooth follow: turn on transitions only after the first placement, so the logo does not slide in from a corner */
-  setTimeout(function () { if (!reduce) { fly.classList.add("smooth"); heroIn.classList.add("smooth"); } }, 120);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measureFly(); onScroll(); });
   var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { renderSwatches(false); renderMarquee(); measureFly(); onScroll(); }, 150); });
 })();
