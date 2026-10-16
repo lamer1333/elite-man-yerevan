@@ -102,12 +102,13 @@ p { margin: 0; }
 .hero { position: relative; margin-top: calc(-1 * var(--hh)); height: clamp(600px, 92vh, 880px); display: grid; place-items: start center; padding-block: 0; text-align: center; color: var(--ink); overflow: hidden; }
 .hero-media { position: absolute; inset: 0; }
 .hero-media .ph { position: absolute; inset: 0; }
-.hero-media .ph img { transform: scale(var(--hs, 1.06)); transform-origin: center; }
+.hero-media .ph img { transform: scale(1.06); transform-origin: center; will-change: transform; }
 .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #ffffff4d, #ffffff00 48%); pointer-events: none; }
-.hero-smoke { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; transition: opacity .6s ease; }
+.hero-smoke { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; will-change: opacity; }
 .hero-smoke::before { content: ""; position: absolute; left: 50%; top: -2%; width: min(1180px, 130%); height: 60%; transform: translateX(-50%);
-  background: radial-gradient(ellipse at center, #ffffffd1 0%, #ffffff9e 30%, #ffffff47 52%, #ffffff00 72%); filter: blur(8px); }
-.hero-smoke i { position: absolute; display: block; border-radius: 50%; background: radial-gradient(circle, #ffffffb3 0%, #ffffff59 35%, #ffffff00 68%); filter: blur(28px); animation: smoke 26s ease-in-out infinite alternate; will-change: transform, opacity; }
+  background: radial-gradient(closest-side, #ffffffd1 0%, #ffffffa6 30%, #ffffff5c 55%, #ffffff1f 78%, #ffffff00 100%); }
+/* soft edges come from the gradient itself: blur filters on big animated layers made scrolling stutter */
+.hero-smoke i { position: absolute; display: block; background: radial-gradient(closest-side, #ffffffa6 0%, #ffffff66 35%, #ffffff26 65%, #ffffff00 100%); animation: smoke 26s ease-in-out infinite alternate; will-change: transform, opacity; }
 .hero-smoke i:nth-child(1) { width: 58vw; height: 38vh; left: 2%; top: -4%; }
 .hero-smoke i:nth-child(2) { width: 54vw; height: 40vh; right: -4%; top: 4%; animation-duration: 31s; animation-delay: -9s; }
 .hero-smoke i:nth-child(3) { width: 66vw; height: 28vh; left: 17%; top: 16%; animation-duration: 23s; animation-delay: -15s; }
@@ -121,7 +122,8 @@ p { margin: 0; }
 .hero-sub { font-size: 12.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
 .hero-line { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.8vw, 22px); color: var(--ink); }
 .has-fly .hero .wordmark { opacity: 0; }
-.fly { position: fixed; left: 0; top: 0; z-index: 50; margin: 0; display: block; width: max-content; color: var(--ink); pointer-events: none; transform-origin: center center; will-change: transform; }
+.has-fly.fly-done .hdr .logo b { opacity: 1; }
+.fly { position: absolute; left: 0; top: 0; z-index: 50; margin: 0; display: block; width: max-content; color: var(--ink); pointer-events: none; transform-origin: center center; will-change: transform; }
 .fly span, .intro .wordmark span { opacity: 0; transform: translateY(42%); filter: blur(6px); animation: letter 1s var(--ease) forwards; animation-delay: calc(var(--i) * 70ms + 150ms); }
 .intro .hero-after { opacity: 0; transform: translateY(14px); animation: up .9s var(--ease) forwards; animation-delay: 1.05s; }
 @keyframes letter { to { opacity: 1; transform: none; filter: none; } }
@@ -159,7 +161,7 @@ section { padding-block: clamp(48px, 6vw, 80px); }
 /* Band with parallax */
 .band { position: relative; height: clamp(440px, 64vh, 640px); display: grid; place-items: center; text-align: center; color: #fff; padding: 0; overflow: hidden; }
 .band .ph { position: absolute; inset: -12% 0; }
-.band .ph img { transform: translateY(var(--py, 0)); }
+.band .ph img { will-change: transform; }
 .band::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 36% 42% at 50% 50%, #00000047, #00000000 75%), #00000040; }
 .band-in { position: relative; z-index: 2; display: grid; gap: 12px; justify-items: center; padding: 16px; }
 .band .label { color: #ffffffd9; }
@@ -924,19 +926,32 @@ footer { background: var(--footer); color: var(--footer-ink); padding-block: 56p
   var fly = document.getElementById("fly"), heroWord = hero.querySelector(".wordmark"), logoB = document.querySelector(".hdr .logo b"), hdr = document.getElementById("hdr");
   var flyStart = null, heroSmoke = document.getElementById("heroSmoke");
   function lerp(a, b, k) { return a + (b - a) * k; }
+  var heroImg = heroMedia.querySelector("img"), ribbonH = 0, geo = null;
+  // All layout reads happen here (load, fonts, resize), never inside a scroll frame
   function measureFly() {
     var prev = heroIn.style.transform; heroIn.style.transform = "none";
     var r = heroWord.getBoundingClientRect(), y = window.scrollY;
     heroIn.style.transform = prev;
-    flyStart = { cx: r.left + r.width / 2, cy: r.top + y + r.height / 2, fs: parseFloat(getComputedStyle(heroWord).fontSize) };
+    var lr = logoB.getBoundingClientRect(), hr = hdr.getBoundingClientRect(), stickTop = parseFloat(getComputedStyle(hdr).top) || 0;
+    flyStart = { cx: r.left + r.width / 2, cy: r.top + y + r.height / 2, fs: parseFloat(getComputedStyle(heroWord).fontSize),
+      lx: lr.left + lr.width / 2, ly: stickTop + (lr.top - hr.top) + lr.height / 2, tfs: parseFloat(getComputedStyle(logoB).fontSize) };
+    flyStart.d = Math.max(1, flyStart.cy - flyStart.ly);
+    var br = band.getBoundingClientRect(), sr = statement.getBoundingClientRect();
+    geo = { heroH: hero.offsetHeight, bandTop: br.top + y, bandH: br.height, stTop: sr.top + y, stH: sr.height };
+    lastP = -1;
   }
+  /* The wordmark sits in the page (position: absolute), so the browser itself scrolls it: no lag on phones.
+     Script only shrinks it; it lands on the logo at exactly the logo size and hands over to the real logo. */
+  var lastP = -1;
   function flyFrame(y) {
     if (reduce || !flyStart) return;
-    // moves with the page pixel for pixel and reaches the logo size exactly when it reaches the logo
-    var lr = logoB.getBoundingClientRect(), tfs = parseFloat(getComputedStyle(logoB).fontSize), ly = lr.top + lr.height / 2;
-    var p = Math.min(1, Math.max(0, y / Math.max(1, flyStart.cy - ly)));
-    var cx = lerp(flyStart.cx, lr.left + lr.width / 2, p), cy = lerp(flyStart.cy, ly, p), sc = lerp(1, tfs / flyStart.fs, p);
-    fly.style.transform = "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px) translate(-50%,-50%) scale(" + sc.toFixed(4) + ")";
+    var p = Math.min(1, Math.max(0, y / flyStart.d));
+    if (p === lastP) return; lastP = p;
+    var sc = lerp(1, flyStart.tfs / flyStart.fs, p), cx = lerp(flyStart.cx, flyStart.lx, p);
+    fly.style.transform = "translate(" + cx.toFixed(1) + "px," + flyStart.cy.toFixed(1) + "px) translate(-50%,-50%) scale(" + sc.toFixed(4) + ")";
+    var done = p >= 1;
+    document.documentElement.classList.toggle("fly-done", done);
+    fly.style.visibility = done ? "hidden" : "";
     hdr.classList.toggle("on-hero", p < 0.96);
     heroIn.style.opacity = String(Math.max(0, 1 - p * 1.6));
     heroSmoke.style.opacity = String(Math.max(0, 1 - p * 1.25));
@@ -947,23 +962,21 @@ footer { background: var(--footer); color: var(--footer-ink); padding-block: 56p
   var band = document.getElementById("atelier"), bandImg = band.querySelector("img");
   var statement = document.getElementById("statement"), words = [];
   function onScroll() {
-    (function () {
-      if (reduce) return;
-      var vh = window.innerHeight, y = window.scrollY;
-      var hp = Math.min(1, Math.max(0, y / (hero.offsetHeight * 0.9)));
-      heroMedia.style.setProperty("--hs", (1.06 - hp * 0.06).toFixed(3));
-      flyFrame(y);
-      var br = band.getBoundingClientRect();
-      if (br.bottom > 0 && br.top < vh) { var bp = (br.top + br.height / 2 - vh / 2) / vh; bandImg.style.setProperty("--py", (bp * -60).toFixed(1) + "px"); }
-      var sr = statement.getBoundingClientRect();
-      if (sr.top < vh && sr.bottom > 0 && words.length) {
-        var sp = Math.min(1, Math.max(0, (vh * 0.85 - sr.top) / (sr.height * 0.75)));
-        var lit = sp * (words.length + 1);
-        words.forEach(function (w, i) { w.style.setProperty("--o", Math.min(1, Math.max(0.2, lit - i)).toFixed(2)); });
-      }
-    })();
+    if (reduce || !geo) return;
+    var vh = window.innerHeight, y = window.scrollY;
+    flyFrame(y);
+    if (y < geo.heroH) heroImg.style.transform = "scale(" + (1.06 - Math.min(1, y / (geo.heroH * 0.9)) * 0.06).toFixed(4) + ")";
+    var bt = geo.bandTop - y;
+    if (bt + geo.bandH > 0 && bt < vh) bandImg.style.transform = "translateY(" + (((bt + geo.bandH / 2 - vh / 2) / vh) * -60).toFixed(1) + "px)";
+    var st = geo.stTop - y;
+    if (st < vh && st + geo.stH > 0 && words.length) {
+      var lit = Math.min(1, Math.max(0, (vh * 0.85 - st) / (geo.stH * 0.75))) * (words.length + 1);
+      words.forEach(function (w, i) { w.style.setProperty("--o", Math.min(1, Math.max(0.2, lit - i)).toFixed(2)); });
+    }
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  var ticking = false;
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; onScroll(); }); } }, { passive: true });
+  window.addEventListener("load", function () { measureFly(); onScroll(); });
   function renderWords() {
     var p = document.getElementById("bigWords"); p.innerHTML = "";
     words = t("st_words").split(" ").map(function (w) { var s = document.createElement("span"); s.textContent = w + " "; p.appendChild(s); return s; });
