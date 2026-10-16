@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Товар · Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="em-pages.css">
+<style>
+/* Product page: Represent's three columns (story left, photos centre, size and booking right), OUTSIDR blur title below */
+.pd { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 0.9fr); grid-template-areas: "info gallery buy"; gap: clamp(20px, 3vw, 48px); align-items: start; padding-block: 22px clamp(48px, 6vw, 80px); }
+.pd-info { grid-area: info; display: grid; gap: 16px; position: sticky; top: calc(var(--hh) + 28px); }
+.pd-head, .pd-more { display: grid; gap: 16px; }
+.pd-info h1 { font-size: clamp(24px, 2.6vw, 36px); line-height: 1.1; }
+.pd-info .lead { font-size: 15px; }
+.pd-head .pd-price { font-size: 16px; }
+.pd-gallery { grid-area: gallery; display: grid; gap: 12px; min-width: 0; }
+.pd-gallery .ph { aspect-ratio: 3 / 4; width: 100%; max-width: 100%; animation: up 1s var(--ease) both; }
+.pd-gallery .ph:nth-child(2) { animation-delay: .12s; } .pd-gallery .ph:nth-child(3) { animation-delay: .24s; } .pd-gallery .ph:nth-child(4) { animation-delay: .36s; }
+.pd-gallery .ph.model::before { content: ""; position: absolute; inset: 0; background: #12121240; }
+.pd-count { display: none; }
+.pd-buy { grid-area: buy; display: grid; gap: 16px; position: sticky; top: calc(var(--hh) + 28px); }
+.pd-price { font-size: 18px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.size-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.size-head .more::after { content: ""; }
+.guide { background: var(--soft); padding: 14px 16px; font-size: 13.5px; animation: up .4s var(--ease); overflow-x: auto; }
+.guide table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.guide th, .guide td { text-align: left; padding: 5px 8px 5px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.guide th { font-weight: 400; color: var(--muted); font-size: 11.5px; letter-spacing: 0.1em; text-transform: uppercase; }
+.guide tr.on td { color: var(--accent); }
+.pick { font-size: 13px; color: var(--muted); min-height: 1.4em; }
+.perks { list-style: none; margin: 0; padding: 16px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; font-size: 13.5px; color: var(--muted); }
+.perks li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; align-items: start; }
+.perks svg { width: 18px; height: 18px; color: var(--ink); margin-top: 2px; }
+.also { padding-block: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+
+@media (max-width: 1020px) {
+  .pd { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); grid-template-areas: "gallery info" "gallery buy"; }
+  .pd-info, .pd-buy { position: static; }
+}
+@media (max-width: 760px) {
+  .pd { grid-template-columns: minmax(0, 1fr); grid-template-areas: "gallery" "head" "buy" "more"; padding-top: 14px; }
+  .pd-info { display: contents; }
+  .pd-head { grid-area: head; }
+  .pd-more { grid-area: more; }
+  .pd-gallery { grid-auto-flow: column; grid-auto-columns: 86%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; position: relative; }
+  .pd-gallery::-webkit-scrollbar { display: none; }
+  .pd-gallery .ph { scroll-snap-align: start; }
+  .pd-count { display: block; font-size: 12px; letter-spacing: 0.1em; color: var(--muted); margin-top: -10px; }
+}
+</style>
+</head>
+<body>
+<main id="top">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumbs"><a href="elite-man-home.html" data-i18n="nav_home"></a><span aria-hidden="true">/</span><a href="catalog.html" data-i18n="nav_catalog"></a><span aria-hidden="true">/</span><a href="catalog.html" id="crCat"></a><span aria-hidden="true">/</span><span id="crName"></span></nav>
+    <div class="pd">
+      <div class="pd-info">
+        <div class="pd-head">
+          <div class="label" id="pCat"></div>
+          <h1 id="pName"></h1>
+          <div class="pd-price" id="pPrice"></div>
+          <p class="lead" id="pDesc"></p>
+        </div>
+        <div class="pd-more">
+        <dl class="specs" id="pSpecs"></dl>
+        <div class="acc">
+          <details open><summary data-i18n="pd_fit_t"></summary><div class="acc-body"><p data-i18n="pd_fit"></p></div></details>
+          <details><summary data-i18n="pd_care_t"></summary><div class="acc-body"><p id="pCare"></p></div></details>
+          <details><summary data-i18n="pd_visit_t"></summary><div class="acc-body"><p data-i18n="pd_visit"></p></div></details>
+        </div>
+        </div>
+      </div>
+      <div class="pd-gallery" id="gallery" aria-label="Photos"></div>
+      <div class="pd-buy">
+        <div>
+          <div class="size-head"><div class="row-l" data-i18n="qv_size"></div><button class="more" type="button" id="guideBtn" aria-expanded="false" aria-controls="guide" data-i18n="pd_guide"></button></div>
+          <div class="sizes" id="pSizes"></div>
+        </div>
+        <div class="guide" id="guide" hidden></div>
+        <p class="pick" id="pick" aria-live="polite"></p>
+        <a class="btn btn-accent" href="#booking" id="pBook" data-i18n="band_btn"></a>
+        <a class="btn btn-dark" href="https://wa.me/37499404066" target="_blank" rel="noopener" id="pWa" data-i18n="qv_ask"></a>
+        <ul class="perks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M6 3l12 18M18 3L6 21"/><circle cx="6" cy="5" r="2.5"/><circle cx="18" cy="5" r="2.5"/></svg><span data-i18n="pd_perk1"></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span data-i18n="pd_perk2"></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="4" y="5" width="16" height="15"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span data-i18n="pd_perk3"></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <section class="also" aria-labelledby="alsoTitle">
+    <div class="wrap">
+      <h2 class="blur-title" id="alsoTitle"></h2>
+      <div class="products" id="alsoGrid"></div>
+    </div>
+  </section>
+
+  <section class="booking-band" id="booking"></section>
+</main>
+
+<script src="em-pages.js"></script>
+<script>
+(function () {
+  EM.add({
+    ru: { ribbon: "Прототип страницы товара · фото временные, цены для примера", also: "Вам может понравиться",
+      pd_guide: "Таблица размеров", pd_pick: "Выберите размер, и мы отложим его к примерке.", pd_picked: "Размер {s} отложим к вашей примерке.",
+      pd_fit_t: "Подгонка в ателье", pd_fit: "Мастер ателье подгонит длину рукавов и брюк, талию и посадку по плечу. Обычно это занимает два-три дня (срок для примера).",
+      pd_care_t: "Уход", care_cloth: "Только сухая чистка. Храните на широких плечиках, между носками давайте вещи отдохнуть день.", care_shoes: "Чистите кремом в тон, сушите на колодках вдали от батареи. Набойки меняем в ателье.",
+      pd_visit_t: "Примерка в бутике", pd_visit: "Ул. Туманяна, 10. Запишитесь на удобное время, и к вашему приходу вещь будет ждать в примерочной.",
+      pd_perk1: "Подгонка по фигуре в ателье бутика", pd_perk2: "Примерка на Туманяна 10", pd_perk3: "Ответим в WhatsApp в рабочее время",
+      g_size: "Размер", g_chest: "Грудь, см", g_waist: "Талия, см", g_eu: "EU", g_foot: "Стопа, см", photos: "Фото {i} из {n}" },
+    hy: { ribbon: "Ապրանքի էջի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար", also: "Ձեզ կարող է հետաքրքրել նաև",
+      pd_guide: "Չափսերի աղյուսակ", pd_pick: "Ընտրեք չափսը, և մենք այն կպահենք փորձարկման համար։", pd_picked: "{s} չափսը կպահենք ձեր փորձարկման համար։",
+      pd_fit_t: "Հարմարեցում ատելյեում", pd_fit: "Ատելյեի վարպետը կհարմարեցնի թևքերի և տաբատի երկարությունը, գոտկատեղը և ուսերի նստվածքը։ Սովորաբար դա տևում է երկու-երեք օր (ժամկետը՝ օրինակի համար)։",
+      pd_care_t: "Խնամք", care_cloth: "Միայն չոր մաքրում։ Պահեք լայն կախիչի վրա և կրելուց հետո մեկ օր հանգիստ տվեք։", care_shoes: "Մաքրեք համապատասխան գույնի քսուքով, չորացրեք կաղապարի վրա՝ մարտկոցից հեռու։ Կրնկատակերը փոխում ենք ատելյեում։",
+      pd_visit_t: "Փորձարկում բուտիկում", pd_visit: "Թումանյան 10։ Գրանցվեք հարմար ժամի, և ձեր գալու պահին իրը կսպասի փորձասենյակում։",
+      pd_perk1: "Հարմարեցում բուտիկի ատելյեում", pd_perk2: "Փորձարկում Թումանյան 10-ում", pd_perk3: "Կպատասխանենք WhatsApp-ով աշխատանքային ժամերին",
+      g_size: "Չափս", g_chest: "Կուրծք, սմ", g_waist: "Գոտկատեղ, սմ", g_eu: "EU", g_foot: "Ոտնաթաթ, սմ", photos: "Լուսանկար {i}՝ {n}-ից" },
+    en: { ribbon: "Product page prototype · temporary photos, sample prices", also: "You may also like",
+      pd_guide: "Size guide", pd_pick: "Choose a size and we'll set it aside for your fitting.", pd_picked: "We'll set size {s} aside for your fitting.",
+      pd_fit_t: "Alterations in the atelier", pd_fit: "Our tailor adjusts sleeve and trouser length, the waist and the fit across the shoulders. It usually takes two to three days (sample timing).",
+      pd_care_t: "Care", care_cloth: "Dry clean only. Keep it on a broad hanger and give it a day's rest between wears.", care_shoes: "Polish with a matching cream and dry on shoe trees away from the radiator. We replace heels in the atelier.",
+      pd_visit_t: "Fitting at the boutique", pd_visit: "10 Tumanyan St. Book a time and the piece will be waiting in the fitting room when you arrive.",
+      pd_perk1: "Altered to fit in the boutique's atelier", pd_perk2: "Fittings at 10 Tumanyan", pd_perk3: "We reply on WhatsApp during opening hours",
+      g_size: "Size", g_chest: "Chest, cm", g_waist: "Waist, cm", g_eu: "EU", g_foot: "Foot, cm", photos: "Photo {i} of {n}" }
+  });
+  EM.chrome({ page: "catalog" });
+  EM.booking(document.getElementById("booking"), { service: "rtw" });
+
+  var t = EM.t, p = null, size = null;
+  var CHEST = { 46: [92, 80], 48: [96, 84], 50: [100, 88], 52: [104, 92], 54: [108, 96], 56: [112, 100] };
+  var FOOT = { s40: 25.5, s41: 26.2, s42: 26.9, s43: 27.5, s44: 28.2, s45: 28.9, s46: 29.5 };
+
+  function current() { var id = location.hash.replace("#", ""); return EM.PBY[id] || EM.PRODUCTS[0]; }
+
+  function renderGallery() {
+    var g = document.getElementById("gallery"); g.innerHTML = "";
+    var shots = [[EM.photo(p), null, ""], [EM.photo(p, "model"), 4.8, " model"], [p.img + "-detail", 8, ""], [p.img + "-back", 2.6, ""]];
+    shots.forEach(function (s, i) {
+      var d = document.createElement("div"); d.className = "ph" + s[2]; d.style.backgroundImage = EM.clothBg(p, 480, s[1]);
+      d.innerHTML = '<img data-ph src="img/' + s[0] + '.jpg" alt=""><span class="ph-label">' + s[0] + '.jpg · 3:4</span>';
+      g.appendChild(d); EM.watchImg(d.querySelector("img"));
+    });
+    var c = document.getElementById("pdCount");
+    if (!c) { c = document.createElement("div"); c.className = "pd-count num"; c.id = "pdCount"; g.after(c); }
+    var upd = function () { var i = Math.round(g.scrollLeft / (g.firstElementChild.offsetWidth + 12)) + 1; c.textContent = t("photos", { i: Math.min(i, shots.length), n: shots.length }); };
+    g.onscroll = upd; upd();
+  }
+  function renderGuide() {
+    var box = document.getElementById("guide"), shoes = p.cat === "shoes", rows;
+    if (shoes) rows = "<tr><th>" + t("g_eu") + "</th><th>" + t("g_foot") + "</th></tr>" + p.sizes.map(function (s) { return '<tr class="' + (s === size ? "on" : "") + '"><td>' + EM.sizeLabel(s) + "</td><td>" + String(FOOT[s]).replace(".", EM.lang() === "en" ? "." : ",") + "</td></tr>"; }).join("");
+    else rows = "<tr><th>" + t("g_size") + "</th><th>" + t("g_chest") + "</th><th>" + t("g_waist") + "</th></tr>" + p.sizes.map(function (s) { return '<tr class="' + (s === size ? "on" : "") + '"><td>' + s + "</td><td>" + CHEST[s][0] + "</td><td>" + CHEST[s][1] + "</td></tr>"; }).join("");
+    box.innerHTML = "<table>" + rows + "</table>";
+  }
+  function renderBuy() {
+    var sz = document.getElementById("pSizes"); sz.innerHTML = "";
+    p.sizes.forEach(function (s) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "size"; b.textContent = EM.sizeLabel(s); b.setAttribute("aria-pressed", String(size === s));
+      b.addEventListener("click", function () { size = s; renderBuy(); });
+      sz.appendChild(b);
+    });
+    document.getElementById("pick").textContent = size ? t("pd_picked", { s: EM.sizeLabel(size) }) : t("pd_pick");
+    document.getElementById("pWa").href = "https://wa.me/37499404066?text=" + encodeURIComponent(EM.pName(p) + (size ? ", " + EM.sizeLabel(size) : ""));
+    renderGuide();
+  }
+  function renderAlso() {
+    EM.blurTitle(document.getElementById("alsoTitle"), t("also"));
+    var same = EM.PRODUCTS.filter(function (x) { return x !== p && x.cat === p.cat; });
+    var other = EM.PRODUCTS.filter(function (x) { return x !== p && x.cat !== p.cat; });
+    var pick = same.slice(0, 2).concat(other.filter(function (x, i) { return i % 3 === p.ord % 3; })).slice(0, 4);
+    var g = document.getElementById("alsoGrid"); g.innerHTML = "";
+    pick.forEach(function (x, i) { var c = EM.productCard(x, i, { reveal: true }); g.appendChild(c); EM.observe(c); });
+  }
+  function render() {
+    var name = EM.pName(p);
+    document.title = name + " · Elite Man Yerevan";
+    var cr = document.getElementById("crCat"); cr.textContent = t("cat_" + p.cat); cr.href = "catalog.html#" + p.cat;
+    document.getElementById("crName").textContent = name;
+    document.getElementById("pCat").textContent = t("cat_" + p.cat) + " · " + t("season");
+    document.getElementById("pName").textContent = name;
+    document.getElementById("pDesc").textContent = EM.L(p.d);
+    document.getElementById("pPrice").textContent = EM.amd(p.price);
+    document.getElementById("pSpecs").innerHTML = EM.specs(p).map(function (r) { return "<dt>" + EM.esc(r[0]) + "</dt><dd>" + EM.esc(r[1]) + "</dd>"; }).join("");
+    document.getElementById("pCare").textContent = t(p.cat === "shoes" ? "care_shoes" : "care_cloth");
+    renderBuy(); renderAlso();
+  }
+  function load() { p = current(); size = null; renderGallery(); render(); }
+
+  var guideBtn = document.getElementById("guideBtn");
+  guideBtn.addEventListener("click", function () { var g = document.getElementById("guide"); g.hidden = !g.hidden; guideBtn.setAttribute("aria-expanded", String(!g.hidden)); });
+  document.getElementById("pBook").addEventListener("click", function (e) {
+    e.preventDefault(); document.getElementById("booking").scrollIntoView({ behavior: EM.reduce ? "auto" : "smooth" });
+    EM.prefill("rtw", EM.pName(p) + (size ? ", " + t("qv_size").toLowerCase() + " " + EM.sizeLabel(size) : ""));
+  });
+  window.addEventListener("hashchange", function () { if (EM.PBY[location.hash.replace("#", "")]) { load(); window.scrollTo(0, 0); } });
+
+  p = current(); renderGallery();
+  EM.onLang(function () { render(); var c = document.getElementById("pdCount"); if (c) document.getElementById("gallery").onscroll(); });
+  EM.start();
+})();
+</script>
+</body>
+</html>

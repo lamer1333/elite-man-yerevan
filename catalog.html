@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Каталог · Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="em-pages.css">
+<style>
+/* Catalogue: Huntsman's shop page (category row, slim filter bar, 4-up grid), Represent hover swap, OUTSIDR quick view */
+.cat-head { display: grid; gap: 10px; padding-block: 18px 26px; }
+.cat-tabs { display: flex; gap: clamp(18px, 2.6vw, 34px); overflow-x: auto; border-bottom: 1px solid var(--line); scrollbar-width: none; }
+.cat-tabs::-webkit-scrollbar { display: none; }
+.ctab { flex: none; background: none; border: 0; border-bottom: 1px solid transparent; margin-bottom: -1px; padding: 12px 0; font: 400 12.5px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); cursor: pointer; }
+.ctab sup { font-size: 10px; letter-spacing: 0; margin-left: 3px; }
+.ctab:hover { color: var(--ink); }
+.ctab[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap; padding-block: 16px; }
+.tool { display: inline-flex; align-items: center; gap: 8px; background: none; border: 1px solid var(--line); padding: 10px 14px; font: 400 12px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); cursor: pointer; }
+.tool:hover, .tool[aria-expanded="true"] { border-color: var(--ink); }
+.tool svg { width: 16px; height: 16px; }
+.tool b { font-weight: 400; background: var(--accent); color: #fff; min-width: 18px; height: 18px; display: inline-grid; place-items: center; font-size: 10.5px; letter-spacing: 0; }
+.count { font-size: 12.5px; color: var(--muted); margin-right: auto; }
+.sort { display: flex; align-items: center; gap: 10px; }
+.sort label { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.sort select { font: 300 14px/1.3 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; padding: 9px 10px; }
+.fpanel { display: grid; gap: 12px; padding: 18px 0 20px; border-top: 1px solid var(--line); animation: up .4s var(--ease); }
+.fpanel .frow > span { min-width: 92px; }
+.active { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 1px; padding-bottom: 18px; }
+.atag { display: inline-flex; align-items: center; gap: 8px; font: 400 12.5px/1 var(--sans); background: var(--soft); border: 1px solid var(--line); padding: 8px 10px; cursor: pointer; color: var(--ink); }
+.atag::after { content: "×"; font-size: 15px; line-height: 0; color: var(--muted); }
+.atag:hover { border-color: var(--ink); }
+.clear { background: none; border: 0; font: 400 12.5px/1 var(--sans); color: var(--accent); text-decoration: underline; cursor: pointer; padding: 8px 4px; }
+.empty { grid-column: 1 / -1; padding: 40px 0; display: grid; gap: 14px; justify-items: start; color: var(--muted); }
+.cat-grid { padding-bottom: clamp(48px, 6vw, 80px); }
+
+.band { position: relative; min-height: clamp(360px, 52vh, 520px); display: grid; place-items: center; text-align: center; color: #fff; padding: 0; overflow: hidden; }
+.band > .ph { position: absolute; inset: 0; }
+.band::after { content: ""; position: absolute; inset: 0; background: #00000048; }
+.band-in { position: relative; z-index: 2; display: grid; gap: 12px; justify-items: center; padding: 32px 16px; }
+.band .label { color: #ffffffd9; }
+.band h2 { font-size: clamp(22px, 2.4vw, 32px); line-height: 1.15; }
+.band p { color: #ffffffe0; max-width: 46ch; }
+
+/* Quick view (home page's three-column overlay) */
+.qv { position: fixed; inset: 0; z-index: 70; background: var(--paper); overflow-y: auto; animation: qvIn .55s var(--ease); }
+@keyframes qvIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.qv-top { position: sticky; top: 0; background: #fffffff2; border-bottom: 1px solid var(--line); z-index: 2; }
+.qv-top .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.qv-top .logo b { font-size: 18px; }
+.qv-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 0.9fr); gap: clamp(20px, 3vw, 48px); align-items: start; padding-block: clamp(28px, 4vw, 56px); }
+.qv-left { display: grid; gap: 14px; position: sticky; top: 100px; }
+.qv-left h2 { font-size: clamp(24px, 2.8vw, 38px); line-height: 1.08; }
+.qv-left p { color: var(--muted); font-size: 15px; }
+.qv-img { display: grid; gap: 12px; }
+.qv-img .ph { aspect-ratio: 3 / 4; width: 100%; max-width: 100%; animation: up .9s var(--ease) both; animation-delay: .12s; }
+.qv-img .ph + .ph { animation-delay: .3s; }
+.qv-right { display: grid; gap: 16px; position: sticky; top: 100px; }
+.qv-right .specs { border-top: 1px solid var(--line); padding-top: 16px; }
+
+@media (max-width: 1020px) {
+  .qv-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .qv-left { grid-column: 1 / -1; position: static; }
+  .qv-right { position: static; }
+}
+@media (max-width: 760px) {
+  .qv-grid { grid-template-columns: minmax(0, 1fr); }
+  .qv-img { grid-auto-flow: column; grid-auto-columns: 82%; overflow-x: auto; scroll-snap-type: x mandatory; }
+  .qv-img .ph { scroll-snap-align: start; }
+  .sort label { display: none; }
+  .fpanel .frow > span { min-width: 100%; }
+}
+</style>
+</head>
+<body>
+<main id="top">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumbs"><a href="elite-man-home.html" data-i18n="nav_home"></a><span aria-hidden="true">/</span><span data-i18n="nav_catalog"></span></nav>
+    <div class="cat-head">
+      <div class="label" data-i18n="season"></div>
+      <h1 class="page-title" data-i18n="c_title"></h1>
+      <p class="lead" data-i18n="c_lead"></p>
+    </div>
+    <div class="cat-tabs" id="catTabs" role="group" data-i18n-aria="c_cats"></div>
+    <div class="toolbar">
+      <button class="tool" type="button" id="fltBtn" aria-expanded="false" aria-controls="fpanel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>
+        <span data-i18n="c_filters"></span><b id="fltN" hidden></b>
+      </button>
+      <span class="count" id="count" aria-live="polite"></span>
+      <div class="sort">
+        <label for="sort" data-i18n="c_sort"></label>
+        <select id="sort"><option value="rec" data-i18n="c_rec"></option><option value="asc" data-i18n="c_asc"></option><option value="desc" data-i18n="c_desc"></option></select>
+      </div>
+    </div>
+    <div class="fpanel" id="fpanel" hidden>
+      <div class="frow" id="fSize"><span data-i18n="c_size"></span></div>
+      <div class="frow" id="fFab"><span data-i18n="c_fabric"></span></div>
+      <div class="frow" id="fSeason"><span data-i18n="c_season"></span></div>
+    </div>
+    <div class="active" id="active"></div>
+    <div class="cat-grid"><div class="products" id="grid"></div></div>
+  </div>
+
+  <section class="band" aria-label="Made to measure">
+    <div class="ph dark"><img data-ph src="img/fitting.jpg" alt=""><span class="ph-label">fitting.jpg · 16:9</span></div>
+    <div class="band-in rv">
+      <div class="label" data-i18n="c_mtm_label"></div>
+      <h2 data-i18n="c_mtm_title"></h2>
+      <p data-i18n="c_mtm_text"></p>
+      <a class="btn btn-light" href="atelier.html" data-i18n="c_mtm_btn"></a>
+    </div>
+  </section>
+
+  <section class="booking-band" id="booking"></section>
+</main>
+
+<div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" hidden>
+  <div class="qv-top"><div class="wrap">
+    <span class="logo" style="text-align:left"><b>Elite Man</b></span>
+    <button class="icon-btn" type="button" id="qvClose" data-i18n-aria="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div></div>
+  <div class="wrap qv-grid">
+    <div class="qv-left">
+      <div class="label" id="qvCat"></div>
+      <h2 id="qvName"></h2>
+      <div class="p-price" id="qvPrice"></div>
+      <p id="qvDesc"></p>
+      <div><a class="more" id="qvPage" href="product.html" data-i18n="c_open"></a></div>
+    </div>
+    <div class="qv-img" id="qvImgs">
+      <div class="ph"><img data-ph id="qvImg" src="" alt=""><span class="ph-label" id="qvLabel"></span></div>
+      <div class="ph"><img data-ph id="qvImg2" src="" alt=""><span class="ph-label" id="qvLabel2"></span></div>
+    </div>
+    <div class="qv-right">
+      <div><div class="row-l" data-i18n="qv_size"></div><div class="sizes" id="qvSizes"></div></div>
+      <a class="btn btn-accent" href="#booking" id="qvBook" data-i18n="band_btn"></a>
+      <a class="btn btn-dark" href="https://wa.me/37499404066" target="_blank" rel="noopener" id="qvWa" data-i18n="qv_ask"></a>
+      <dl class="specs" id="qvSpecs"></dl>
+    </div>
+  </div>
+</div>
+
+<script src="em-pages.js"></script>
+<script>
+(function () {
+  EM.add({
+    ru: { doc_title: "Каталог · Elite Man Yerevan", ribbon: "Прототип каталога · фото временные, цены для примера",
+      c_title: "Каталог", c_lead: "Готовая коллекция бутика на Туманяна 10. Каждую вещь подгоняем по фигуре в нашем ателье.", c_cats: "Категории",
+      c_filters: "Фильтры", c_sort: "Сортировка", c_rec: "Рекомендуем", c_asc: "Сначала дешевле", c_desc: "Сначала дороже",
+      c_size: "Размер", c_fabric: "Ткань", c_season: "Сезон", c_count: "Товаров: {n}", c_clear: "Сбросить всё",
+      c_empty: "Под эти фильтры ничего не нашлось. Уберите один из фильтров или посмотрите все вещи.", c_reset: "Показать все",
+      c_open: "Открыть страницу товара", c_mtm_label: "Пошив на заказ", c_mtm_title: "Нет вашего размера? Сошьём по меркам",
+      c_mtm_text: "Выберите ткань из библиотеки, а мастер снимет мерки и сошьёт костюм за четыре недели.", c_mtm_btn: "О пошиве на заказ" },
+    hy: { doc_title: "Կատալոգ · Elite Man Yerevan", ribbon: "Կատալոգի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար",
+      c_title: "Կատալոգ", c_lead: "Թումանյան 10-ի բուտիկի պատրաստի հավաքածուն։ Յուրաքանչյուր իր հարմարեցնում ենք ձեր կազմվածքին մեր ատելյեում։", c_cats: "Կատեգորիաներ",
+      c_filters: "Ֆիլտրեր", c_sort: "Դասավորել", c_rec: "Առաջարկվող", c_asc: "Սկզբում էժանները", c_desc: "Սկզբում թանկերը",
+      c_size: "Չափս", c_fabric: "Գործվածք", c_season: "Սեզոն", c_count: "Ապրանքներ՝ {n}", c_clear: "Մաքրել բոլորը",
+      c_empty: "Այս ֆիլտրերով ոչինչ չգտնվեց։ Հանեք ֆիլտրերից մեկը կամ դիտեք բոլոր իրերը։", c_reset: "Ցույց տալ բոլորը",
+      c_open: "Բացել ապրանքի էջը", c_mtm_label: "Պատվերով կարում", c_mtm_title: "Ձեր չափսը չկա՞։ Կկարենք ձեր չափսերով",
+      c_mtm_text: "Ընտրեք գործվածքը գրադարանից, իսկ վարպետը կվերցնի չափսերը և կկարի կոստյումը չորս շաբաթում։", c_mtm_btn: "Պատվերով կարման մասին" },
+    en: { doc_title: "Catalogue · Elite Man Yerevan", ribbon: "Catalogue prototype · temporary photos, sample prices",
+      c_title: "Catalogue", c_lead: "The ready-to-wear collection of the boutique at 10 Tumanyan. Every piece is altered to fit in our atelier.", c_cats: "Categories",
+      c_filters: "Filters", c_sort: "Sort", c_rec: "Recommended", c_asc: "Price: low to high", c_desc: "Price: high to low",
+      c_size: "Size", c_fabric: "Cloth", c_season: "Season", c_count: "{n} pieces", c_clear: "Clear all",
+      c_empty: "Nothing matches these filters. Remove one of them or see every piece.", c_reset: "Show all",
+      c_open: "Open the product page", c_mtm_label: "Made to measure", c_mtm_title: "Not your size? We'll make it to measure",
+      c_mtm_text: "Choose a cloth from the library; the tailor takes your measurements and makes the suit in four weeks.", c_mtm_btn: "About made to measure" }
+  });
+  EM.chrome({ page: "catalog" });
+  EM.booking(document.getElementById("booking"), { service: "rtw" });
+
+  var t = EM.t, P = EM.PRODUCTS;
+  var CATS = ["all", "suits", "tuxedo", "jackets", "coats", "shoes"];
+  var FABS = ["wool", "cashmere", "linen", "velvet", "leather"];
+  var st = { cat: "all", sizes: [], fabs: [], season: "all", sort: "rec" };
+  var fromHash = location.hash.replace("#", "");
+  if (CATS.indexOf(fromHash) > 0) st.cat = fromHash;
+
+  function inCat(p) { return st.cat === "all" || p.cat === st.cat; }
+  function sizeSet() {
+    var shoes = st.cat === "shoes", seen = {};
+    P.filter(inCat).forEach(function (p) { p.sizes.forEach(function (s) { seen[s] = 1; }); });
+    return Object.keys(seen).filter(function (s) { return shoes ? s[0] === "s" : s[0] !== "s"; }).sort(function (a, b) { return parseInt(EM.sizeLabel(a)) - parseInt(EM.sizeLabel(b)); });
+  }
+  function match(p) {
+    return inCat(p) &&
+      (!st.sizes.length || st.sizes.some(function (s) { return p.sizes.map(String).indexOf(s) > -1; })) &&
+      (!st.fabs.length || st.fabs.indexOf(p.fb) > -1) &&
+      (st.season === "all" || p.s === st.season);
+  }
+  function list() {
+    var l = P.filter(match);
+    if (st.sort === "asc") l.sort(function (a, b) { return a.price - b.price; });
+    if (st.sort === "desc") l.sort(function (a, b) { return b.price - a.price; });
+    return l;
+  }
+
+  function chip(label, pressed, onClick, disabled) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = label;
+    b.setAttribute("aria-pressed", String(pressed)); if (disabled) b.disabled = true;
+    b.addEventListener("click", onClick); return b;
+  }
+  function toggle(arr, v) { var i = arr.indexOf(v); if (i > -1) arr.splice(i, 1); else arr.push(v); }
+  function clearRow(el) { el.querySelectorAll(".chip").forEach(function (c) { c.remove(); }); }
+
+  function renderTabs() {
+    var box = document.getElementById("catTabs"); box.innerHTML = "";
+    CATS.forEach(function (c) {
+      var n = P.filter(function (p) { return c === "all" || p.cat === c; }).length;
+      var b = document.createElement("button"); b.type = "button"; b.className = "ctab"; b.id = "cat-" + c;
+      b.innerHTML = EM.esc(t("cat_" + c)) + "<sup class=\"num\">" + n + "</sup>";
+      b.setAttribute("aria-pressed", String(st.cat === c));
+      b.addEventListener("click", function () { setCat(c); });
+      box.appendChild(b);
+    });
+  }
+  function setCat(c) {
+    st.cat = c;
+    var ok = sizeSet(); st.sizes = st.sizes.filter(function (s) { return ok.indexOf(s) > -1; });
+    var fabsHere = FABS.filter(function (f) { return P.some(function (p) { return inCat(p) && p.fb === f; }); });
+    st.fabs = st.fabs.filter(function (f) { return fabsHere.indexOf(f) > -1; });
+    try { history.replaceState(null, "", c === "all" ? location.pathname : "#" + c); } catch (e) {}
+    update(true);
+  }
+  function renderFilters() {
+    var fs = document.getElementById("fSize"); clearRow(fs);
+    sizeSet().forEach(function (s) { fs.appendChild(chip(EM.sizeLabel(s), st.sizes.indexOf(s) > -1, function () { toggle(st.sizes, s); update(true); })); });
+    var ff = document.getElementById("fFab"); clearRow(ff);
+    FABS.forEach(function (f) {
+      var has = P.some(function (p) { return inCat(p) && p.fb === f; });
+      if (has) ff.appendChild(chip(t("fb_" + f), st.fabs.indexOf(f) > -1, function () { toggle(st.fabs, f); update(true); }));
+    });
+    var fse = document.getElementById("fSeason"); clearRow(fse);
+    ["all", "aw", "ss", "yr"].forEach(function (s) { fse.appendChild(chip(t(s), st.season === s, function () { st.season = s; update(true); })); });
+    var n = st.sizes.length + st.fabs.length + (st.season === "all" ? 0 : 1), badge = document.getElementById("fltN");
+    badge.hidden = !n; badge.textContent = n;
+    var act = document.getElementById("active"); act.innerHTML = "";
+    function tag(label, fn) { var b = document.createElement("button"); b.type = "button"; b.className = "atag"; b.textContent = label; b.addEventListener("click", function () { fn(); update(true); }); act.appendChild(b); }
+    st.sizes.forEach(function (s) { tag(t("c_size") + " " + EM.sizeLabel(s), function () { toggle(st.sizes, s); }); });
+    st.fabs.forEach(function (f) { tag(t("fb_" + f), function () { toggle(st.fabs, f); }); });
+    if (st.season !== "all") tag(t(st.season), function () { st.season = "all"; });
+    if (n) { var c = document.createElement("button"); c.type = "button"; c.className = "clear"; c.textContent = t("c_clear"); c.addEventListener("click", resetAll); act.appendChild(c); }
+  }
+  function resetAll() { st.sizes = []; st.fabs = []; st.season = "all"; update(true); }
+  function renderGrid(animate) {
+    var g = document.getElementById("grid"), l = list(); g.innerHTML = "";
+    document.getElementById("count").textContent = t("c_count", { n: l.length });
+    if (!l.length) {
+      var e = document.createElement("div"); e.className = "empty";
+      e.innerHTML = "<p>" + EM.esc(t("c_empty")) + "</p>";
+      var b = document.createElement("button"); b.type = "button"; b.className = "btn btn-dark"; b.textContent = t("c_reset");
+      b.addEventListener("click", function () { st.cat = "all"; resetAll(); });
+      e.appendChild(b); g.appendChild(e); return;
+    }
+    l.forEach(function (p, i) { g.appendChild(EM.productCard(p, i, { enter: animate !== false, sizes: true, quick: openQV })); });
+  }
+  function update(animate) { renderTabs(); renderFilters(); renderGrid(animate); }
+
+  document.getElementById("sort").addEventListener("change", function () { st.sort = this.value; renderGrid(true); });
+  var fltBtn = document.getElementById("fltBtn"), fpanel = document.getElementById("fpanel");
+  function setPanel(open) { fpanel.hidden = !open; fltBtn.setAttribute("aria-expanded", String(open)); }
+  fltBtn.addEventListener("click", function () { setPanel(fpanel.hidden); });
+  setPanel(window.innerWidth > 1020);
+  window.addEventListener("hashchange", function () { var h = location.hash.replace("#", ""); if (CATS.indexOf(h) > -1 && h !== st.cat) setCat(h); });
+
+  /* Quick view */
+  var qv = document.getElementById("qv"), qvP = null, qvSize = null, lastFocus = null;
+  function fillQV() {
+    var p = qvP; if (!p) return;
+    document.getElementById("qvCat").textContent = t("cat_" + p.cat);
+    document.getElementById("qvName").textContent = EM.pName(p);
+    document.getElementById("qvPrice").textContent = EM.amd(p.price);
+    document.getElementById("qvDesc").textContent = EM.L(p.d);
+    document.getElementById("qvPage").href = "product.html#" + p.id;
+    var shots = [EM.photo(p), EM.photo(p, "model")];
+    ["qvImg", "qvImg2"].forEach(function (id, k) {
+      var img = document.getElementById(id), box = img.parentElement;
+      box.style.backgroundImage = EM.clothBg(p, 480, k ? 4.8 : null);
+      if (img.getAttribute("src") !== "img/" + shots[k] + ".jpg") { box.classList.remove("missing"); img.src = "img/" + shots[k] + ".jpg"; }
+      document.getElementById(k ? "qvLabel2" : "qvLabel").textContent = shots[k] + ".jpg · 3:4";
+    });
+    var sz = document.getElementById("qvSizes"); sz.innerHTML = "";
+    p.sizes.forEach(function (s) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "size"; b.textContent = EM.sizeLabel(s); b.setAttribute("aria-pressed", String(qvSize === s));
+      b.addEventListener("click", function () { qvSize = s; fillQV(); });
+      sz.appendChild(b);
+    });
+    document.getElementById("qvSpecs").innerHTML = EM.specs(p).map(function (r) { return "<dt>" + EM.esc(r[0]) + "</dt><dd>" + EM.esc(r[1]) + "</dd>"; }).join("");
+    document.getElementById("qvWa").href = "https://wa.me/37499404066?text=" + encodeURIComponent(EM.pName(p) + (qvSize ? ", " + EM.sizeLabel(qvSize) : ""));
+  }
+  function openQV(p) {
+    lastFocus = document.activeElement; qvP = p; qvSize = null;
+    qv.hidden = false; qv.scrollTop = 0; document.body.classList.add("lock");
+    document.querySelectorAll("#qvImgs .ph").forEach(function (ph) { ph.style.animation = "none"; void ph.offsetWidth; ph.style.animation = ""; });
+    fillQV(); document.getElementById("qvClose").focus();
+  }
+  function closeQV() { qv.hidden = true; document.body.classList.remove("lock"); if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus(); }
+  document.getElementById("qvClose").addEventListener("click", closeQV);
+  document.getElementById("qvBook").addEventListener("click", function () {
+    EM.prefill("rtw", EM.pName(qvP) + (qvSize ? ", " + t("qv_size").toLowerCase() + " " + EM.sizeLabel(qvSize) : ""));
+    qv.hidden = true; document.body.classList.remove("lock");
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !qv.hidden) closeQV(); });
+
+  EM.onLang(function () { update(false); fillQV(); });
+  EM.start();
+})();
+</script>
+</body>
+</html>

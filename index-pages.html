@@ -1,0 +1,129 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Прототип Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="em-pages.css">
+<style>
+/* Contents page: the site's header and footer around a plain list of pages, each with a cloth swatch from its own world */
+.idx-head { display: grid; gap: 12px; padding-block: clamp(40px, 6vw, 80px) clamp(24px, 3vw, 40px); }
+.idx-head h1 { font-size: clamp(28px, 3.6vw, 48px); line-height: 1.05; letter-spacing: 0.14em; }
+.pages { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.pg { border-bottom: 1px solid var(--line); }
+.pg a { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(0, 1.3fr) auto; gap: 14px clamp(16px, 3vw, 40px); align-items: center; padding-block: 18px; text-decoration: none; }
+.pg canvas { width: 72px; height: 72px; display: block; transition: transform .6s var(--ease); }
+.pg h2 { font-size: clamp(16px, 1.5vw, 20px); letter-spacing: 0.1em; transition: color .2s; }
+.pg .file { display: block; margin-top: 4px; font: 400 11.5px/1.3 ui-monospace, Menlo, monospace; color: var(--muted); letter-spacing: 0; }
+.pg p { color: var(--muted); font-size: 14.5px; }
+.pg .go { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; display: inline-flex; gap: 8px; align-items: center; }
+.pg .go::after { content: "→"; transition: transform .3s var(--ease); }
+.pg a:hover h2 { color: var(--accent); }
+.pg a:hover canvas { transform: scale(1.06); }
+.pg a:hover .go::after { transform: translateX(4px); }
+.idx-note { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 3vw, 40px); padding-block: clamp(40px, 5vw, 64px); }
+.idx-note div { display: grid; gap: 6px; align-content: start; }
+.idx-note p { color: var(--muted); font-size: 14.5px; }
+.idx-foot { background: var(--footer); color: var(--footer-muted); font-size: 12.5px; padding-block: 22px; }
+.idx-foot .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.hdr-in .spacer { min-width: 1px; }
+@media (max-width: 760px) {
+  .pg a { grid-template-columns: 56px minmax(0, 1fr); align-items: start; }
+  .pg canvas { width: 56px; height: 56px; }
+  .pg p, .pg .go { grid-column: 2; }
+  .idx-note { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+
+<div class="ribbon" data-i18n="ribbon"></div>
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <div class="spacer"></div>
+    <a class="logo" href="elite-man-home.html" aria-label="Elite Man Yerevan"><b>Elite Man</b><i>Yerevan</i></a>
+    <div class="hdr-right">
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="hy" id="lang-hy">HY</button>
+        <button type="button" data-lang="ru" id="lang-ru">RU</button>
+        <button type="button" data-lang="en" id="lang-en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="idx-head">
+      <div class="label" data-i18n="i_label"></div>
+      <h1>Elite Man Yerevan</h1>
+      <p class="lead" data-i18n="i_lead"></p>
+    </div>
+    <ol class="pages" id="pages"></ol>
+    <div class="idx-note">
+      <div><div class="label" data-i18n="n1_t"></div><p data-i18n="n1_d"></p></div>
+      <div><div class="label" data-i18n="n2_t"></div><p data-i18n="n2_d"></p></div>
+      <div><div class="label" data-i18n="n3_t"></div><p data-i18n="n3_d"></p></div>
+    </div>
+  </div>
+</main>
+<footer class="idx-foot"><div class="wrap"><span>© 2026 Elite Man Yerevan · <span data-i18n="addr"></span></span><span data-i18n="foot"></span></div></footer>
+
+<script src="em-pages.js"></script>
+<script>
+(function () {
+  EM.add({
+    ru: { ribbon: "Прототип сайта · фото временные, цены для примера", i_label: "Прототип сайта · все страницы",
+      i_lead: "Кликабельный прототип бутика на Туманяна 10: главная и четыре внутренние страницы в одной дизайн-системе. Язык переключается на любой странице и запоминается.",
+      open: "Открыть",
+      p_home: "Главная", p_home_d: "Коллекция, ателье, образ месяца, библиотека тканей, гости бутика и запись на примерку.",
+      p_cat: "Каталог", p_cat_d: "Пять категорий, фильтры по размеру, ткани и сезону, сортировка по цене, быстрый просмотр.",
+      p_prod: "Страница товара", p_prod_d: "Три колонки: описание, галерея и размер с записью. Состав, подкладка, пуговицы и подгонка в ателье.",
+      p_at: "Пошив на заказ", p_at_d: "Процесс в четыре шага, библиотека тканей с фильтрами, образ месяца и запись на консультацию.",
+      p_gr: "Для жениха", p_gr_d: "Образы для жениха, шаферов и отцов, подготовка к свадьбе по неделям и свадебная консультация.",
+      n1_t: "Фото", n1_d: "Пока нет снимков, в рамке видна ткань и имя файла, который нужно положить в папку img.",
+      n2_t: "Цены", n2_d: "Все цены и сроки для примера. Их заменим на реальные после согласования с бутиком.",
+      n3_t: "Заявки", n3_d: "Формы записи работают как в жизни, но никуда не отправляются. На сайте они будут приходить в WhatsApp." },
+    hy: { ribbon: "Կայքի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար", i_label: "Կայքի նախատիպ · բոլոր էջերը",
+      i_lead: "Թումանյան 10-ի բուտիկի սեղմելի նախատիպ՝ գլխավոր և չորս ներքին էջ նույն դիզայն համակարգով։ Լեզուն փոխվում է ցանկացած էջում և հիշվում է։",
+      open: "Բացել",
+      p_home: "Գլխավոր", p_home_d: "Հավաքածու, ատելյե, ամսվա կերպար, գործվածքների գրադարան, բուտիկի հյուրեր և գրանցում փորձարկման։",
+      p_cat: "Կատալոգ", p_cat_d: "Հինգ կատեգորիա, ֆիլտրեր ըստ չափսի, գործվածքի և սեզոնի, դասավորում ըստ գնի, արագ դիտում։",
+      p_prod: "Ապրանքի էջ", p_prod_d: "Երեք սյունակ՝ նկարագրություն, պատկերասրահ և չափս՝ գրանցմամբ։ Կազմ, աստառ, կոճակներ և հարմարեցում ատելյեում։",
+      p_at: "Պատվերով կարում", p_at_d: "Չորս քայլից բաղկացած գործընթաց, գործվածքների գրադարան ֆիլտրերով, ամսվա կերպար և գրանցում խորհրդատվության։",
+      p_gr: "Փեսայի համար", p_gr_d: "Կերպարներ փեսայի, խաչեղբայրների և հայրերի համար, հարսանիքի նախապատրաստում ըստ շաբաթների և հարսանեկան խորհրդատվություն։",
+      n1_t: "Լուսանկարներ", n1_d: "Քանի դեռ լուսանկարներ չկան, շրջանակում երևում է գործվածքը և ֆայլի անունը, որը պետք է դնել img թղթապանակում։",
+      n2_t: "Գներ", n2_d: "Բոլոր գներն ու ժամկետները օրինակի համար են։ Դրանք կփոխարինենք իրականով՝ բուտիկի հետ համաձայնեցնելուց հետո։",
+      n3_t: "Հայտեր", n3_d: "Գրանցման ձևերն աշխատում են ինչպես իրականում, բայց ոչ մի տեղ չեն ուղարկվում։ Կայքում դրանք կգան WhatsApp-ին։" },
+    en: { ribbon: "Site prototype · temporary photos, sample prices", i_label: "Site prototype · all pages",
+      i_lead: "A clickable prototype for the boutique at 10 Tumanyan: the homepage and four inner pages in one design system. The language switches on any page and is remembered.",
+      open: "Open",
+      p_home: "Home", p_home_d: "Collection, atelier, look of the month, fabric library, boutique guests and fitting booking.",
+      p_cat: "Catalogue", p_cat_d: "Five categories, filters by size, cloth and season, sorting by price, quick view.",
+      p_prod: "Product page", p_prod_d: "Three columns: description, gallery, and size with booking. Composition, lining, buttons and alterations.",
+      p_at: "Made to measure", p_at_d: "A four-step process, the fabric library with filters, the look of the month and consultation booking.",
+      p_gr: "For the groom", p_gr_d: "Looks for the groom, best men and fathers, a week-by-week wedding plan and a wedding consultation.",
+      n1_t: "Photos", n1_d: "Until the photos arrive, each frame shows a cloth and the name of the file to put in the img folder.",
+      n2_t: "Prices", n2_d: "All prices and timings are samples. We'll replace them with real ones once the boutique confirms.",
+      n3_t: "Requests", n3_d: "Booking forms behave like the real thing but send nothing. On the live site they will go to WhatsApp." }
+  });
+  var PAGES = [
+    ["elite-man-home.html", "p_home", "f4"], ["catalog.html", "p_cat", "f3"], ["product.html#s1", "p_prod", "f2"],
+    ["atelier.html", "p_at", "f6"], ["groom.html", "p_gr", "f8"]
+  ];
+  function render() {
+    var ol = document.getElementById("pages"); ol.innerHTML = "";
+    PAGES.forEach(function (p, i) {
+      var li = document.createElement("li"); li.className = "pg rv in"; li.style.setProperty("--d", i);
+      li.innerHTML = '<a href="' + p[0] + '"><canvas aria-hidden="true"></canvas><div><h2>' + EM.esc(EM.t(p[1])) + '</h2><span class="file">' + p[0].replace(/#.*/, "") + '</span></div><p>' + EM.esc(EM.t(p[1] + "_d")) + '</p><span class="go">' + EM.esc(EM.t("open")) + '</span></a>';
+      ol.appendChild(li);
+      EM.drawCloth(li.querySelector("canvas"), EM.byId[p[2]], 1);
+    });
+  }
+  document.querySelectorAll(".langs button").forEach(function (b) {
+    b.addEventListener("click", function () { EM.setLang(b.dataset.lang); });
+  });
+  EM.onLang(render);
+  EM.start();
+})();
+</script>

@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Пошив на заказ · Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="em-pages.css">
+<style>
+/* Atelier: Huntsman's bespoke page (hero, short manifesto, numbered process), the homepage fabric library and look builder */
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 80px); align-items: start; }
+.intro h2 { font-size: clamp(20px, 2vw, 28px); line-height: 1.25; }
+.intro-txt { display: grid; gap: 14px; color: var(--muted); max-width: 58ch; }
+.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: clamp(32px, 4vw, 56px); }
+.fact { padding: 22px 18px 22px 0; display: grid; gap: 4px; }
+.fact + .fact { border-left: 1px solid var(--line); padding-left: 18px; }
+.fact b { font-weight: 400; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 13px; color: var(--muted); }
+
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); counter-reset: step; }
+.step { display: grid; gap: 12px; align-content: start; }
+.step .ph { aspect-ratio: 4 / 5; width: 100%; max-width: 100%; }
+.step-n { font-size: 12px; letter-spacing: 0.16em; color: var(--accent); }
+.step h3 { font-size: 15px; letter-spacing: 0.1em; line-height: 1.3; }
+.step p { font-size: 14.5px; color: var(--muted); }
+.step .when { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); border-top: 1px solid var(--line); padding-top: 10px; }
+
+/* Fabric library (from the homepage) */
+.fab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.fab-text { display: grid; gap: 16px; align-content: start; position: sticky; top: calc(var(--hh) + 30px); }
+.fab-text p { color: var(--muted); max-width: 46ch; }
+.filters { display: grid; gap: 10px; margin-top: 6px; }
+.detail { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 14px; margin-top: 8px; }
+.detail h3 { font-size: 22px; }
+.detail-price { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.detail-price b { font-weight: 400; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.count { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+.swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 12px; }
+.sw { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; display: grid; gap: 8px; color: inherit; font: inherit; animation: up .5s var(--ease) both; animation-delay: calc(var(--d, 0) * 40ms); }
+.sw canvas { width: 100%; aspect-ratio: 1 / 1; display: block; transition: opacity .2s; }
+.sw:hover canvas { opacity: .88; }
+.sw[aria-pressed="true"] canvas { outline: 1px solid var(--ink); outline-offset: 4px; }
+.sw small { font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.sw[aria-pressed="true"] small { color: var(--ink); }
+.empty { color: var(--muted); grid-column: 1 / -1; padding: 24px 0; }
+
+/* Look of the month (from the homepage) */
+.look-band { background: var(--soft); }
+.look { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.stage { position: relative; display: grid; place-items: center; min-height: 560px; min-width: 0; }
+.figure { width: min(100%, 300px); height: auto; display: block; filter: drop-shadow(0 18px 24px #0000001f); }
+.figure .part { transition: opacity .35s ease; }
+.figure .part.flash { animation: flash .5s ease; }
+@keyframes flash { 0% { opacity: .2; } 100% { opacity: 1; } }
+.tag { position: absolute; display: flex; align-items: center; gap: 10px; background: var(--paper); padding: 8px 12px 8px 8px; box-shadow: 0 6px 18px #0000000f; font-size: 12.5px; line-height: 1.25; max-width: 180px; transition: transform .4s var(--ease); }
+.tag i { width: 30px; height: 30px; flex: none; background-size: cover; border: 1px solid var(--line); }
+.tag b { display: block; font-weight: 400; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.tag.t1 { left: 0; top: 18%; } .tag.t2 { right: 0; top: 48%; } .tag.t3 { left: 2%; bottom: 10%; }
+.tag.pop { animation: pop .45s var(--ease); }
+@keyframes pop { 0% { transform: scale(.92); } 100% { transform: none; } }
+.look-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-content: start; min-width: 0; }
+.look-side p { color: var(--muted); max-width: 46ch; }
+.rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 4px; }
+.rows > div { min-width: 0; }
+.rail { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin; }
+.opt { flex: none; width: 58px; height: 58px; border: 1px solid var(--line); background: var(--paper) center / cover; cursor: pointer; padding: 0; transition: transform .25s var(--ease), outline-color .2s; outline: 1px solid transparent; outline-offset: 3px; }
+.opt:hover { transform: translateY(-2px); }
+.opt[aria-pressed="true"] { outline-color: var(--ink); }
+.look-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 14px; }
+.look-total b { font-weight: 400; font-size: 18px; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+
+/* Details you choose */
+.choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+.choice { border-top: 1px solid var(--ink); padding-top: 16px; display: grid; gap: 8px; align-content: start; }
+.choice h3 { font-size: 14px; letter-spacing: 0.12em; }
+.choice ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; color: var(--muted); font-size: 14.5px; }
+
+@media (max-width: 1020px) {
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 36px; }
+  .fab, .look, .intro { grid-template-columns: minmax(0, 1fr); }
+  .fab-text { position: static; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fact:nth-child(3) { border-left: 0; padding-left: 0; }
+  .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+}
+@media (max-width: 760px) {
+  .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stage { min-height: 0; padding-block: 8px 0; }
+  .figure { width: min(62vw, 240px); }
+  .tag { position: static; max-width: none; box-shadow: none; border: 1px solid var(--line); padding: 6px; gap: 6px; font-size: 11.5px; }
+  .tag i { width: 22px; height: 22px; }
+  .tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 14px; width: 100%; }
+  .choices { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 440px) {
+  .steps { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tags { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<main id="top">
+  <section class="page-hero" aria-labelledby="hTitle">
+    <div class="ph dark"><img data-ph src="img/fitting.jpg" alt=""><span class="ph-label">fitting.jpg · 16:9</span></div>
+    <div class="wrap">
+      <div class="hero-txt">
+        <nav class="crumbs" aria-label="Breadcrumbs"><a href="elite-man-home.html" data-i18n="nav_home"></a><span aria-hidden="true">/</span><span data-i18n="nav_atelier"></span></nav>
+        <div class="label" data-i18n="a_label"></div>
+        <h1 id="hTitle" data-i18n="a_title"></h1>
+        <p data-i18n="a_sub"></p>
+        <div class="hero-btns"><a class="btn btn-light" href="#booking" data-i18n="a_cta"></a><a class="btn btn-light" href="#fabrics" data-i18n="a_cta2"></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro">
+        <h2 class="rv" data-i18n="a_intro_t"></h2>
+        <div class="intro-txt rv" style="--d:1"><p data-i18n="a_intro_1"></p><p data-i18n="a_intro_2"></p></div>
+      </div>
+      <div class="facts rv">
+        <div class="fact"><b>4</b><span data-i18n="a_f1"></span></div>
+        <div class="fact"><b>2</b><span data-i18n="a_f2"></span></div>
+        <div class="fact"><b>12+</b><span data-i18n="a_f3"></span></div>
+        <div class="fact"><b class="num" id="fromPrice"></b><span data-i18n="a_f4"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head rv"><div class="label" data-i18n="a_proc_l"></div><h2 class="title" data-i18n="a_proc_t"></h2></div>
+      <div class="steps">
+        <article class="step rv settle" style="--d:0"><div class="ph"><img data-ph src="img/atelier-step-1.jpg" alt=""><span class="ph-label">atelier-step-1.jpg · 4:5</span></div><div class="step-n">01</div><h3 data-i18n="s1_t"></h3><p data-i18n="s1_d"></p><div class="when" data-i18n="s1_w"></div></article>
+        <article class="step rv settle" style="--d:1"><div class="ph"><img data-ph src="img/atelier-step-2.jpg" alt=""><span class="ph-label">atelier-step-2.jpg · 4:5</span></div><div class="step-n">02</div><h3 data-i18n="s2_t"></h3><p data-i18n="s2_d"></p><div class="when" data-i18n="s2_w"></div></article>
+        <article class="step rv settle" style="--d:2"><div class="ph"><img data-ph src="img/atelier-step-3.jpg" alt=""><span class="ph-label">atelier-step-3.jpg · 4:5</span></div><div class="step-n">03</div><h3 data-i18n="s3_t"></h3><p data-i18n="s3_d"></p><div class="when" data-i18n="s3_w"></div></article>
+        <article class="step rv settle" style="--d:3"><div class="ph"><img data-ph src="img/atelier-step-4.jpg" alt=""><span class="ph-label">atelier-step-4.jpg · 4:5</span></div><div class="step-n">04</div><h3 data-i18n="s4_t"></h3><p data-i18n="s4_d"></p><div class="when" data-i18n="s4_w"></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="fabrics" style="border-top:1px solid var(--line)">
+    <div class="wrap fab">
+      <div class="fab-text rv">
+        <div class="label" data-i18n="fab_label"></div>
+        <h2 class="title" data-i18n="fab_title"></h2>
+        <p data-i18n="fab_text"></p>
+        <div class="filters">
+          <div class="frow" id="fSeason"><span data-i18n="f_season"></span></div>
+          <div class="frow" id="fComp"><span data-i18n="f_comp"></span></div>
+        </div>
+        <div class="detail" aria-live="polite">
+          <h3 id="dName"></h3>
+          <dl class="specs">
+            <dt data-i18n="d_comp"></dt><dd id="dComp"></dd>
+            <dt data-i18n="d_weight"></dt><dd id="dWeight" class="num"></dd>
+            <dt data-i18n="d_origin"></dt><dd id="dOrigin"></dd>
+            <dt data-i18n="d_season"></dt><dd id="dSeason"></dd>
+          </dl>
+          <div class="detail-price"><span class="label" data-i18n="d_price"></span><b id="dPrice"></b></div>
+          <div><a class="btn btn-accent" href="#booking" id="dBook" data-i18n="d_book"></a></div>
+        </div>
+      </div>
+      <div class="rv" style="--d:1">
+        <div class="count" id="fCount"></div>
+        <div class="swatches" id="swGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="look-band" id="look">
+    <div class="wrap look">
+      <div class="stage rv">
+        <svg class="figure" id="figure" viewBox="0 0 300 640" role="img" aria-label="Look preview">
+          <defs>
+            <pattern id="patJ" patternUnits="userSpaceOnUse" width="120" height="120"><image id="imgJ" width="120" height="120" href=""/></pattern>
+            <pattern id="patT" patternUnits="userSpaceOnUse" width="120" height="120"><image id="imgT" width="120" height="120" href=""/></pattern>
+            <linearGradient id="shade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+          </defs>
+          <g class="part" id="gTrousers">
+            <path d="M88 300 L212 300 L222 602 L162 602 L150 382 L138 602 L78 602 Z" fill="url(#patT)"/>
+            <path d="M88 300 L212 300 L222 602 L162 602 L150 382 L138 602 L78 602 Z" fill="url(#shade)"/>
+            <path d="M150 382 L150 330" stroke="#00000033" stroke-width="1"/>
+          </g>
+          <g class="part" id="gShoes">
+            <path d="M76 598 L140 598 L142 616 Q110 628 70 620 Q64 610 76 598 Z" id="shoeL"/>
+            <path d="M160 598 L224 598 Q236 610 230 620 Q190 628 158 616 Z" id="shoeR"/>
+          </g>
+          <g class="part" id="gShirt">
+            <path d="M118 88 L182 88 L150 196 Z" id="shirtV"/>
+            <path d="M118 88 L136 84 L150 110 L128 116 Z M182 88 L164 84 L150 110 L172 116 Z" id="collar"/>
+            <path d="M145 108 L155 108 L161 190 L150 206 L139 190 Z" fill="#5A2228"/>
+          </g>
+          <g class="part" id="gJacket">
+            <path d="M62 96 L36 112 L22 318 L48 322 L70 150 Z" fill="url(#patJ)"/>
+            <path d="M238 96 L264 112 L278 318 L252 322 L230 150 Z" fill="url(#patJ)"/>
+            <path d="M62 96 L120 86 L150 196 L180 86 L238 96 L234 330 Q150 344 66 330 Z" fill="url(#patJ)"/>
+            <path d="M62 96 L120 86 L150 196 L180 86 L238 96 L234 330 Q150 344 66 330 Z" fill="url(#shade)"/>
+            <path d="M120 86 L104 92 L98 124 L134 206 L150 196 Z" fill="#00000030" stroke="#ffffff22"/>
+            <path d="M180 86 L196 92 L202 124 L166 206 L150 196 Z" fill="#00000030" stroke="#ffffff22"/>
+            <path d="M84 270 L124 270 M176 270 L216 270 M172 146 L204 144" stroke="#00000055" stroke-width="2"/>
+            <circle cx="150" cy="232" r="5" fill="#2A1C12"/><circle cx="150" cy="266" r="5" fill="#2A1C12"/>
+            <path d="M22 318 L48 322 M278 318 L252 322" stroke="#00000044" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="tags" id="tags">
+          <div class="tag t1" id="tag1"><i></i><span><b data-i18n="lk_jacket"></b><span class="tv"></span></span></div>
+          <div class="tag t2" id="tag2"><i></i><span><b data-i18n="lk_trousers"></b><span class="tv"></span></span></div>
+          <div class="tag t3" id="tag3"><i></i><span><b data-i18n="lk_shoes"></b><span class="tv"></span></span></div>
+        </div>
+      </div>
+      <div class="look-side rv" style="--d:1">
+        <div class="label" data-i18n="lk_label"></div>
+        <h2 class="title" data-i18n="lk_title"></h2>
+        <p data-i18n="lk_text"></p>
+        <div class="rows">
+          <div><div class="row-l" data-i18n="lk_jacket"></div><div class="rail" id="railJ"></div></div>
+          <div><div class="row-l" data-i18n="lk_trousers"></div><div class="rail" id="railT"></div></div>
+          <div><div class="row-l" data-i18n="lk_shirt"></div><div class="rail" id="railS"></div></div>
+          <div><div class="row-l" data-i18n="lk_shoes"></div><div class="rail" id="railO"></div></div>
+        </div>
+        <div class="look-total"><span class="label" data-i18n="lk_total"></span><b id="lkTotal"></b></div>
+        <div><a class="btn btn-accent" href="#booking" id="lkBook" data-i18n="lk_book"></a></div>
+        <p class="note-s" data-i18n="lk_note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="details">
+    <div class="wrap">
+      <div class="sec-head rv"><div class="label" data-i18n="a_det_l"></div><h2 class="title" data-i18n="a_det_t"></h2></div>
+      <div class="choices">
+        <div class="choice rv" style="--d:0"><h3 data-i18n="ch1_t"></h3><ul><li data-i18n="ch1_a"></li><li data-i18n="ch1_b"></li><li data-i18n="ch1_c"></li></ul></div>
+        <div class="choice rv" style="--d:1"><h3 data-i18n="ch2_t"></h3><ul><li data-i18n="ch2_a"></li><li data-i18n="ch2_b"></li><li data-i18n="ch2_c"></li></ul></div>
+        <div class="choice rv" style="--d:2"><h3 data-i18n="ch3_t"></h3><ul><li data-i18n="ch3_a"></li><li data-i18n="ch3_b"></li><li data-i18n="ch3_c"></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-band" id="booking"></section>
+</main>
+
+<script src="em-pages.js"></script>
+<script>
+(function () {
+  EM.add({
+    ru: { doc_title: "Пошив на заказ · Elite Man Yerevan", ribbon: "Прототип страницы ателье · фото временные, цены для примера",
+      a_label: "Ателье · Туманяна 10", a_title: "Пошив на заказ", a_sub: "Костюм по вашим меркам из итальянской, английской или австралийской ткани. От первой встречи до готового костюма около четырёх недель.",
+      a_cta: "Записаться на консультацию", a_cta2: "Выбрать ткань",
+      a_intro_t: "Костюм, который сидит только на вас", a_intro_1: "Готовый костюм шьют на среднюю фигуру. В ателье мы начинаем с ваших мерок, осанки и привычек: как вы стоите, сидите и носите пиджак.",
+      a_intro_2: "Мастер снимает больше двадцати мерок, вы выбираете ткань и детали, а после двух примерок получаете костюм, который не нужно подгонять.",
+      a_f1: "недели от мерок до костюма", a_f2: "примерки перед готовым костюмом", a_f3: "тканей в библиотеке ателье", a_f4: "костюм на заказ (пример)",
+      a_proc_l: "Как мы работаем", a_proc_t: "Четыре шага до готового костюма",
+      s1_t: "Консультация и мерки", s1_d: "Обсуждаем повод, стиль и бюджет. Мастер снимает мерки и отмечает особенности фигуры.", s1_w: "Первый визит · 60 минут",
+      s2_t: "Ткань и детали", s2_d: "Выбираете ткань из библиотеки, лацканы, пуговицы, подкладку и монограмму.", s2_w: "В тот же день",
+      s3_t: "Примерка", s3_d: "Примеряете костюм на этапе сборки. Мастер уточняет длину, баланс и посадку по плечу.", s3_w: "Через 2–3 недели",
+      s4_t: "Готовый костюм", s4_d: "Финальная примерка и последние правки. Костюм выдаём в чехле для хранения.", s4_w: "Около 4 недель",
+      fab_label: "Пошив на заказ", fab_title: "Библиотека тканей", fab_text: "Итальянская, английская и австралийская шерсть, кашемир, лён и шёлк. Выберите ткань, а мы сошьём из неё костюм по вашим меркам.",
+      f_season: "Сезон", f_comp: "Состав", wool: "Шерсть", cashmere: "С кашемиром", linen: "Лён",
+      count: "Тканей: {n}", none: "Таких тканей пока нет. Попробуйте другой фильтр.",
+      d_weight: "Вес", d_origin: "Страна", d_season: "Сезон", d_price: "Костюм из этой ткани", d_book: "Записаться с этой тканью", fabric_note: "Ткань: {name}",
+      lk_label: "Образ месяца", lk_title: "Соберите свой костюм", lk_text: "Выберите ткань пиджака и брюк, рубашку и обувь. Образ сразу появится на фигуре, а к вашему визиту мастер подготовит выбранные ткани.",
+      lk_jacket: "Пиджак", lk_trousers: "Брюки", lk_shirt: "Рубашка", lk_shoes: "Обувь", lk_total: "Образ целиком", lk_book: "Записаться с этим образом",
+      lk_note: "В прототипе образ нарисован. На сайте здесь будут фото вещей на модели.", lk_booknote: "Образ: пиджак «{j}», брюки «{t}», {s} рубашка, {o}",
+      sh_white: "белая", sh_blue: "голубая", sh_pink: "розовая", sh_black: "чёрная", sh_ivory: "молочная",
+      sho_black: "чёрные оксфорды", sho_brown: "коричневые оксфорды", sho_tan: "светло-коричневые лоферы",
+      a_det_l: "Детали на выбор", a_det_t: "Что вы решаете вместе с мастером",
+      ch1_t: "Крой", ch1_a: "Однобортный или двубортный", ch1_b: "Лацкан с вырезом, острый или шалевый", ch1_c: "Мягкое или чёткое плечо",
+      ch2_t: "Отделка", ch2_a: "Пуговицы из рога или перламутра", ch2_b: "Подкладка из шёлка, вискозы или купро", ch2_c: "Монограмма на подкладке",
+      ch3_t: "Брюки и жилет", ch3_a: "Со стрелками или складками", ch3_b: "С отворотами или без", ch3_c: "Жилет к костюму-тройке",
+      bk_t: "Запишитесь на консультацию", bk_s: "Первая встреча занимает около часа: мерки, ткани и детали. Мы подтвердим время в WhatsApp.",
+      bk_p1: "Мерки снимает мастер ателье", bk_p2: "Образцы тканей можно потрогать и сравнить", bk_p3: "Консультация ни к чему не обязывает" },
+    hy: { doc_title: "Պատվերով կարում · Elite Man Yerevan", ribbon: "Ատելյեի էջի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար",
+      a_label: "Ատելյե · Թումանյան 10", a_title: "Պատվերով կարում", a_sub: "Կոստյում ձեր չափսերով՝ իտալական, անգլիական կամ ավստրալիական գործվածքից։ Առաջին հանդիպումից մինչև պատրաստի կոստյում՝ մոտ չորս շաբաթ։",
+      a_cta: "Գրանցվել խորհրդատվության", a_cta2: "Ընտրել գործվածքը",
+      a_intro_t: "Կոստյում, որը նստում է միայն ձեզ վրա", a_intro_1: "Պատրաստի կոստյումը կարվում է միջին կազմվածքի համար։ Ատելյեում մենք սկսում ենք ձեր չափսերից, կեցվածքից և սովորություններից՝ ինչպես եք կանգնում, նստում և կրում պիջակը։",
+      a_intro_2: "Վարպետը վերցնում է քսանից ավելի չափս, դուք ընտրում եք գործվածքը և դետալները, իսկ երկու փորձարկումից հետո ստանում եք կոստյում, որը հարմարեցնելու կարիք չունի։",
+      a_f1: "շաբաթ՝ չափսերից մինչև կոստյում", a_f2: "փորձարկում մինչև պատրաստի կոստյումը", a_f3: "գործվածք ատելյեի գրադարանում", a_f4: "պատվերով կոստյում (օրինակ)",
+      a_proc_l: "Ինչպես ենք աշխատում", a_proc_t: "Չորս քայլ մինչև պատրաստի կոստյումը",
+      s1_t: "Խորհրդատվություն և չափսեր", s1_d: "Քննարկում ենք առիթը, ոճը և բյուջեն։ Վարպետը վերցնում է չափսերը և նշում կազմվածքի առանձնահատկությունները։", s1_w: "Առաջին այց · 60 րոպե",
+      s2_t: "Գործվածք և դետալներ", s2_d: "Ընտրում եք գործվածքը գրադարանից, օձիքը, կոճակները, աստառը և մոնոգրամը։", s2_w: "Նույն օրը",
+      s3_t: "Փորձարկում", s3_d: "Փորձում եք կոստյումը հավաքման փուլում։ Վարպետը ճշտում է երկարությունը, հավասարակշռությունը և ուսերի նստվածքը։", s3_w: "2–3 շաբաթ անց",
+      s4_t: "Պատրաստի կոստյում", s4_d: "Վերջնական փորձարկում և վերջին ուղղումներ։ Կոստյումը հանձնում ենք պահպանման պատյանով։", s4_w: "Մոտ 4 շաբաթ",
+      fab_label: "Պատվերով կարում", fab_title: "Գործվածքների ընտրանի", fab_text: "Իտալական, անգլիական և ավստրալիական բուրդ, քաշմիր, վուշ և մետաքս։ Ընտրեք գործվածքը, և մենք դրանից կկարենք կոստյում՝ ըստ ձեր չափսերի։",
+      f_season: "Սեզոն", f_comp: "Բաղադրություն", wool: "Բուրդ", cashmere: "Քաշմիրով", linen: "Վուշ",
+      count: "Գործվածքներ՝ {n}", none: "Այս ընտրությամբ գործվածքներ դեռ չկան։ Փորձեք այլ ֆիլտր։",
+      d_weight: "Քաշ", d_origin: "Երկիր", d_season: "Սեզոն", d_price: "Կոստյում այս գործվածքից", d_book: "Գրանցվել այս գործվածքով", fabric_note: "Գործվածք՝ {name}",
+      lk_label: "Ամսվա կերպարը", lk_title: "Կազմեք ձեր կոստյումը", lk_text: "Ընտրեք պիջակի և տաբատի գործվածքը, վերնաշապիկն ու կոշիկները։ Կերպարն անմիջապես կերևա նկարում, իսկ ձեր այցին վարպետը կպատրաստի ընտրված գործվածքները։",
+      lk_jacket: "Պիջակ", lk_trousers: "Տաբատ", lk_shirt: "Վերնաշապիկ", lk_shoes: "Կոշիկներ", lk_total: "Ամբողջ կերպարը", lk_book: "Գրանցվել այս կերպարով",
+      lk_note: "Նախատիպում կերպարը գծանկար է։ Իրական կայքում այստեղ կլինեն իրերի լուսանկարները՝ մոդելի վրա։", lk_booknote: "Կերպար՝ պիջակ «{j}», տաբատ «{t}», {s} վերնաշապիկ, {o}",
+      sh_white: "սպիտակ", sh_blue: "երկնագույն", sh_pink: "վարդագույն", sh_black: "սև", sh_ivory: "կաթնագույն",
+      sho_black: "սև օքսֆորդներ", sho_brown: "շագանակագույն օքսֆորդներ", sho_tan: "բաց շագանակագույն լոֆերներ",
+      a_det_l: "Դետալներ ըստ ընտրության", a_det_t: "Ինչ եք որոշում վարպետի հետ",
+      ch1_t: "Կտրվածք", ch1_a: "Միակողմանի կամ երկկողմանի", ch1_b: "Կտրվածքով, սուր կամ շալ օձիք", ch1_c: "Փափուկ կամ հստակ ուս",
+      ch2_t: "Հարդարում", ch2_a: "Եղջյուրե կամ սադափե կոճակներ", ch2_b: "Աստառ մետաքսից, վիսկոզայից կամ կուպրոյից", ch2_c: "Մոնոգրամ աստառի վրա",
+      ch3_t: "Տաբատ և ժիլետ", ch3_a: "Արդուկագծով կամ ծալքերով", ch3_b: "Ծալված եզրով կամ առանց", ch3_c: "Ժիլետ եռյակ կոստյումի համար",
+      bk_t: "Գրանցվեք խորհրդատվության", bk_s: "Առաջին հանդիպումը տևում է մոտ մեկ ժամ՝ չափսեր, գործվածքներ և դետալներ։ Ժամը կհաստատենք WhatsApp-ով։",
+      bk_p1: "Չափսերը վերցնում է ատելյեի վարպետը", bk_p2: "Գործվածքների նմուշները կարելի է շոշափել և համեմատել", bk_p3: "Խորհրդատվությունը ոչնչի չի պարտավորեցնում" },
+    en: { doc_title: "Made to measure · Elite Man Yerevan", ribbon: "Atelier page prototype · temporary photos, sample prices",
+      a_label: "The atelier · 10 Tumanyan", a_title: "Made to measure", a_sub: "A suit cut to your measurements in Italian, English or Australian cloth. About four weeks from the first meeting to the finished suit.",
+      a_cta: "Book a consultation", a_cta2: "Choose a cloth",
+      a_intro_t: "A suit that fits only you", a_intro_1: "Ready-to-wear is cut for an average figure. In the atelier we start with your measurements, posture and habits: how you stand, sit and wear a jacket.",
+      a_intro_2: "The tailor takes more than twenty measurements, you choose the cloth and details, and after two fittings you get a suit that needs no alterations.",
+      a_f1: "weeks from measurements to suit", a_f2: "fittings before the finished suit", a_f3: "cloths in the atelier library", a_f4: "made-to-measure suit (sample)",
+      a_proc_l: "How we work", a_proc_t: "Four steps to the finished suit",
+      s1_t: "Consultation and measurements", s1_d: "We talk through the occasion, style and budget. The tailor measures you and notes your build.", s1_w: "First visit · 60 minutes",
+      s2_t: "Cloth and details", s2_d: "Choose the cloth from the library, then the lapels, buttons, lining and monogram.", s2_w: "The same day",
+      s3_t: "Fitting", s3_d: "You try the suit while it is being made. The tailor refines the length, balance and shoulder.", s3_w: "After 2–3 weeks",
+      s4_t: "The finished suit", s4_d: "A final fitting and last adjustments. The suit comes in a garment bag.", s4_w: "About 4 weeks",
+      fab_label: "Made to measure", fab_title: "The cloth library", fab_text: "Italian, English and Australian wool, cashmere, linen and silk. Choose your cloth, and we'll make the suit to your measurements.",
+      f_season: "Season", f_comp: "Cloth", wool: "Wool", cashmere: "With cashmere", linen: "Linen",
+      count: "Cloths: {n}", none: "Nothing matches these filters yet. Try another one.",
+      d_weight: "Weight", d_origin: "Origin", d_season: "Season", d_price: "A suit in this cloth", d_book: "Book with this cloth", fabric_note: "Cloth: {name}",
+      lk_label: "Look of the month", lk_title: "Build your suit", lk_text: "Choose the cloth for the jacket and trousers, then a shirt and shoes. The look comes together on the figure as you go, and your tailor will have the cloth ready for your visit.",
+      lk_jacket: "Jacket", lk_trousers: "Trousers", lk_shirt: "Shirt", lk_shoes: "Shoes", lk_total: "Complete look", lk_book: "Book with this look",
+      lk_note: "In this prototype the look is an illustration. The live site will show the pieces photographed on a model.", lk_booknote: "Look: jacket “{j}”, trousers “{t}”, {s} shirt, {o}",
+      sh_white: "white", sh_blue: "light blue", sh_pink: "pink", sh_black: "black", sh_ivory: "ivory",
+      sho_black: "black oxfords", sho_brown: "brown oxfords", sho_tan: "tan loafers",
+      a_det_l: "Details you choose", a_det_t: "What you decide with the tailor",
+      ch1_t: "Cut", ch1_a: "Single or double-breasted", ch1_b: "Notch, peak or shawl lapel", ch1_c: "Soft or structured shoulder",
+      ch2_t: "Finishing", ch2_a: "Horn or mother-of-pearl buttons", ch2_b: "Silk, viscose or cupro lining", ch2_c: "A monogram on the lining",
+      ch3_t: "Trousers and waistcoat", ch3_a: "Flat front or pleated", ch3_b: "With or without turn-ups", ch3_c: "A waistcoat for a three-piece",
+      bk_t: "Book a consultation", bk_s: "The first meeting takes about an hour: measurements, cloths and details. We'll confirm the time on WhatsApp.",
+      bk_p1: "Measurements are taken by the atelier's tailor", bk_p2: "You can feel and compare the cloth samples", bk_p3: "The consultation commits you to nothing" }
+  });
+  EM.chrome({ page: "atelier" });
+  EM.booking(document.getElementById("booking"), { service: "mtm", title: "bk_t", sub: "bk_s", points: ["bk_p1", "bk_p2", "bk_p3"] });
+
+  var t = EM.t, FAB = EM.FAB, byId = EM.byId, esc = EM.esc;
+  var minPrice = Math.min.apply(null, FAB.map(function (f) { return f.price; }));
+
+  /* Fabric library */
+  var fSeason = "all", fComp = "all", current = FAB[0];
+  function chipRow(el, keys, getVal, setVal) {
+    el.querySelectorAll(".chip").forEach(function (c) { c.remove(); });
+    keys.forEach(function (k) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = t(k);
+      b.setAttribute("aria-pressed", String(getVal() === k));
+      b.addEventListener("click", function () { setVal(k); renderFilters(); renderSwatches(true); });
+      el.appendChild(b);
+    });
+  }
+  function renderFilters() {
+    chipRow(document.getElementById("fSeason"), ["all", "aw", "ss", "yr"], function () { return fSeason; }, function (v) { fSeason = v; });
+    chipRow(document.getElementById("fComp"), ["all", "wool", "cashmere", "linen"], function () { return fComp; }, function (v) { fComp = v; });
+  }
+  function renderSwatches(animate) {
+    var grid = document.getElementById("swGrid"); grid.innerHTML = "";
+    var list = FAB.filter(function (f) { return (fSeason === "all" || f.s === fSeason) && (fComp === "all" || f.comp === fComp); });
+    document.getElementById("fCount").textContent = t("count", { n: list.length });
+    if (!list.length) { var e = document.createElement("p"); e.className = "empty"; e.textContent = t("none"); grid.appendChild(e); return; }
+    if (list.indexOf(current) === -1) current = list[0];
+    list.forEach(function (f, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.id = "sw-" + f.id;
+      if (animate) b.style.setProperty("--d", i); else b.style.animation = "none";
+      b.setAttribute("aria-pressed", String(f === current));
+      b.innerHTML = '<canvas></canvas><small>' + esc(f.n[EM.lang()]) + '</small>';
+      b.addEventListener("click", function () { current = f; renderSwatches(false); });
+      grid.appendChild(b); EM.drawCloth(b.querySelector("canvas"), f, 1);
+    });
+    var f = current;
+    document.getElementById("dName").textContent = f.n[EM.lang()];
+    document.getElementById("dComp").textContent = f.cs[EM.lang()];
+    document.getElementById("dWeight").textContent = f.g + " " + t("gm");
+    document.getElementById("dOrigin").textContent = t(f.o);
+    document.getElementById("dSeason").textContent = t(f.s);
+    document.getElementById("dPrice").textContent = EM.from(f.price);
+  }
+  document.getElementById("dBook").addEventListener("click", function () { EM.prefill("mtm", t("fabric_note", { name: current.n[EM.lang()] })); });
+
+  /* Look of the month */
+  var SHIRTS = [{ k: "sh_white", c: "#F3F2EE" }, { k: "sh_blue", c: "#CBD9EA" }, { k: "sh_pink", c: "#EED8D3" }, { k: "sh_ivory", c: "#EFE6D2" }, { k: "sh_black", c: "#1C1C1E" }];
+  var SHOES = [{ k: "sho_black", c: "#121212" }, { k: "sho_brown", c: "#3B2416" }, { k: "sho_tan", c: "#8A5A36" }];
+  var JK = ["f4", "f1", "f3", "f2", "f6", "f7", "f10", "f9"], TR = ["f4", "f3", "f5", "f7", "f8", "f11", "f9", "f12"];
+  var look = { j: "f4", t: "f4", s: 0, o: 0 };
+  function swatchURL(c) { var cv = document.createElement("canvas"); cv.width = cv.height = 60; var x = cv.getContext("2d"); x.fillStyle = c; x.fillRect(0, 0, 60, 60); return cv.toDataURL(); }
+  function flash(id) { var g = document.getElementById(id); g.classList.remove("flash"); void g.getBBox(); g.classList.add("flash"); }
+  function pop(id) { var g = document.getElementById(id); g.classList.remove("pop"); void g.offsetWidth; g.classList.add("pop"); }
+  function round5(n) { return Math.round(n / 5000) * 5000; }
+  function renderLook(changed) {
+    var lang = EM.lang(), j = byId[look.j], tr = byId[look.t], sh = SHIRTS[look.s], so = SHOES[look.o];
+    document.getElementById("imgJ").setAttribute("href", EM.clothURL(j, 120));
+    document.getElementById("imgT").setAttribute("href", EM.clothURL(tr, 120));
+    document.getElementById("shirtV").setAttribute("fill", sh.c);
+    document.getElementById("collar").setAttribute("fill", sh.c);
+    document.getElementById("shoeL").setAttribute("fill", so.c);
+    document.getElementById("shoeR").setAttribute("fill", so.c);
+    [["tag1", EM.clothURL(j, 60), j.n[lang]], ["tag2", EM.clothURL(tr, 60), tr.n[lang]], ["tag3", swatchURL(so.c), t(so.k)]].forEach(function (x) {
+      var el = document.getElementById(x[0]); el.querySelector("i").style.backgroundImage = "url(" + x[1] + ")"; el.querySelector(".tv").textContent = x[2];
+    });
+    if (changed === "j") { flash("gJacket"); pop("tag1"); }
+    if (changed === "t") { flash("gTrousers"); pop("tag2"); }
+    if (changed === "s") flash("gShirt");
+    if (changed === "o") { flash("gShoes"); pop("tag3"); }
+    document.getElementById("lkTotal").textContent = EM.from(round5(j.price * 0.62) + round5(tr.price * 0.38) + 45000 + 150000);
+  }
+  function rail(id, items, key, makeBg, title) {
+    var r = document.getElementById(id); r.innerHTML = "";
+    items.forEach(function (it, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.id = id + "-" + i;
+      var val = (key === "j" || key === "t") ? it : i;
+      b.style.backgroundImage = "url(" + makeBg(it) + ")";
+      b.setAttribute("aria-pressed", String(look[key] === val));
+      b.setAttribute("aria-label", title(it)); b.title = title(it);
+      b.addEventListener("click", function () { look[key] = val; renderRails(); renderLook(key); });
+      r.appendChild(b);
+    });
+  }
+  function renderRails() {
+    var lang = EM.lang();
+    rail("railJ", JK, "j", function (id) { return EM.clothURL(byId[id], 60); }, function (id) { return byId[id].n[lang]; });
+    rail("railT", TR, "t", function (id) { return EM.clothURL(byId[id], 60); }, function (id) { return byId[id].n[lang]; });
+    rail("railS", SHIRTS, "s", function (x) { return swatchURL(x.c); }, function (x) { return t(x.k); });
+    rail("railO", SHOES, "o", function (x) { return swatchURL(x.c); }, function (x) { return t(x.k); });
+  }
+  document.getElementById("lkBook").addEventListener("click", function () {
+    var lang = EM.lang();
+    EM.prefill("mtm", t("lk_booknote", { j: byId[look.j].n[lang], t: byId[look.t].n[lang], s: t(SHIRTS[look.s].k), o: t(SHOES[look.o].k) }));
+  });
+
+  EM.onLang(function () {
+    var k = Math.round(minPrice / 1000), l = EM.lang();
+    document.getElementById("fromPrice").textContent = l === "en" ? "from ֏" + k + "k" : l === "hy" ? k + " հզ. ֏-ից" : "от " + k + " тыс. ֏";
+    renderFilters(); renderSwatches(false); renderRails(); renderLook();
+  });
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { renderSwatches(false); }, 150); });
+  EM.start();
+})();
+</script>
+</body>
+</html>

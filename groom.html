@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Для жениха · Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="em-pages.css">
+<style>
+/* Groom: Huntsman's wedding page (hero, looks by role, timeline, accessories, questions), studio.parc-style switching between roles */
+.roles { display: inline-flex; border: 1px solid var(--line); margin-bottom: 28px; max-width: 100%; overflow-x: auto; }
+.role { background: var(--paper); border: 0; padding: 12px 20px; font: 400 12.5px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); cursor: pointer; flex: none; }
+.role + .role { border-left: 1px solid var(--line); }
+.role:hover { color: var(--ink); }
+.role[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.looks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+.lk { display: grid; gap: 12px; align-content: start; animation: up .6s var(--ease) both; animation-delay: calc(var(--d, 0) * 80ms); }
+.lk .ph { aspect-ratio: 4 / 5; width: 100%; max-width: 100%; }
+.lk .ph::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #12121233, transparent 40%); pointer-events: none; }
+.lk h3 { font-size: 15px; letter-spacing: 0.1em; line-height: 1.3; }
+.lk p { font-size: 14.5px; color: var(--muted); }
+.lk ul { list-style: none; margin: 0; padding: 0; font-size: 13.5px; display: grid; gap: 4px; }
+.lk ul li::before { content: "— "; color: var(--muted); }
+.lk-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 12px; }
+.lk-foot b { font-weight: 400; font-size: 13px; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.group-note { margin-top: 26px; padding: 16px 18px; background: var(--soft); font-size: 14.5px; display: flex; gap: 12px 24px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+
+.plan { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+.plan-head { position: sticky; top: calc(var(--hh) + 30px); display: grid; gap: 14px; }
+.plan-head p { color: var(--muted); max-width: 40ch; }
+.tl { position: relative; list-style: none; margin: 0; padding: 0 0 0 34px; display: grid; gap: clamp(26px, 3vw, 40px); }
+.tl::before, .tl::after { content: ""; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: var(--line); }
+.tl::after { background: var(--accent); bottom: auto; height: calc((100% - 16px) * var(--p, 0)); }
+.tl li { position: relative; display: grid; gap: 6px; }
+.tl li::before { content: ""; position: absolute; left: -34px; top: 6px; width: 11px; height: 11px; border-radius: 50%; background: var(--paper); border: 1px solid var(--muted); transition: background .4s, border-color .4s; }
+.tl li.on::before { background: var(--accent); border-color: var(--accent); }
+.tl .when { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.tl h3 { font-size: 15px; letter-spacing: 0.1em; }
+.tl p { color: var(--muted); font-size: 14.5px; max-width: 52ch; }
+
+.accs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+.acc-tile { display: grid; gap: 10px; }
+.acc-tile .ph { aspect-ratio: 1 / 1; width: 100%; max-width: 100%; }
+.acc-tile h3 { font-size: 13px; letter-spacing: 0.12em; }
+.acc-tile p { font-size: 13.5px; color: var(--muted); }
+.faq { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+
+@media (max-width: 1020px) {
+  .plan, .faq { grid-template-columns: minmax(0, 1fr); }
+  .plan-head { position: static; }
+  .accs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .looks { grid-template-columns: minmax(0, 1fr); }
+  .roles { display: flex; }
+  .role { flex: 1; padding: 12px 10px; }
+}
+</style>
+</head>
+<body>
+<main id="top">
+  <section class="page-hero" aria-labelledby="hTitle">
+    <div class="ph dark"><img data-ph src="img/groom.jpg" alt=""><span class="ph-label">groom.jpg · 16:9</span></div>
+    <div class="wrap">
+      <div class="hero-txt">
+        <nav class="crumbs" aria-label="Breadcrumbs"><a href="elite-man-home.html" data-i18n="nav_home"></a><span aria-hidden="true">/</span><span data-i18n="nav_groom"></span></nav>
+        <div class="label" data-i18n="w_label"></div>
+        <h1 id="hTitle" data-i18n="w_title"></h1>
+        <p data-i18n="w_sub"></p>
+        <div class="hero-btns"><a class="btn btn-light" href="#booking" data-i18n="w_cta"></a><a class="btn btn-light" href="#looks" data-i18n="w_cta2"></a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="looks">
+    <div class="wrap">
+      <div class="sec-head rv"><div class="label" data-i18n="w_looks_l"></div><h2 class="title" data-i18n="w_looks_t"></h2></div>
+      <div class="roles" role="group" id="roles"></div>
+      <div class="looks" id="looksGrid"></div>
+      <div class="group-note rv"><span data-i18n="w_group"></span><a class="more" href="#booking" id="groupBook" data-i18n="w_group_btn"></a></div>
+    </div>
+  </section>
+
+  <section id="plan" style="border-top:1px solid var(--line)">
+    <div class="wrap plan">
+      <div class="plan-head rv">
+        <div class="label" data-i18n="w_plan_l"></div>
+        <h2 class="title" data-i18n="w_plan_t"></h2>
+        <p data-i18n="w_plan_s"></p>
+        <div><a class="btn btn-dark" href="#booking" data-i18n="w_cta"></a></div>
+      </div>
+      <ol class="tl" id="tl">
+        <li class="rv"><span class="when" data-i18n="tl1_w"></span><h3 data-i18n="tl1_t"></h3><p data-i18n="tl1_d"></p></li>
+        <li class="rv"><span class="when" data-i18n="tl2_w"></span><h3 data-i18n="tl2_t"></h3><p data-i18n="tl2_d"></p></li>
+        <li class="rv"><span class="when" data-i18n="tl3_w"></span><h3 data-i18n="tl3_t"></h3><p data-i18n="tl3_d"></p></li>
+        <li class="rv"><span class="when" data-i18n="tl4_w"></span><h3 data-i18n="tl4_t"></h3><p data-i18n="tl4_d"></p></li>
+        <li class="rv"><span class="when" data-i18n="tl5_w"></span><h3 data-i18n="tl5_t"></h3><p data-i18n="tl5_d"></p></li>
+        <li class="rv"><span class="when" data-i18n="tl6_w"></span><h3 data-i18n="tl6_t"></h3><p data-i18n="tl6_d"></p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="accessories" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head rv"><div class="label" data-i18n="w_acc_l"></div><h2 class="title" data-i18n="w_acc_t"></h2></div>
+      <div class="accs">
+        <div class="acc-tile rv settle" style="--d:0"><div class="ph"><img data-ph src="img/wedding-bowtie.jpg" alt=""><span class="ph-label">wedding-bowtie.jpg · 1:1</span></div><h3 data-i18n="ac1_t"></h3><p data-i18n="ac1_d"></p></div>
+        <div class="acc-tile rv settle" style="--d:1"><div class="ph"><img data-ph src="img/wedding-shirt.jpg" alt=""><span class="ph-label">wedding-shirt.jpg · 1:1</span></div><h3 data-i18n="ac2_t"></h3><p data-i18n="ac2_d"></p></div>
+        <div class="acc-tile rv settle" style="--d:2"><div class="ph"><img data-ph src="img/wedding-cufflinks.jpg" alt=""><span class="ph-label">wedding-cufflinks.jpg · 1:1</span></div><h3 data-i18n="ac3_t"></h3><p data-i18n="ac3_d"></p></div>
+        <div class="acc-tile rv settle" style="--d:3"><div class="ph"><img data-ph src="img/wedding-shoes.jpg" alt=""><span class="ph-label">wedding-shoes.jpg · 1:1</span></div><h3 data-i18n="ac4_t"></h3><p data-i18n="ac4_d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="border-top:1px solid var(--line)">
+    <div class="wrap faq">
+      <div class="sec-head rv"><div class="label" data-i18n="w_faq_l"></div><h2 class="title" data-i18n="w_faq_t"></h2></div>
+      <div class="acc rv" style="--d:1">
+        <details open><summary data-i18n="q1"></summary><div class="acc-body"><p data-i18n="a1"></p></div></details>
+        <details><summary data-i18n="q2"></summary><div class="acc-body"><p data-i18n="a2"></p></div></details>
+        <details><summary data-i18n="q3"></summary><div class="acc-body"><p data-i18n="a3"></p></div></details>
+        <details><summary data-i18n="q4"></summary><div class="acc-body"><p data-i18n="a4"></p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking-band" id="booking"></section>
+</main>
+
+<script src="em-pages.js"></script>
+<script>
+(function () {
+  EM.add({
+    ru: { doc_title: "Для жениха · Elite Man Yerevan", ribbon: "Прототип свадебной страницы · фото временные, цены для примера",
+      w_label: "Свадьба", w_title: "Для жениха", w_sub: "Костюм или смокинг для жениха и образы в одном стиле для шаферов и отцов. Начните подготовку за три месяца до свадьбы.",
+      w_cta: "Записаться на свадебную консультацию", w_cta2: "Смотреть образы",
+      w_looks_l: "Образы", w_looks_t: "Один стиль для всей свадьбы", r_groom: "Жених", r_best: "Шаферы", r_father: "Отцы",
+      w_pick: "Выбрать образ", w_from_each: "{p} за костюм", w_note: "Свадебный образ: {name} ({role})",
+      w_group: "Шьём для всей мужской части свадьбы: подберём ткани в одной гамме и назначим общие примерки.", w_group_btn: "Обсудить на консультации",
+      w_plan_l: "Подготовка", w_plan_t: "Как мы готовим вас к свадьбе", w_plan_s: "Обратный отсчёт от даты свадьбы. Если времени меньше, подберём готовый смокинг и подгоним его за неделю.",
+      tl1_w: "За 3 месяца", tl1_t: "Свадебная консультация", tl1_d: "Обсуждаем дату, место и стиль праздника. Решаем, кто из мужчин будет в одном стиле с женихом.",
+      tl2_w: "За 10 недель", tl2_t: "Ткани и мерки", tl2_d: "Жених выбирает ткань и детали. Мастер снимает мерки у жениха, шаферов и отцов.",
+      tl3_w: "За 6 недель", tl3_t: "Первая примерка", tl3_d: "Примеряете костюм на этапе сборки. Уточняем посадку и длину.",
+      tl4_w: "За 3 недели", tl4_t: "Вторая примерка и аксессуары", tl4_d: "Подбираем рубашку, бабочку или галстук, запонки, нагрудный платок и обувь.",
+      tl5_w: "За неделю", tl5_t: "Финальная подгонка", tl5_d: "Последние правки. Костюмы выдаём в чехлах, отглаженными и готовыми к празднику.",
+      tl6_w: "День свадьбы", tl6_t: "Остаётся только надеть", tl6_d: "Всё подогнано заранее, поэтому утро свадьбы проходит спокойно.",
+      w_acc_l: "Аксессуары", w_acc_t: "Детали к свадебному образу",
+      ac1_t: "Бабочки и галстуки", ac1_d: "Шёлк, атлас и бархат в тон лацканам.", ac2_t: "Рубашки", ac2_d: "Под бабочку, с французскими манжетами.",
+      ac3_t: "Запонки и платки", ac3_d: "Серебро, перламутр и шёлковые паше.", ac4_t: "Обувь", ac4_d: "Лакированные оксфорды и замшевые лоферы.",
+      w_faq_l: "Вопросы", w_faq_t: "Частые вопросы перед свадьбой",
+      q1: "За сколько времени нужно начинать?", a1: "Для костюма на заказ лучше начинать за три месяца. Готовый смокинг из коллекции можно подобрать и подогнать за одну-две недели.",
+      q2: "Можно ли сшить костюмы шаферам в одном стиле?", a2: "Да. Подберём ткань в одной гамме с костюмом жениха, а различия сделаем в деталях: галстуке, платке или жилете.",
+      q3: "Сколько стоит свадебный образ?", a3: "Цены на этой странице для примера. Точную стоимость назовём на консультации, когда выберете ткань и детали.",
+      q4: "Что взять с собой на консультацию?", a4: "Если есть, возьмите фото места свадьбы и образа невесты. Обувь, которую планируете носить, поможет точнее подобрать длину брюк.",
+      bk_t: "Запишитесь на свадебную консультацию", bk_s: "Расскажите о дате и количестве гостей в костюмах. Мы подтвердим встречу в WhatsApp.",
+      bk_p1: "Около часа: стиль, ткани и мерки", bk_p2: "Можно прийти вместе с невестой или шаферами", bk_p3: "Консультация ни к чему не обязывает" },
+    hy: { doc_title: "Փեսայի համար · Elite Man Yerevan", ribbon: "Հարսանեկան էջի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար",
+      w_label: "Հարսանիք", w_title: "Փեսայի համար", w_sub: "Կոստյում կամ սմոքինգ փեսայի համար և նույն ոճով կերպարներ խաչեղբայրների ու հայրերի համար։ Սկսեք պատրաստվել հարսանիքից երեք ամիս առաջ։",
+      w_cta: "Գրանցվել հարսանեկան խորհրդատվության", w_cta2: "Դիտել կերպարները",
+      w_looks_l: "Կերպարներ", w_looks_t: "Մեկ ոճ ամբողջ հարսանիքի համար", r_groom: "Փեսա", r_best: "Խաչեղբայրներ", r_father: "Հայրեր",
+      w_pick: "Ընտրել կերպարը", w_from_each: "{p}՝ մեկ կոստյումի համար", w_note: "Հարսանեկան կերպար՝ {name} ({role})",
+      w_group: "Կարում ենք հարսանիքի բոլոր տղամարդկանց համար՝ կընտրենք գործվածքներ նույն գամմայով և կնշանակենք ընդհանուր փորձարկումներ։", w_group_btn: "Քննարկել խորհրդատվության ժամանակ",
+      w_plan_l: "Նախապատրաստում", w_plan_t: "Ինչպես ենք պատրաստում ձեզ հարսանիքին", w_plan_s: "Հետհաշվարկ հարսանիքի օրվանից։ Եթե ժամանակը քիչ է, կընտրենք պատրաստի սմոքինգ և կհարմարեցնենք մեկ շաբաթում։",
+      tl1_w: "3 ամիս առաջ", tl1_t: "Հարսանեկան խորհրդատվություն", tl1_d: "Քննարկում ենք տոնի օրը, վայրը և ոճը։ Որոշում ենք, թե տղամարդկանցից ով կլինի փեսայի հետ նույն ոճով։",
+      tl2_w: "10 շաբաթ առաջ", tl2_t: "Գործվածքներ և չափսեր", tl2_d: "Փեսան ընտրում է գործվածքը և դետալները։ Վարպետը վերցնում է փեսայի, խաչեղբայրների և հայրերի չափսերը։",
+      tl3_w: "6 շաբաթ առաջ", tl3_t: "Առաջին փորձարկում", tl3_d: "Փորձում եք կոստյումը հավաքման փուլում։ Ճշտում ենք նստվածքը և երկարությունը։",
+      tl4_w: "3 շաբաթ առաջ", tl4_t: "Երկրորդ փորձարկում և աքսեսուարներ", tl4_d: "Ընտրում ենք վերնաշապիկ, թիթեռնիկ կամ փողկապ, ճարմանդներ, գրպանի թաշկինակ և կոշիկներ։",
+      tl5_w: "Մեկ շաբաթ առաջ", tl5_t: "Վերջնական հարմարեցում", tl5_d: "Վերջին ուղղումներ։ Կոստյումները հանձնում ենք պատյաններով՝ արդուկված և տոնին պատրաստ։",
+      tl6_w: "Հարսանիքի օրը", tl6_t: "Մնում է միայն հագնել", tl6_d: "Ամեն ինչ նախապես հարմարեցված է, ուստի հարսանիքի առավոտը հանգիստ է անցնում։",
+      w_acc_l: "Աքսեսուարներ", w_acc_t: "Դետալներ հարսանեկան կերպարի համար",
+      ac1_t: "Թիթեռնիկներ և փողկապներ", ac1_d: "Մետաքս, ատլաս և թավիշ՝ օձիքի երանգով։", ac2_t: "Վերնաշապիկներ", ac2_d: "Թիթեռնիկի համար, ֆրանսիական ճարմանդներով։",
+      ac3_t: "Ճարմանդներ և թաշկինակներ", ac3_d: "Արծաթ, սադափ և մետաքսե թաշկինակներ։", ac4_t: "Կոշիկներ", ac4_d: "Լաքապատ օքսֆորդներ և թավշակաշվե լոֆերներ։",
+      w_faq_l: "Հարցեր", w_faq_t: "Հաճախ տրվող հարցեր հարսանիքից առաջ",
+      q1: "Որքա՞ն ժամանակ առաջ սկսել", a1: "Պատվերով կոստյումի համար լավ է սկսել երեք ամիս առաջ։ Հավաքածուից պատրաստի սմոքինգը կարելի է ընտրել և հարմարեցնել մեկ-երկու շաբաթում։",
+      q2: "Կարո՞ղ եք խաչեղբայրների համար կարել նույն ոճով", a2: "Այո։ Կընտրենք գործվածք փեսայի կոստյումի գամմայով, իսկ տարբերությունները կանենք դետալներում՝ փողկապ, թաշկինակ կամ ժիլետ։",
+      q3: "Որքա՞ն արժե հարսանեկան կերպարը", a3: "Այս էջի գները օրինակի համար են։ Ճշգրիտ արժեքը կասենք խորհրդատվության ժամանակ, երբ ընտրեք գործվածքը և դետալները։",
+      q4: "Ի՞նչ վերցնել խորհրդատվությանը", a4: "Եթե կա, վերցրեք հարսանիքի վայրի և հարսնացուի կերպարի լուսանկարները։ Կոշիկները, որոնք պատրաստվում եք կրել, կօգնեն ճշգրիտ ընտրել տաբատի երկարությունը։",
+      bk_t: "Գրանցվեք հարսանեկան խորհրդատվության", bk_s: "Պատմեք օրվա և կոստյումով հյուրերի քանակի մասին։ Հանդիպումը կհաստատենք WhatsApp-ով։",
+      bk_p1: "Մոտ մեկ ժամ՝ ոճ, գործվածքներ և չափսեր", bk_p2: "Կարող եք գալ հարսնացուի կամ խաչեղբայրների հետ", bk_p3: "Խորհրդատվությունը ոչնչի չի պարտավորեցնում" },
+    en: { doc_title: "For the groom · Elite Man Yerevan", ribbon: "Wedding page prototype · temporary photos, sample prices",
+      w_label: "Weddings", w_title: "For the groom", w_sub: "A suit or tuxedo for the groom, and matching looks for the best men and fathers. Start three months before the wedding.",
+      w_cta: "Book a wedding consultation", w_cta2: "See the looks",
+      w_looks_l: "Looks", w_looks_t: "One style for the whole wedding", r_groom: "Groom", r_best: "Best men", r_father: "Fathers",
+      w_pick: "Choose this look", w_from_each: "{p} per suit", w_note: "Wedding look: {name} ({role})",
+      w_group: "We dress every man in the wedding party: cloths in one palette and shared fittings.", w_group_btn: "Discuss at a consultation",
+      w_plan_l: "Preparation", w_plan_t: "How we get you ready for the wedding", w_plan_s: "A countdown from the wedding date. If time is short, we'll choose a ready-made tuxedo and alter it in a week.",
+      tl1_w: "3 months before", tl1_t: "Wedding consultation", tl1_d: "We talk through the date, venue and style, and decide which men will match the groom.",
+      tl2_w: "10 weeks before", tl2_t: "Cloth and measurements", tl2_d: "The groom chooses the cloth and details. The tailor measures the groom, best men and fathers.",
+      tl3_w: "6 weeks before", tl3_t: "First fitting", tl3_d: "You try the suit while it is being made. We refine the fit and length.",
+      tl4_w: "3 weeks before", tl4_t: "Second fitting and accessories", tl4_d: "We choose the shirt, bow tie or tie, cufflinks, pocket square and shoes.",
+      tl5_w: "A week before", tl5_t: "Final fitting", tl5_d: "Last adjustments. The suits leave in garment bags, pressed and ready.",
+      tl6_w: "The wedding day", tl6_t: "All that's left is to put it on", tl6_d: "Everything was fitted in advance, so the wedding morning stays calm.",
+      w_acc_l: "Accessories", w_acc_t: "Details for the wedding look",
+      ac1_t: "Bow ties and ties", ac1_d: "Silk, satin and velvet to match the lapels.", ac2_t: "Shirts", ac2_d: "Wing or turn-down collar, French cuffs.",
+      ac3_t: "Cufflinks and squares", ac3_d: "Silver, mother of pearl and silk pocket squares.", ac4_t: "Shoes", ac4_d: "Patent oxfords and suede loafers.",
+      w_faq_l: "Questions", w_faq_t: "Common questions before the wedding",
+      q1: "How early should we start?", a1: "For made to measure, start three months ahead. A ready-made tuxedo from the collection can be chosen and altered in one to two weeks.",
+      q2: "Can you dress the best men in the same style?", a2: "Yes. We choose a cloth in the groom's palette and vary the details: a tie, a pocket square or a waistcoat.",
+      q3: "How much does a wedding look cost?", a3: "Prices on this page are samples. We'll quote the exact price at the consultation, once you choose the cloth and details.",
+      q4: "What should I bring to the consultation?", a4: "If you have them, bring photos of the venue and the bride's look. The shoes you plan to wear help us set the trouser length.",
+      bk_t: "Book a wedding consultation", bk_s: "Tell us the date and how many men will be in suits. We'll confirm the meeting on WhatsApp.",
+      bk_p1: "About an hour: style, cloths and measurements", bk_p2: "Come with the bride or the best men", bk_p3: "The consultation commits you to nothing" }
+  });
+  EM.chrome({ page: "groom" });
+  EM.booking(document.getElementById("booking"), { service: "wed", title: "bk_t", sub: "bk_s", points: ["bk_p1", "bk_p2", "bk_p3"], wedding: true });
+
+  var t = EM.t, L = EM.L, esc = EM.esc;
+  var LOOKS = {
+    groom: [
+      { img: "groom-tuxedo", cl: "f8", price: 760000,
+        n: { ru: "Классический смокинг", hy: "Դասական սմոքինգ", en: "The classic tuxedo" },
+        d: { ru: "Чёрный смокинг с атласными лацканами для вечерней свадьбы.", hy: "Սև սմոքինգ ատլասե օձիքով՝ երեկոյան հարսանիքի համար։", en: "A black tuxedo with satin lapels for an evening wedding." },
+        i: { ru: ["Смокинг из английской шерсти", "Рубашка под бабочку", "Лакированные туфли"], hy: ["Սմոքինգ անգլիական բրդից", "Վերնաշապիկ թիթեռնիկի համար", "Լաքապատ կոշիկներ"], en: ["Tuxedo in English wool", "Dress shirt for a bow tie", "Patent shoes"] } },
+      { img: "groom-threepiece", cl: "f7", price: 890000,
+        n: { ru: "Полночно-синяя тройка", hy: "Կեսգիշերային կապույտ եռյակ", en: "Midnight blue three-piece" },
+        d: { ru: "Костюм на заказ с жилетом. Синий хорошо смотрится и днём, и на вечерних фото.", hy: "Պատվերով կոստյում ժիլետով։ Կապույտը լավ է երևում և՛ ցերեկը, և՛ երեկոյան լուսանկարներում։", en: "A made-to-measure suit with a waistcoat. Blue looks good by day and in evening photos." },
+        i: { ru: ["Шерсть Super 150S, Австралия", "Шёлковый галстук", "Чёрные оксфорды"], hy: ["Super 150S բուրդ, Ավստրալիա", "Մետաքսե փողկապ", "Սև օքսֆորդներ"], en: ["Super 150S wool, Australia", "Silk tie", "Black oxfords"] } },
+      { img: "groom-linen", cl: "f9", price: 650000,
+        n: { ru: "Летний костюм из льна и шёлка", hy: "Ամառային կոստյում վուշից և մետաքսից", en: "Summer linen and silk suit" },
+        d: { ru: "Для выездной свадьбы в саду или в горах. Лёгкий и не жаркий.", hy: "Այգում կամ լեռներում արտագնա հարսանիքի համար։ Թեթև է և շոգ չէ։", en: "For a garden or mountain wedding. Light and cool." },
+        i: { ru: ["Лён и шёлк, Италия", "Рубашка без галстука", "Замшевые лоферы"], hy: ["Վուշ և մետաքս, Իտալիա", "Վերնաշապիկ առանց փողկապի", "Թավշակաշվե լոֆերներ"], en: ["Linen and silk, Italy", "Open-collar shirt", "Suede loafers"] } }
+    ],
+    best: [
+      { img: "bestman-charcoal", cl: "f3", price: 590000, each: true,
+        n: { ru: "Графитовые костюмы", hy: "Գրաֆիտե կոստյումներ", en: "Charcoal suits" },
+        d: { ru: "Одна ткань на всех шаферов и галстуки в цвет платья подружек невесты.", hy: "Մեկ գործվածք բոլոր խաչեղբայրների համար և փողկապներ՝ հարսնաքույրերի զգեստների գույնով։", en: "One cloth for every best man, with ties in the bridesmaids' colour." },
+        i: { ru: ["Меловая полоска, Италия", "Галстуки в одном цвете"], hy: ["Կավճագիծ, Իտալիա", "Նույն գույնի փողկապներ"], en: ["Chalk stripe, Italy", "Matching ties"] } },
+      { img: "bestman-navy", cl: "f1", price: 620000, each: true,
+        n: { ru: "Тёмно-синие костюмы в тон жениху", hy: "Մուգ կապույտ կոստյումներ՝ փեսայի տոնով", en: "Navy suits to match the groom" },
+        d: { ru: "На тон светлее костюма жениха, чтобы он выделялся на общих фото.", hy: "Փեսայի կոստյումից մեկ տոն բաց, որպեսզի նա առանձնանա ընդհանուր լուսանկարներում։", en: "A shade lighter than the groom's suit, so he stands out in group photos." },
+        i: { ru: ["Ёлочка, Италия", "Белые нагрудные платки"], hy: ["Եղևնանախշ, Իտալիա", "Սպիտակ գրպանի թաշկինակներ"], en: ["Herringbone, Italy", "White pocket squares"] } },
+      { img: "bestman-linen", cl: "f12", price: 420000, each: true,
+        n: { ru: "Пиджаки и брюки для лета", hy: "Պիջակներ և տաբատներ ամռան համար", en: "Jackets and trousers for summer" },
+        d: { ru: "Бежевые льняные пиджаки и серые брюки. Для дневной свадьбы на открытом воздухе.", hy: "Բեժ վուշե պիջակներ և մոխրագույն տաբատներ։ Բացօթյա ցերեկային հարսանիքի համար։", en: "Beige linen jackets with grey trousers. For a daytime wedding outdoors." },
+        i: { ru: ["Лён, Италия", "Брюки из шерсти"], hy: ["Վուշ, Իտալիա", "Բրդյա տաբատ"], en: ["Linen, Italy", "Wool trousers"] } }
+    ],
+    father: [
+      { img: "father-doublebreasted", cl: "f4", price: 790000,
+        n: { ru: "Двубортный костюм", hy: "Երկկողմանի կոստյում", en: "Double-breasted suit" },
+        d: { ru: "Тонкая полоска и строгий силуэт для отца жениха или невесты.", hy: "Բարակ գիծ և խիստ ուրվագիծ՝ փեսայի կամ հարսի հոր համար։", en: "A fine stripe and a formal line for the father of the groom or bride." },
+        i: { ru: ["Шерсть Super 140S, Италия", "Галстук в тон свадьбе"], hy: ["Super 140S բուրդ, Իտալիա", "Փողկապ հարսանիքի գամմայով"], en: ["Super 140S wool, Italy", "A tie in the wedding palette"] } },
+      { img: "father-flannel", cl: "f5", price: 680000,
+        n: { ru: "Фланелевая тройка", hy: "Ֆլանելե եռյակ", en: "Flannel three-piece" },
+        d: { ru: "Тёплый костюм с жилетом для осенней и зимней свадьбы.", hy: "Տաք կոստյում ժիլետով՝ աշնանային և ձմեռային հարսանիքի համար։", en: "A warm suit with a waistcoat for an autumn or winter wedding." },
+        i: { ru: ["Фланель, Англия", "Жилет к костюму"], hy: ["Ֆլանել, Անգլիա", "Ժիլետ կոստյումին"], en: ["Flannel, England", "Matching waistcoat"] } },
+      { img: "father-tuxedo", cl: "f8", price: 760000,
+        n: { ru: "Смокинг для вечернего приёма", hy: "Սմոքինգ երեկոյան ընդունելության համար", en: "Tuxedo for the evening reception" },
+        d: { ru: "Если жених в смокинге, отцам подойдёт такой же дресс-код.", hy: "Եթե փեսան սմոքինգով է, հայրերին կհամապատասխանի նույն դրես-կոդը։", en: "If the groom wears a tuxedo, the fathers can follow the same dress code." },
+        i: { ru: ["Смокинговая шерсть, Англия", "Чёрная бабочка"], hy: ["Սմոքինգային բուրդ, Անգլիա", "Սև թիթեռնիկ"], en: ["Evening wool, England", "Black bow tie"] } }
+    ]
+  };
+  var ROLES = [["groom", "r_groom"], ["best", "r_best"], ["father", "r_father"]], role = "groom";
+
+  function renderRoles() {
+    var box = document.getElementById("roles"); box.innerHTML = "";
+    box.setAttribute("aria-label", t("w_looks_l"));
+    ROLES.forEach(function (r) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "role"; b.id = "role-" + r[0]; b.textContent = t(r[1]);
+      b.setAttribute("aria-pressed", String(role === r[0]));
+      b.addEventListener("click", function () { role = r[0]; renderRoles(); renderLooks(true); });
+      box.appendChild(b);
+    });
+  }
+  function renderLooks(animate) {
+    var g = document.getElementById("looksGrid"); g.innerHTML = "";
+    var roleName = t(ROLES.filter(function (r) { return r[0] === role; })[0][1]);
+    LOOKS[role].forEach(function (lk, i) {
+      var a = document.createElement("article"); a.className = "lk"; a.style.setProperty("--d", i);
+      if (!animate) a.style.animation = "none";
+      var price = lk.each ? t("w_from_each", { p: EM.from(lk.price) }) : EM.from(lk.price);
+      a.innerHTML = '<div class="ph" style="background-image:url(' + EM.clothURL(EM.byId[lk.cl], 360) + ')"><img data-ph src="img/' + lk.img + '.jpg" alt=""><span class="ph-label">' + lk.img + '.jpg · 4:5</span></div>' +
+        '<h3>' + esc(L(lk.n)) + '</h3><p>' + esc(L(lk.d)) + '</p><ul>' + L(lk.i).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul>' +
+        '<div class="lk-foot"><b>' + esc(price) + '</b><a class="more" href="#booking">' + esc(t("w_pick")) + '</a></div>';
+      a.querySelector(".more").addEventListener("click", function () { EM.prefill("wed", t("w_note", { name: L(lk.n), role: roleName })); });
+      EM.watchImg(a.querySelector("img"));
+      g.appendChild(a);
+    });
+  }
+  document.getElementById("groupBook").addEventListener("click", function () { EM.prefill("wed", null); });
+
+  /* Timeline fills as you scroll past it */
+  var tl = document.getElementById("tl"), items = tl.querySelectorAll("li");
+  function onScroll() {
+    var r = tl.getBoundingClientRect(), vh = window.innerHeight;
+    var p = Math.min(1, Math.max(0, (vh * 0.6 - r.top) / r.height));
+    tl.style.setProperty("--p", EM.reduce ? 1 : p.toFixed(3));
+    items.forEach(function (li) { var lr = li.getBoundingClientRect(); li.classList.toggle("on", EM.reduce || lr.top < vh * 0.6); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+
+  EM.onLang(function () { renderRoles(); renderLooks(false); });
+  EM.start(); onScroll();
+})();
+</script>
+</body>
+</html>

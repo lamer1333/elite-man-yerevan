@@ -1,0 +1,1379 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Elite Man Yerevan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Noto+Sans+Armenian:wght@300;400;500&display=swap">
+<style>
+/* Layout: Huntsman's homepage skeleton (white page, centred serif logo, full-bleed hero, 4-up product row,
+   full-bleed band, 3-up tiles, journal grid, black footer). The Elite Man 5%: a Yerevan-tuff accent,
+   HY/RU/EN, prices, fabric library, look builder, booking. Motion follows the client's references:
+   wordmark intro, hero that frames itself on scroll, soft reveals, quick view, marquee + word-by-word statement. */
+:root {
+  --paper: #FFFFFF;
+  --ink: #121212;
+  --muted: #6E6A66;
+  --soft: #F4F2EF;
+  --line: #E4E0DA;
+  --accent: #8E4A36;
+  --accent-hi: #A85A43;
+  --footer: #121212;
+  --footer-ink: #E9E6E1;
+  --footer-muted: #9C9792;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --hh: 84px;
+
+  --serif: "Jost", "Noto Sans Armenian", ui-sans-serif, system-ui, sans-serif;
+  --sans: "Jost", "Noto Sans Armenian", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+
+html { scroll-behavior: smooth; }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body.lock { overflow: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; letter-spacing: 0.01em; text-wrap: balance; }
+p { margin: 0; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-inline: clamp(16px, 3.6vw, 56px); }
+.label { font-family: var(--sans); font-size: 12px; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.title { font-size: clamp(26px, 2.6vw, 34px); line-height: 1.15; }
+.num { font-variant-numeric: tabular-nums; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; font: 400 12.5px/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 13px 22px; border: 1px solid currentColor; border-radius: 0; background: transparent; color: inherit; text-decoration: none; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+.btn-light { color: #fff; border-color: #ffffffcc; }
+.btn-light:hover { background: #fff; color: var(--ink); }
+.btn-dark { color: var(--ink); border-color: var(--ink); }
+.btn-dark:hover { background: var(--ink); color: #fff; }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-accent:hover { background: var(--accent-hi); border-color: var(--accent-hi); }
+.more { font-size: 13px; color: var(--accent); text-decoration: none; letter-spacing: 0.02em; }
+.more::after { content: " ›"; }
+.more:hover { text-decoration: underline; }
+
+.ribbon { background: var(--soft); color: var(--muted); font-size: 12px; text-align: center; padding: 6px 16px; letter-spacing: 0.04em; border-bottom: 1px solid var(--line); }
+
+/* Header */
+.hdr { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 40; background: var(--paper); border-bottom: 1px solid var(--line); transition: background .35s, border-color .35s, color .35s; }
+.hdr.on-hero { background: transparent; border-bottom-color: transparent; color: var(--ink); }
+.hdr.on-hero .logo i { opacity: 0; }
+.logo i { transition: opacity .35s; }
+.has-fly .hdr .logo b { opacity: 0; }
+.hdr-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; height: var(--hh); }
+.icon-btn { background: none; border: 0; padding: 8px; cursor: pointer; color: var(--ink); display: inline-grid; place-items: center; }
+.icon-btn svg { width: 22px; height: 22px; }
+.logo { text-decoration: none; text-align: center; line-height: 1; }
+.logo b { display: block; font-family: var(--serif); font-weight: 400; font-size: 25px; letter-spacing: 0.2em; padding-left: 0.2em; text-transform: uppercase; }
+.logo i { display: block; font-family: var(--serif); font-size: 14px; color: var(--muted); margin-top: 5px; }
+.hdr-right { display: flex; justify-content: flex-end; align-items: center; gap: 18px; }
+.langs { display: flex; gap: 2px; }
+.langs button { font: 400 12px/1 var(--sans); letter-spacing: 0.1em; color: var(--muted); background: none; border: 0; padding: 6px 6px; cursor: pointer; border-bottom: 1px solid transparent; }
+.langs button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.hdr-book { font-size: 12.5px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; }
+.hdr-book:hover { color: var(--accent); }
+.sidetab { position: fixed; right: 0; top: 190px; z-index: 35; writing-mode: vertical-rl; background: var(--accent); color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; padding: 18px 11px; }
+.sidetab:hover { background: var(--accent-hi); }
+
+/* Drawer */
+.drawer { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-columns: minmax(0, 420px) 1fr; }
+.drawer-panel { background: var(--paper); padding: 28px clamp(20px, 4vw, 40px); display: grid; align-content: start; gap: 6px; overflow-y: auto; animation: slideIn .45s var(--ease); }
+.drawer-scrim { background: #12121255; border: 0; cursor: pointer; animation: fade .45s; }
+.drawer-panel .icon-btn { justify-self: start; margin: -6px 0 18px -8px; }
+.drawer-panel a { font-family: var(--serif); font-size: 28px; text-decoration: none; padding: 6px 0; border-bottom: 1px solid var(--line); }
+.drawer-panel a:hover { color: var(--accent); }
+@keyframes slideIn { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Photo slots */
+.ph { position: relative; overflow: hidden; background: #E9E5DF; }
+.ph.dark { background: linear-gradient(160deg, #5E554E, #3B3531); }
+.ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; max-width: 100%; }
+.ph-label { position: absolute; left: 12px; top: 12px; font: 400 11px/1.3 ui-monospace, Menlo, monospace; color: #6E6A66; border: 1px dashed #6E6A6666; padding: 3px 7px; display: none; background: #ffffffaa; z-index: 1; }
+.ph.missing img { display: none; }
+.ph.missing .ph-label { display: block; }
+
+/* Hero: wordmark intro + frames itself on scroll */
+.hero { position: relative; margin-top: calc(-1 * var(--hh)); height: clamp(600px, 92vh, 880px); display: grid; place-items: start center; padding-block: 0; text-align: center; color: var(--ink); overflow: hidden; }
+.hero-media { position: absolute; inset: 0; }
+.hero-media .ph { position: absolute; inset: 0; }
+.hero-media .ph img { transform: scale(var(--hs, 1.06)); transform-origin: center; }
+.hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #ffffff4d, #ffffff00 48%); pointer-events: none; }
+.hero-smoke { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; transition: opacity .6s ease; }
+.hero-smoke::before { content: ""; position: absolute; left: 50%; top: -2%; width: min(1180px, 130%); height: 60%; transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, #ffffffd1 0%, #ffffff9e 30%, #ffffff47 52%, #ffffff00 72%); filter: blur(8px); }
+.hero-smoke i { position: absolute; display: block; border-radius: 50%; background: radial-gradient(circle, #ffffffb3 0%, #ffffff59 35%, #ffffff00 68%); filter: blur(28px); animation: smoke 26s ease-in-out infinite alternate; will-change: transform, opacity; }
+.hero-smoke i:nth-child(1) { width: 58vw; height: 38vh; left: 2%; top: -4%; }
+.hero-smoke i:nth-child(2) { width: 54vw; height: 40vh; right: -4%; top: 4%; animation-duration: 31s; animation-delay: -9s; }
+.hero-smoke i:nth-child(3) { width: 66vw; height: 28vh; left: 17%; top: 16%; animation-duration: 23s; animation-delay: -15s; }
+.hero-smoke i:nth-child(4) { width: 44vw; height: 30vh; left: 28%; top: -10%; animation-duration: 35s; animation-delay: -4s; }
+@keyframes smoke { 0% { transform: translate3d(-7%, 2%, 0) scale(1); opacity: .6; } 50% { transform: translate3d(3%, -4%, 0) scale(1.1); opacity: .95; } 100% { transform: translate3d(8%, 3%, 0) scale(.96); opacity: .65; } }
+.hero-sub, .hero-line { text-shadow: 0 0 18px #ffffff, 0 0 2px #ffffffcc; }
+.hero-in.smooth { transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .6s cubic-bezier(.22,.61,.36,1); }
+.fly { text-shadow: 0 0 28px #ffffffb3; }
+.fly.smooth { transition: transform .6s cubic-bezier(.22,.61,.36,1); }
+.hero-in { position: relative; z-index: 2; display: grid; gap: 14px; justify-items: center; padding: calc(var(--hh) + 2vh) 16px 40px; will-change: transform, opacity; }
+.wordmark { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 8vw, 128px); line-height: .95; letter-spacing: 0.2em; padding-left: .2em; text-transform: uppercase; white-space: nowrap; }
+.wordmark span { display: inline-block; }
+.hero-sub { font-size: 12.5px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--ink); }
+.hero-line { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 1.8vw, 22px); color: var(--ink); }
+.has-fly .hero .wordmark { opacity: 0; }
+.fly { position: fixed; left: 0; top: 0; z-index: 50; margin: 0; display: block; width: max-content; color: var(--ink); pointer-events: none; transform-origin: center center; will-change: transform; }
+.fly span, .intro .wordmark span { opacity: 0; transform: translateY(42%); filter: blur(6px); animation: letter 1s var(--ease) forwards; animation-delay: calc(var(--i) * 70ms + 150ms); }
+.intro .hero-after { opacity: 0; transform: translateY(14px); animation: up .9s var(--ease) forwards; animation-delay: 1.05s; }
+@keyframes letter { to { opacity: 1; transform: none; filter: none; } }
+@keyframes up { to { opacity: 1; transform: none; } }
+.hero-after { display: grid; gap: 12px; justify-items: center; }
+
+section { padding-block: clamp(48px, 6vw, 80px); }
+.sec-head { display: grid; gap: 8px; margin-bottom: 28px; }
+.sec-head.row { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; }
+
+/* Reveal on scroll: starts visible but soft, settles when it enters */
+.js .rv { opacity: .18; transform: translateY(28px); filter: blur(3px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+.js .rv.in { opacity: 1; transform: none; filter: none; }
+.js .settle .ph img { transform: scale(1.12); transition: transform 1.6s var(--ease); }
+.js .settle.in .ph img { transform: scale(1); }
+
+/* Products */
+.products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+.product { text-decoration: none; display: grid; gap: 12px; align-content: start; background: none; border: 0; padding: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; }
+.product .ph { aspect-ratio: 3 / 4; background: var(--soft); width: 100%; max-width: 100%; }
+.product .ph img { transition: transform .8s ease; }
+.product:hover .ph img { transform: scale(1.03); }
+.product .alt { position: absolute; inset: 0; z-index: 1; background: #DCD5CB; clip-path: inset(0 0 0 100%); transition: clip-path .75s var(--ease); }
+.product .alt img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.product .alt .ph-label { left: auto; right: 12px; }
+.product:hover .alt, .product:focus-visible .alt { clip-path: inset(0 0 0 0); }
+.alt.missing img { display: none; }
+.alt.missing .ph-label { display: block; }
+.quick { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; background: #fffffff0; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; text-align: center; padding: 10px; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; }
+.product:hover .quick, .product:focus-visible .quick { opacity: 1; transform: none; }
+.p-name { font-size: 14.5px; line-height: 1.35; font-weight: 400; }
+.p-price { font-size: 12.5px; letter-spacing: 0.08em; font-variant-numeric: tabular-nums; }
+.p-sizes { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--muted); }
+
+/* Band with parallax */
+.band { position: relative; height: clamp(440px, 64vh, 640px); display: grid; place-items: center; text-align: center; color: #fff; padding: 0; overflow: hidden; }
+.band .ph { position: absolute; inset: -12% 0; }
+.band .ph img { transform: translateY(var(--py, 0)); }
+.band::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse 36% 42% at 50% 50%, #00000047, #00000000 75%), #00000040; }
+.band-in { position: relative; z-index: 2; display: grid; gap: 12px; justify-items: center; padding: 16px; }
+.band .label { color: #ffffffd9; }
+.band h2 { font-size: clamp(32px, 3.8vw, 46px); line-height: 1.1; }
+
+/* Tiles */
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+.tile { position: relative; aspect-ratio: 9 / 10; color: #fff; text-decoration: none; display: grid; overflow: hidden; }
+.tile .ph { position: absolute; inset: 0; }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, #000000a6 0%, #00000033 45%, #00000000 70%); }
+.tile-in { position: relative; z-index: 2; align-self: end; padding: clamp(18px, 2.4vw, 30px); display: grid; gap: 10px; }
+.tile.center .tile-in { justify-items: center; text-align: center; }
+.tile.left .tile-in { justify-items: start; }
+.tile .label { color: #ffffffd9; font-size: 11.5px; }
+.tile h3 { font-size: clamp(26px, 2.5vw, 34px); line-height: 1.1; }
+.tile:hover .ph img { transform: scale(1.04) !important; transition: transform 1s ease; }
+#categories .tile .ph img, #tiles .tile:not(:first-child) .ph img { object-position: 50% 15%; }
+
+/* Look builder (reference: monthly selection app) */
+.look-band { background: var(--soft); }
+.look { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+.stage { position: relative; display: grid; place-items: center; min-height: 560px; }
+.figure { width: min(100%, 300px); height: auto; display: block; filter: drop-shadow(0 18px 24px #0000001f); }
+.figure .part { transition: opacity .35s ease; }
+.figure .part.flash { animation: flash .5s ease; }
+@keyframes flash { 0% { opacity: .2; } 100% { opacity: 1; } }
+.tag { position: absolute; display: flex; align-items: center; gap: 10px; background: var(--paper); padding: 8px 12px 8px 8px; box-shadow: 0 6px 18px #0000000f; font-size: 12.5px; line-height: 1.25; max-width: 180px; transition: transform .4s var(--ease); }
+.tag i { width: 30px; height: 30px; flex: none; background-size: cover; border: 1px solid var(--line); }
+.tag b { display: block; font-weight: 400; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.tag.t1 { left: 0; top: 18%; } .tag.t2 { right: 0; top: 48%; } .tag.t3 { left: 2%; bottom: 10%; } .tag.t4 { right: 0; top: 14%; }
+.lk-photo { position: relative; width: min(100%, 340px); aspect-ratio: 3 / 5; background: var(--soft);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent); mask-composite: intersect; }
+.lk-photo img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.lk-layer img { opacity: 0; transition: opacity .35s ease; }
+.lk-layer img.on { opacity: 1; }
+.opt.thumb { background-color: var(--soft); }
+.tag.pop { animation: pop .45s var(--ease); }
+@keyframes pop { 0% { transform: scale(.92); } 100% { transform: none; } }
+.look-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; align-content: start; min-width: 0; }
+.stage { min-width: 0; }
+.look-side p { color: var(--muted); max-width: 46ch; }
+.rows { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 4px; }
+.rows > div { min-width: 0; }
+.row-l { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.rail { display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px 8px; scrollbar-width: thin; }
+.opt { flex: none; width: 58px; height: 58px; border: 1px solid var(--line); background: var(--paper) center / cover; cursor: pointer; padding: 0; transition: transform .25s var(--ease), outline-color .2s; outline: 1px solid transparent; outline-offset: 3px; }
+.opt:hover { transform: translateY(-2px); }
+.opt[aria-pressed="true"] { outline-color: var(--ink); }
+.look-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 14px; }
+.look-total b { font-weight: 400; font-size: 18px; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+.note-s { font-size: 12.5px; color: var(--muted); }
+
+/* Fabric library */
+.fab { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
+.fab-text { display: grid; gap: 16px; align-content: start; position: sticky; top: 120px; }
+.fab-text p { color: var(--muted); max-width: 46ch; }
+.filters { display: grid; gap: 10px; margin-top: 6px; }
+.frow { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.frow > span { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); min-width: 70px; }
+.chip { font: 400 12.5px/1 var(--sans); letter-spacing: 0.04em; color: var(--ink); background: var(--paper); border: 1px solid var(--line); padding: 8px 12px; cursor: pointer; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.detail { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 14px; margin-top: 8px; }
+.detail h3 { font-size: 26px; }
+.specs { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 18px; margin: 0; font-size: 14px; }
+.specs dt { color: var(--muted); }
+.specs dd { margin: 0; }
+.detail-price { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.detail-price b { font-weight: 400; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.count { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; }
+.swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 12px; }
+.sw { background: none; border: 0; padding: 0; cursor: pointer; text-align: left; display: grid; gap: 8px; color: inherit; font: inherit; animation: up .5s var(--ease) both; animation-delay: calc(var(--d, 0) * 40ms); }
+.sw canvas, .sw img { width: 100%; aspect-ratio: 1 / 1; display: block; object-fit: cover; transition: opacity .2s; }
+.sw:hover canvas, .sw:hover img { opacity: .88; }
+.sw[aria-pressed="true"] canvas, .sw[aria-pressed="true"] img { outline: 1px solid var(--ink); outline-offset: 4px; }
+.d-cloth { aspect-ratio: 4 / 1; overflow: hidden; }
+.d-cloth canvas, .d-cloth img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.sw small { font-size: 12.5px; line-height: 1.3; color: var(--muted); }
+.sw[aria-pressed="true"] small { color: var(--ink); }
+.empty { color: var(--muted); grid-column: 1 / -1; padding: 24px 0; }
+
+/* Journal-style guests */
+.journal { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(12px, 1.6vw, 20px); }
+.jsmall { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 1.6vw, 20px); }
+.jcard { background: var(--soft); text-decoration: none; display: grid; align-content: start; }
+.jcard .ph { aspect-ratio: 4 / 3; background: #E2DDD6; width: 100%; max-width: 100%; }
+.jcard.big .ph { aspect-ratio: 4 / 3.2; }
+.jcard .ph::before { content: ""; position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border: 1px solid #12121255; border-radius: 50%; transition: transform .3s; }
+.jcard .ph::after { content: ""; position: absolute; left: 50%; top: 50%; margin: -8px 0 0 -4px; border-left: 13px solid #12121288; border-top: 8px solid transparent; border-bottom: 8px solid transparent; }
+.jcard:hover .ph::before { transform: scale(1.12); }
+.jbody { padding: 16px 18px 20px; display: grid; gap: 8px; justify-items: center; text-align: center; }
+.jbody h3 { font-size: 19px; line-height: 1.25; }
+.jcard.big .jbody h3 { font-size: 22px; }
+.jbody p { font-size: 14px; color: var(--muted); max-width: 52ch; }
+.center-btn { display: flex; justify-content: center; margin-top: 28px; }
+
+/* Statement: marquee + words light up on scroll */
+.statement { background: var(--footer); color: var(--footer-ink); padding-block: clamp(56px, 8vw, 110px); overflow: hidden; }
+.marquee { overflow: hidden; margin-bottom: clamp(40px, 6vw, 80px); }
+.track { display: flex; gap: 14px; width: max-content; animation: marquee 48s linear infinite; }
+.track canvas, .track img { width: 200px; height: 130px; display: block; flex: none; object-fit: cover; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.big-words { font-family: var(--serif); font-size: clamp(40px, 7.4vw, 112px); line-height: 1.02; letter-spacing: -0.005em; max-width: 14ch; }
+.big-words span { opacity: var(--o, .2); transition: opacity .25s linear; }
+.statement .label { color: var(--footer-muted); margin-top: 26px; display: block; }
+
+/* Instagram strip (reference: feed row under the products) */
+.ig-row { display: grid; grid-auto-flow: column; grid-auto-columns: clamp(180px, 22vw, 300px); gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; cursor: grab; scrollbar-width: thin; }
+.ig-row.drag { cursor: grabbing; scroll-snap-type: none; }
+.ig { position: relative; aspect-ratio: 1 / 1; scroll-snap-align: start; display: block; text-decoration: none; }
+.ig .ph { position: absolute; inset: 0; }
+.ig::after { content: ""; position: absolute; inset: 0; background: #12121255; opacity: 0; transition: opacity .3s; }
+.ig:hover::after { opacity: 1; }
+.ig svg { position: absolute; left: 50%; top: 50%; width: 30px; height: 30px; margin: -15px 0 0 -15px; z-index: 2; color: #fff; opacity: 0; transform: scale(.8); transition: opacity .3s, transform .3s; }
+.ig:hover svg { opacity: 1; transform: none; }
+
+/* Booking */
+.booking-band { background: var(--soft); }
+.booking { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.booking .sec-head p { color: var(--muted); max-width: 40ch; }
+.form { display: grid; gap: 20px; background: var(--paper); padding: clamp(20px, 3vw, 36px); border: 1px solid var(--line); }
+.fld { display: grid; gap: 8px; }
+.fld > label, .fld > span { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.fld input, .fld select, .fld textarea { font: 300 15px/1.4 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; padding: 12px 13px; width: 100%; }
+.fld textarea { min-height: 80px; resize: vertical; }
+.fld input:focus, .fld select:focus, .fld textarea:focus { outline: none; border-color: var(--ink); }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.days, .times { display: flex; flex-wrap: wrap; gap: 6px; }
+.day, .time { font: 400 13px/1.2 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--line); padding: 9px 11px; cursor: pointer; text-align: center; }
+.day small { display: block; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.day:hover, .time:hover { border-color: var(--ink); }
+.day[aria-pressed="true"], .time[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.day[aria-pressed="true"] small { color: #ffffffaa; }
+.time:disabled { opacity: .35; cursor: not-allowed; text-decoration: line-through; }
+.err { color: #A3301C; font-size: 14px; min-height: 1em; }
+.done { display: grid; gap: 14px; }
+.done h3 { font-size: 30px; }
+.done .proto { font-size: 13.5px; color: var(--muted); border-left: 2px solid var(--accent); padding-left: 12px; }
+
+/* Quick view (reference: product page in three columns) */
+.qv { position: fixed; inset: 0; z-index: 70; background: var(--paper); overflow-y: auto; animation: qvIn .55s var(--ease); }
+@keyframes qvIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.qv-top { position: sticky; top: 0; background: #fffffff2; border-bottom: 1px solid var(--line); z-index: 2; }
+.qv-top .wrap { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+.qv-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) minmax(0, 0.9fr); gap: clamp(20px, 3vw, 48px); align-items: start; padding-block: clamp(28px, 4vw, 56px); }
+.qv-left { display: grid; gap: 14px; position: sticky; top: 100px; }
+.qv-left h2 { font-size: clamp(34px, 3.8vw, 54px); line-height: 1.02; }
+.qv-left p { color: var(--muted); font-size: 15px; }
+.qv-img { display: grid; gap: 12px; }
+.qv-img .ph { aspect-ratio: 3 / 4; background: var(--soft); width: 100%; max-width: 100%; animation: up .9s var(--ease) both; animation-delay: .12s; transform: translateY(40px); opacity: 0; }
+.qv-img .ph + .ph { animation-delay: .3s; background: #E7E2DA; }
+.qv-right { display: grid; gap: 18px; position: sticky; top: 100px; }
+.sizes { display: flex; flex-wrap: wrap; gap: 6px; }
+.size { font: 400 13px/1 var(--sans); min-width: 44px; padding: 12px 8px; border: 1px solid var(--line); background: var(--paper); cursor: pointer; }
+.size[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.qv-specs { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 16px; font-size: 14px; margin: 0; border-top: 1px solid var(--line); padding-top: 16px; }
+.qv-specs dt { color: var(--muted); }
+.qv-specs dd { margin: 0; }
+.also { padding-block: 24px 64px; border-top: 1px solid var(--line); }
+.blur-title { font-family: var(--serif); font-size: clamp(30px, 3.4vw, 46px); margin-bottom: 24px; }
+.blur-title span { display: inline-block; opacity: 0; filter: blur(10px); transform: translateY(10px); transition: opacity .7s var(--ease), filter .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i) * 35ms); white-space: pre; }
+.blur-title.in span { opacity: 1; filter: none; transform: none; }
+.also-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.8vw, 24px); }
+
+/* Footer */
+footer { background: var(--footer); color: var(--footer-ink); padding-block: 56px 28px; border-top: 1px solid #ffffff14; }
+.fcols { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 32px; }
+.fcols h4 { font: 400 12.5px/1.4 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 14px; }
+.fcols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 14px; color: var(--footer-muted); }
+.fcols a { text-decoration: none; }
+.fcols a:hover { color: var(--footer-ink); }
+.fcols p { font-size: 14px; color: var(--footer-muted); max-width: 34ch; }
+.copy { font: 400 11px/1 var(--sans); letter-spacing: 0.12em; text-transform: uppercase; background: none; color: var(--footer-ink); border: 1px solid #ffffff44; padding: 6px 9px; cursor: pointer; margin-left: 8px; }
+.fbottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid #ffffff22; margin-top: 40px; padding-top: 18px; font-size: 12.5px; color: var(--footer-muted); }
+
+.mbar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 45; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px)); background: #ffffffF2; border-top: 1px solid var(--line); }
+.mbar .btn { flex: 1; padding: 14px 8px; }
+
+/* Typography: Jost throughout, headings in spaced capitals (as Kiton / Scabal) */
+:is(h2, h3, .big-words, .drawer-panel a, .blur-title) { text-transform: uppercase; letter-spacing: 0.08em; font-weight: 400; }
+.title { font-size: clamp(20px, 1.9vw, 26px); }
+.band h2, .tile h3 { font-size: clamp(22px, 2.2vw, 30px); }
+.big-words { font-size: clamp(30px, 5.2vw, 76px); line-height: 1.08; }
+.hero-line, .logo i { font-style: normal; }
+
+@media (max-width: 1020px) {
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fab, .look { grid-template-columns: minmax(0, 1fr); }
+  .d-cloth { aspect-ratio: 16 / 7; }
+  .fab-text { position: static; }
+  .journal { grid-template-columns: minmax(0, 1fr); }
+  .fcols { grid-template-columns: 1fr 1fr; }
+  .qv-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .qv-left { grid-column: 1 / -1; position: static; }
+  .qv-right { position: static; }
+}
+@media (max-width: 760px) {
+  :root { --hh: 68px; }
+  .logo b { font-size: 20px; }
+  .logo i { font-size: 12.5px; }
+  .hdr-book, .sidetab { display: none; }
+  .tiles { grid-template-columns: minmax(0, 1fr); }
+  .tile { aspect-ratio: 4 / 3; }
+  .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .booking, .two { grid-template-columns: minmax(0, 1fr); }
+  .fcols { grid-template-columns: minmax(0, 1fr); }
+  .mbar { display: flex; }
+  footer { padding-bottom: 100px; }
+  .drawer { grid-template-columns: minmax(0, 1fr) 0; }
+  .stage { min-height: 0; padding-block: 8px 0; }
+  .figure { width: min(62vw, 240px); }
+  .lk-photo { width: min(72vw, 280px); }
+  .tag { position: static; max-width: none; box-shadow: none; border: 1px solid var(--line); }
+  .tags { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 14px; width: 100%; }
+  .tag { padding: 6px; gap: 6px; font-size: 11.5px; }
+  .tag i { width: 22px; height: 22px; }
+  .qv-grid { grid-template-columns: minmax(0, 1fr); }
+  .also-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .track canvas, .track img { width: 140px; height: 92px; }
+}
+@media (max-width: 440px) {
+  .langs button { padding: 6px 3px; font-size: 11px; }
+  .jsmall { grid-template-columns: minmax(0, 1fr); }
+  .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; transition-delay: 0ms !important; }
+  .js .rv { opacity: 1; transform: none; filter: none; }
+  .track { animation: none; }
+}
+</style>
+<script>document.documentElement.classList.add("js");</script>
+
+<div class="ribbon" data-i18n="ribbon">Прототип главной страницы · фото временные, цены для примера</div>
+
+<header class="hdr on-hero" id="hdr">
+  <div class="wrap hdr-in">
+    <div>
+      <button class="icon-btn" type="button" id="menuBtn" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+      </button>
+    </div>
+    <a class="logo" href="#top" aria-label="Elite Man Yerevan"><b>Elite Man</b><i>Yerevan</i></a>
+    <div class="hdr-right">
+      <div class="langs" role="group" aria-label="Language">
+        <button type="button" data-lang="hy" id="lang-hy">HY</button>
+        <button type="button" data-lang="ru" id="lang-ru" aria-pressed="true">RU</button>
+        <button type="button" data-lang="en" id="lang-en">EN</button>
+      </div>
+      <a class="hdr-book" href="#booking" data-i18n="cta_book">Записаться</a>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav class="drawer-panel" aria-label="Menu">
+    <button class="icon-btn" type="button" id="menuClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+    <a href="#collection" data-i18n="nav_collection">Коллекция</a>
+    <a href="#look" data-i18n="nav_look">Образ месяца</a>
+    <a href="#atelier" data-i18n="nav_atelier">Пошив на заказ</a>
+    <a href="#fabrics" data-i18n="nav_fabrics">Ткани</a>
+    <a href="#tiles" data-i18n="nav_groom">Жениху</a>
+    <a href="#guests" data-i18n="nav_guests">Гости Elite Man</a>
+    <a href="#booking" data-i18n="cta_book">Записаться</a>
+    <a href="#contacts" data-i18n="nav_contacts">Контакты</a>
+  </nav>
+  <button class="drawer-scrim" type="button" id="menuScrim" aria-label="Close"></button>
+</div>
+
+<div class="wordmark fly" id="fly" aria-hidden="true" hidden><span style="--i:0">E</span><span style="--i:1">L</span><span style="--i:2">I</span><span style="--i:3">T</span><span style="--i:4">E</span>&nbsp;<span style="--i:5">M</span><span style="--i:6">A</span><span style="--i:7">N</span></div>
+
+<a class="sidetab" href="#booking" data-i18n="tab_book">Записаться на примерку</a>
+
+<main id="top">
+  <section class="hero intro" id="hero" aria-label="Elite Man Yerevan">
+    <div class="hero-media" id="heroMedia">
+      <div class="ph dark"><img data-ph src="img/yerevan-tuff.jpg" alt=""><span class="ph-label">yerevan-tuff.jpg · 16:9</span></div>
+    </div>
+    <div class="hero-smoke" id="heroSmoke" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="hero-in" id="heroIn">
+      <div class="hero-sub hero-after" data-i18n="hero_title" style="animation-delay:.2s">Коллекция осень–зима 2026</div>
+      <h1 class="wordmark" aria-label="Elite Man"><span style="--i:0">E</span><span style="--i:1">L</span><span style="--i:2">I</span><span style="--i:3">T</span><span style="--i:4">E</span>&nbsp;<span style="--i:5">M</span><span style="--i:6">A</span><span style="--i:7">N</span></h1>
+      <div class="hero-after">
+        <p class="hero-line" data-i18n="hero_sub">Итальянские ткани, ереванское ателье.</p>
+        <a class="btn btn-dark" href="#collection" data-i18n="hero_btn">Смотреть коллекцию</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="collection">
+    <div class="wrap">
+      <div class="sec-head rv">
+        <div class="label" data-i18n="season">Осень–зима 2026</div>
+        <h2 class="title" data-i18n="prod_title">Костюмы для города</h2>
+      </div>
+      <div class="products" id="products"></div>
+    </div>
+  </section>
+
+  <section class="band" id="atelier" aria-label="Atelier">
+    <div class="ph dark"><img data-ph src="img/door-atelier.jpg" alt=""><span class="ph-label">door-atelier.jpg · 16:9</span></div>
+    <div class="band-in rv">
+      <div class="label" data-i18n="band_label">Туманяна 10 · Ереван</div>
+      <h2 data-i18n="band_title">Пошив по вашим меркам</h2>
+      <a class="btn btn-light" href="#booking" data-i18n="band_btn">Записаться на примерку</a>
+    </div>
+  </section>
+
+  <section id="categories">
+    <div class="wrap">
+      <div class="tiles">
+        <a class="tile center rv settle" style="--d:0" href="#collection"><div class="ph dark"><img data-ph src="img/cat-suits.jpg" alt=""><span class="ph-label">cat-suits.jpg · 4:5</span></div><div class="tile-in"><h3 data-i18n="cat_suits">Костюмы</h3><span class="btn btn-light" data-i18n="view">Смотреть</span></div></a>
+        <a class="tile center rv settle" style="--d:1" href="#collection"><div class="ph dark"><img data-ph src="img/cat-tuxedo.jpg" alt=""><span class="ph-label">cat-tuxedo.jpg · 4:5</span></div><div class="tile-in"><h3 data-i18n="cat_tuxedo">Смокинги</h3><span class="btn btn-light" data-i18n="view">Смотреть</span></div></a>
+        <a class="tile center rv settle" style="--d:2" href="#collection"><div class="ph dark"><img data-ph src="img/cat-coats.jpg" alt=""><span class="ph-label">cat-coats.jpg · 4:5</span></div><div class="tile-in"><h3 data-i18n="cat_coats">Верхняя одежда</h3><span class="btn btn-light" data-i18n="view">Смотреть</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="look-band" id="look">
+    <div class="wrap look">
+      <div class="stage rv">
+        <div class="lk-photo" id="lkPhoto" role="img" aria-label="Look preview" hidden>
+          <img class="lk-base" id="lkBase" alt="">
+          <div class="lk-layer" id="lkO"><img alt=""><img alt=""></div>
+          <div class="lk-layer" id="lkT"><img alt=""><img alt=""></div>
+          <div class="lk-layer" id="lkS"><img alt=""><img alt=""></div>
+          <div class="lk-layer" id="lkJ"><img alt=""><img alt=""></div>
+        </div>
+        <svg class="figure" id="figure" viewBox="0 0 300 640" role="img" aria-label="Look preview">
+          <defs>
+            <pattern id="patJ" patternUnits="userSpaceOnUse" width="120" height="120"><image id="imgJ" width="120" height="120" href=""/></pattern>
+            <pattern id="patT" patternUnits="userSpaceOnUse" width="120" height="120"><image id="imgT" width="120" height="120" href=""/></pattern>
+            <linearGradient id="shade" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+          </defs>
+          <g class="part" id="gTrousers">
+            <path d="M88 300 L212 300 L222 602 L162 602 L150 382 L138 602 L78 602 Z" fill="url(#patT)"/>
+            <path d="M88 300 L212 300 L222 602 L162 602 L150 382 L138 602 L78 602 Z" fill="url(#shade)"/>
+            <path d="M150 382 L150 330" stroke="#00000033" stroke-width="1"/>
+          </g>
+          <g class="part" id="gShoes">
+            <path d="M76 598 L140 598 L142 616 Q110 628 70 620 Q64 610 76 598 Z" id="shoeL"/>
+            <path d="M160 598 L224 598 Q236 610 230 620 Q190 628 158 616 Z" id="shoeR"/>
+          </g>
+          <g class="part" id="gShirt">
+            <path d="M118 88 L182 88 L150 196 Z" id="shirtV"/>
+            <path d="M118 88 L136 84 L150 110 L128 116 Z M182 88 L164 84 L150 110 L172 116 Z" id="collar"/>
+            <path d="M145 108 L155 108 L161 190 L150 206 L139 190 Z" fill="#5A2228"/>
+          </g>
+          <g class="part" id="gJacket">
+            <path d="M62 96 L36 112 L22 318 L48 322 L70 150 Z" fill="url(#patJ)"/>
+            <path d="M238 96 L264 112 L278 318 L252 322 L230 150 Z" fill="url(#patJ)"/>
+            <path d="M62 96 L120 86 L150 196 L180 86 L238 96 L234 330 Q150 344 66 330 Z" fill="url(#patJ)"/>
+            <path d="M62 96 L120 86 L150 196 L180 86 L238 96 L234 330 Q150 344 66 330 Z" fill="url(#shade)"/>
+            <path d="M120 86 L104 92 L98 124 L134 206 L150 196 Z" fill="#00000030" stroke="#ffffff22"/>
+            <path d="M180 86 L196 92 L202 124 L166 206 L150 196 Z" fill="#00000030" stroke="#ffffff22"/>
+            <path d="M84 270 L124 270 M176 270 L216 270 M172 146 L204 144" stroke="#00000055" stroke-width="2"/>
+            <circle cx="150" cy="232" r="5" fill="#2A1C12"/><circle cx="150" cy="266" r="5" fill="#2A1C12"/>
+            <path d="M22 318 L48 322 M278 318 L252 322" stroke="#00000044" stroke-width="2"/>
+          </g>
+        </svg>
+        <div class="tags" id="tags">
+          <div class="tag t1" id="tag1"><i></i><span><b data-i18n="lk_jacket">Пиджак</b><span class="tv"></span></span></div>
+          <div class="tag t2" id="tag2"><i></i><span><b data-i18n="lk_trousers">Брюки</b><span class="tv"></span></span></div>
+          <div class="tag t4" id="tag4"><i></i><span><b data-i18n="lk_shirt">Рубашка</b><span class="tv"></span></span></div>
+          <div class="tag t3" id="tag3"><i></i><span><b data-i18n="lk_shoes">Обувь</b><span class="tv"></span></span></div>
+        </div>
+      </div>
+      <div class="look-side rv" style="--d:1">
+        <div class="label" data-i18n="lk_label">Образ месяца</div>
+        <h2 class="title" data-i18n="lk_title">Соберите свой костюм</h2>
+        <p data-i18n="lk_text">Выберите ткань пиджака и брюк, рубашку и обувь. Образ сразу появится на фигуре, а к вашему визиту мастер подготовит выбранные ткани.</p>
+        <div class="rows">
+          <div><div class="row-l" data-i18n="lk_jacket">Пиджак</div><div class="rail" id="railJ"></div></div>
+          <div><div class="row-l" data-i18n="lk_trousers">Брюки</div><div class="rail" id="railT"></div></div>
+          <div><div class="row-l" data-i18n="lk_shirt">Рубашка</div><div class="rail" id="railS"></div></div>
+          <div><div class="row-l" data-i18n="lk_shoes">Обувь</div><div class="rail" id="railO"></div></div>
+        </div>
+        <div class="look-total"><span class="label" data-i18n="lk_total">Образ целиком</span><b id="lkTotal"></b></div>
+        <div><a class="btn btn-accent" href="#booking" id="lkBook" data-i18n="lk_book">Записаться с этим образом</a></div>
+        <p class="note-s" data-i18n="lk_note">В прототипе образ нарисован. На сайте здесь будут фото вещей на модели.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tiles">
+    <div class="wrap">
+      <div class="tiles">
+        <a class="tile left rv settle" style="--d:0" href="https://www.google.com/maps/search/?api=1&query=Tumanyan+10+Yerevan" target="_blank" rel="noopener"><div class="ph dark"><img data-ph src="img/hero-boutique.jpg" alt=""><span class="ph-label">hero-boutique.jpg</span></div><div class="tile-in"><div class="label" data-i18n="t1_label">Туманяна 10</div><h3 data-i18n="t1_title">Бутик</h3><span class="btn btn-light" data-i18n="t1_btn">Как добраться</span></div></a>
+        <a class="tile left rv settle" style="--d:1" href="#fabrics"><div class="ph dark"><img data-ph src="img/fitting.jpg" alt=""><span class="ph-label">fitting.jpg</span></div><div class="tile-in"><div class="label" data-i18n="t2_label">Пошив на заказ</div><h3 data-i18n="t2_title">Ателье</h3><span class="btn btn-light" data-i18n="more">Подробнее</span></div></a>
+        <a class="tile left rv settle" style="--d:2" href="#booking" id="groomTile"><div class="ph dark"><img data-ph src="img/groom.jpg" alt=""><span class="ph-label">groom.jpg</span></div><div class="tile-in"><div class="label" data-i18n="t3_label">Свадьба</div><h3 data-i18n="t3_title">Для жениха</h3><span class="btn btn-light" data-i18n="more">Подробнее</span></div></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="fabrics" style="border-top:1px solid var(--line)">
+    <div class="wrap fab">
+      <div class="fab-text rv">
+        <div class="label" data-i18n="fab_label">Пошив на заказ</div>
+        <h2 class="title" data-i18n="fab_title">Библиотека тканей</h2>
+        <p data-i18n="fab_text">Итальянская, английская и австралийская шерсть, кашемир, лён и шёлк. Выберите ткань, а мы сошьём из неё костюм по вашим меркам.</p>
+        <div class="filters">
+          <div class="frow" id="fSeason"><span data-i18n="f_season">Сезон</span></div>
+          <div class="frow" id="fComp"><span data-i18n="f_comp">Состав</span></div>
+        </div>
+        <div class="detail" aria-live="polite">
+          <div class="d-cloth" id="dCloth"></div>
+          <h3 id="dName"></h3>
+          <dl class="specs">
+            <dt data-i18n="d_comp">Состав</dt><dd id="dComp"></dd>
+            <dt data-i18n="d_weight">Вес</dt><dd id="dWeight" class="num"></dd>
+            <dt data-i18n="d_origin">Страна</dt><dd id="dOrigin"></dd>
+            <dt data-i18n="d_season">Сезон</dt><dd id="dSeason"></dd>
+          </dl>
+          <div class="detail-price"><span class="label" data-i18n="d_price">Костюм из этой ткани</span><b id="dPrice"></b></div>
+          <div><a class="btn btn-accent" href="#booking" id="dBook" data-i18n="d_book">Записаться с этой тканью</a></div>
+        </div>
+      </div>
+      <div class="rv" style="--d:1">
+        <div class="count" id="fCount"></div>
+        <div class="swatches" id="swGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="guests" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head row rv">
+        <h2 class="title" data-i18n="g_title">Гости Elite Man</h2>
+        <span class="label" data-i18n="g_sub">Видео из Instagram</span>
+      </div>
+      <div class="journal">
+        <a class="jcard big rv" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener">
+          <div class="ph"><span class="ph-label">reel · 4:3</span></div>
+          <div class="jbody"><h3 data-i18n="j1_t">Открытие бутика на Туманяна 10</h3><p data-i18n="j1_d">Elite Man официально открылся в Ереване: деловые костюмы, повседневная одежда, смокинги и обувь.</p><span class="more" data-i18n="watch">Смотреть</span></div>
+        </a>
+        <div class="jsmall">
+          <a class="jcard rv" style="--d:1" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener"><div class="ph"></div><div class="jbody"><h3 data-i18n="j2_t">Шерсть Super 140S и роговые пуговицы</h3><span class="more" data-i18n="watch">Смотреть</span></div></a>
+          <a class="jcard rv" style="--d:2" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener"><div class="ph"></div><div class="jbody"><h3 data-i18n="j3_t">Кашемир и бархат</h3><span class="more" data-i18n="watch">Смотреть</span></div></a>
+          <a class="jcard rv" style="--d:3" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener"><div class="ph"></div><div class="jbody"><h3 data-i18n="j4_t">Гость бутика</h3><span class="more" data-i18n="watch">Смотреть</span></div></a>
+          <a class="jcard rv" style="--d:4" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener"><div class="ph"></div><div class="jbody"><h3 data-i18n="j5_t">Классика и кэжуал</h3><span class="more" data-i18n="watch">Смотреть</span></div></a>
+        </div>
+      </div>
+      <div class="center-btn"><a class="btn btn-dark" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener" data-i18n="g_all">Все видео в Instagram</a></div>
+    </div>
+  </section>
+
+  <section class="statement" id="statement" aria-label="Statement">
+    <div class="marquee" aria-hidden="true"><div class="track" id="track"></div></div>
+    <div class="wrap">
+      <p class="big-words" id="bigWords"></p>
+      <span class="label" data-i18n="st_label">Elite Man · Туманяна 10 · Ереван</span>
+    </div>
+  </section>
+
+  <section id="instagram">
+    <div class="wrap">
+      <div class="sec-head row rv">
+        <div><div class="label">@elitemanyerevan</div><h2 class="title" data-i18n="ig_title">Мы в Instagram</h2></div>
+        <a class="btn btn-dark" href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener" data-i18n="ig_follow">Подписаться</a>
+      </div>
+      <div class="ig-row rv" id="igRow" style="--d:1"></div>
+    </div>
+  </section>
+
+  <section class="booking-band" id="booking">
+    <div class="wrap booking">
+      <div class="sec-head rv">
+        <div class="label" data-i18n="b_label">Запись</div>
+        <h2 class="title" data-i18n="b_title">Запишитесь на примерку</h2>
+        <p data-i18n="b_sub">Выберите день и время. Мы подтвердим запись в WhatsApp.</p>
+      </div>
+      <div class="rv" style="--d:1">
+        <form class="form" id="form" novalidate>
+          <div class="fld">
+            <label for="fService" data-i18n="b_service">Услуга</label>
+            <select id="fService">
+              <option value="rtw" data-i18n="o_rtw">Примерка готовой коллекции</option>
+              <option value="mtm" data-i18n="o_mtm">Пошив на заказ</option>
+              <option value="wed" data-i18n="o_wed">Свадебный образ</option>
+            </select>
+          </div>
+          <div class="fld"><span data-i18n="b_day">День</span><div class="days" id="days"></div></div>
+          <div class="fld"><span data-i18n="b_time">Время</span><div class="times" id="times"></div></div>
+          <div class="two">
+            <div class="fld"><label for="fName" data-i18n="b_name">Имя</label><input id="fName" autocomplete="name"></div>
+            <div class="fld"><label for="fPhone" data-i18n="b_phone">Телефон</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="+374"></div>
+          </div>
+          <div class="fld"><label for="fNote" data-i18n="b_note">Комментарий</label><textarea id="fNote" data-i18n-ph="b_note_ph" placeholder="Например, ткань или повод"></textarea></div>
+          <p class="err" id="err" role="alert"></p>
+          <div><button class="btn btn-accent" type="submit" data-i18n="b_submit">Отправить заявку</button></div>
+        </form>
+        <div class="form done" id="done" hidden>
+          <div class="label" data-i18n="b_label">Запись</div>
+          <h3 id="doneTitle"></h3>
+          <p class="proto" data-i18n="b_proto">Это прототип: заявка никуда не отправляется. На рабочем сайте она придёт в WhatsApp бутика.</p>
+          <div><button class="btn btn-dark" type="button" id="again" data-i18n="b_again">Новая заявка</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="qv" id="qv" role="dialog" aria-modal="true" aria-labelledby="qvName" hidden>
+  <div class="qv-top"><div class="wrap">
+    <span class="logo" style="text-align:left"><b style="font-size:18px">Elite Man</b></span>
+    <button class="icon-btn" type="button" id="qvClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
+  </div></div>
+  <div class="wrap qv-grid">
+    <div class="qv-left">
+      <div class="label" data-i18n="season">Осень–зима 2026</div>
+      <h2 id="qvName"></h2>
+      <div class="p-price" id="qvPrice"></div>
+      <p id="qvDesc"></p>
+    </div>
+    <div class="qv-img" id="qvImgs"><div class="ph"><img data-ph id="qvImg" src="" alt=""><span class="ph-label" id="qvLabel"></span></div><div class="ph"><img data-ph id="qvImg2" src="" alt=""><span class="ph-label" id="qvLabel2"></span></div></div>
+    <div class="qv-right">
+      <div><div class="row-l" data-i18n="qv_size">Размер</div><div class="sizes" id="qvSizes"></div></div>
+      <a class="btn btn-accent" href="#booking" id="qvBook" data-i18n="band_btn">Записаться на примерку</a>
+      <a class="btn btn-dark" href="https://wa.me/37499404066" target="_blank" rel="noopener" data-i18n="qv_ask">Спросить в WhatsApp</a>
+      <dl class="qv-specs">
+        <dt data-i18n="d_comp">Состав</dt><dd id="qvComp"></dd>
+        <dt data-i18n="qv_lining">Подкладка</dt><dd id="qvLining"></dd>
+        <dt data-i18n="qv_buttons">Пуговицы</dt><dd id="qvButtons"></dd>
+        <dt data-i18n="qv_fit">Подгонка</dt><dd data-i18n="qv_fit_v">В ателье бутика</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="wrap also">
+    <h3 class="blur-title" id="alsoTitle"></h3>
+    <div class="also-grid" id="alsoGrid"></div>
+  </div>
+</div>
+
+<footer id="contacts">
+  <div class="wrap">
+    <div class="fcols">
+      <div>
+        <h4>Elite Man Yerevan</h4>
+        <p data-i18n="f_about">Мужские костюмы из итальянских, английских и австралийских тканей. Готовая коллекция и пошив на заказ.</p>
+      </div>
+      <div>
+        <h4 data-i18n="f_clients">Покупателям</h4>
+        <ul>
+          <li><a href="#booking" data-i18n="cta_book">Записаться</a></li>
+          <li><a href="#look" data-i18n="nav_look">Образ месяца</a></li>
+          <li><a href="#fabrics" data-i18n="nav_fabrics">Ткани</a></li>
+          <li><a href="#tiles" data-i18n="nav_groom">Жениху</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="f_contacts">Контакты</h4>
+        <ul>
+          <li data-i18n="addr">Ереван, ул. Туманяна, 10</li>
+          <li><span class="num" id="phone">+374 99 40 40 66</span><button class="copy" type="button" id="copyPhone" data-i18n="copy">Копировать</button></li>
+          <li><a href="https://wa.me/37499404066" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><span data-i18n="hours">Ежедневно 11:00–20:00</span> <span data-i18n="sample">(для примера)</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="f_follow">Следите за нами</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/elitemanyerevan/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Tumanyan+10+Yerevan" target="_blank" rel="noopener" data-i18n="map">Открыть в картах</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbottom"><span>© 2026 Elite Man Yerevan</span><span data-i18n="foot">Прототип от WebSpace</span></div>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-accent" href="#booking" data-i18n="cta_book">Записаться</a>
+  <a class="btn btn-dark" href="https://wa.me/37499404066" target="_blank" rel="noopener">WhatsApp</a>
+</div>
+
+<script>
+(function () {
+  var T = {
+    ru: {
+      ribbon: "Прототип главной страницы · фото временные, цены для примера",
+      cta_book: "Записаться", tab_book: "Записаться на примерку",
+      nav_collection: "Коллекция", nav_look: "Образ месяца", nav_atelier: "Пошив на заказ", nav_fabrics: "Ткани", nav_groom: "Жениху", nav_guests: "Гости Elite Man", nav_contacts: "Контакты",
+      hero_title: "Коллекция осень–зима 2026", hero_sub: "Итальянские ткани, ереванское ателье.", hero_btn: "Смотреть коллекцию",
+      season: "Осень–зима 2026", prod_title: "Костюмы для города", quick: "Быстрый просмотр",
+      p1: "Синий костюм в меловую полоску", p2: "Пальто цвета кэмел с кашемиром", p3: "Пиджак в клетку «Принц Уэльский»", p4: "Чёрный смокинг с атласными лацканами",
+      p1d: "Двубортный костюм из итальянской шерсти Super 130S. Для деловых встреч, ужинов и важных дней.", p2d: "Однобортное пальто из шерсти с кашемиром. Тёплое, лёгкое и хорошо держит форму.", p3d: "Пиджак из английской шерсти в классическую клетку. Подойдёт и к брюкам, и к джинсам.", p4d: "Смокинг из английской шерсти с атласными лацканами. Для свадьбы и торжественных вечеров.",
+      p1c: "100% шерсть Super 130S, Италия", p2c: "90% шерсть, 10% кашемир, Италия", p3c: "100% шерсть, Англия", p4c: "100% шерсть Super 130S, Англия",
+      lin_silk: "Шёлк и вискоза", lin_visc: "Вискоза", btn_horn: "Натуральный рог", btn_satin: "Обтянуты атласом",
+      qv_size: "Размер", qv_ask: "Спросить в WhatsApp", qv_lining: "Подкладка", qv_buttons: "Пуговицы", qv_fit: "Подгонка", qv_fit_v: "В ателье бутика", also: "Вам может понравиться",
+      band_label: "Туманяна 10 · Ереван", band_title: "Пошив по вашим меркам", band_btn: "Записаться на примерку",
+      cat_suits: "Костюмы", cat_tuxedo: "Смокинги", cat_coats: "Верхняя одежда", view: "Смотреть",
+      ig_title: "Мы в Instagram", ig_follow: "Подписаться",
+      lk_label: "Образ месяца", lk_title: "Соберите свой костюм", lk_text: "Выберите ткань пиджака и брюк, рубашку и обувь. Образ сразу появится на фигуре, а к вашему визиту мастер подготовит выбранные ткани.",
+      lk_jacket: "Пиджак", lk_trousers: "Брюки", lk_shirt: "Рубашка", lk_shoes: "Обувь", lk_total: "Образ целиком", lk_book: "Записаться с этим образом",
+      lk_note: "В прототипе образ нарисован. На сайте здесь будут фото вещей на модели.",
+      lk_note_photo: "Фото образа в прототипе сгенерированы. Для сайта снимем вещи бутика на модели в той же позе.",
+      lk_booknote: "Образ: пиджак «{j}», брюки «{t}», {s} рубашка, {o}",
+      sh_white: "белая", sh_blue: "голубая", sh_pink: "розовая", sh_black: "чёрная", sh_ivory: "молочная",
+      sho_black: "чёрные оксфорды", sho_brown: "коричневые оксфорды", sho_tan: "светло-коричневые лоферы",
+      t1_label: "Туманяна 10", t1_title: "Бутик", t1_btn: "Как добраться",
+      t2_label: "Пошив на заказ", t2_title: "Ателье", t3_label: "Свадьба", t3_title: "Для жениха", more: "Подробнее",
+      fab_label: "Пошив на заказ", fab_title: "Библиотека тканей",
+      fab_text: "Итальянская, английская и австралийская шерсть, кашемир, лён и шёлк. Выберите ткань, а мы сошьём из неё костюм по вашим меркам.",
+      f_season: "Сезон", f_comp: "Состав", all: "Все", aw: "Осень–зима", ss: "Весна–лето", yr: "Круглый год",
+      wool: "Шерсть", cashmere: "С кашемиром", linen: "Лён",
+      count: "Тканей: {n}", none: "Таких тканей пока нет. Попробуйте другой фильтр.",
+      d_comp: "Состав", d_weight: "Вес", d_origin: "Страна", d_season: "Сезон", d_price: "Костюм из этой ткани", d_book: "Записаться с этой тканью",
+      gm: "г/м", it: "Италия", en: "Англия", au: "Австралия", fabric_note: "Ткань: {name}",
+      g_title: "Гости Elite Man", g_sub: "Видео из Instagram", watch: "Смотреть", g_all: "Все видео в Instagram",
+      j1_t: "Открытие бутика на Туманяна 10", j1_d: "Elite Man официально открылся в Ереване: деловые костюмы, повседневная одежда, смокинги и обувь.",
+      j2_t: "Шерсть Super 140S и роговые пуговицы", j3_t: "Кашемир и бархат", j4_t: "Гость бутика", j5_t: "Классика и кэжуал",
+      st_words: "Сшито в Ереване по вашим меркам.", st_label: "Elite Man · Туманяна 10 · Ереван",
+      b_label: "Запись", b_title: "Запишитесь на примерку", b_sub: "Выберите день и время. Мы подтвердим запись в WhatsApp.",
+      b_service: "Услуга", o_rtw: "Примерка готовой коллекции", o_mtm: "Пошив на заказ", o_wed: "Свадебный образ",
+      b_day: "День", b_time: "Время", b_name: "Имя", b_phone: "Телефон", b_note: "Комментарий", b_note_ph: "Например, ткань или повод",
+      b_submit: "Отправить заявку", e_slot: "Выберите день и время.", e_contact: "Укажите имя и телефон.",
+      b_done: "Спасибо, {name}! Мы приняли заявку на {date}, {time}.",
+      b_proto: "Это прототип: заявка никуда не отправляется. На рабочем сайте она придёт в WhatsApp бутика.", b_again: "Новая заявка",
+      f_about: "Мужские костюмы из итальянских, английских и австралийских тканей. Готовая коллекция и пошив на заказ.",
+      f_clients: "Покупателям", f_contacts: "Контакты", f_follow: "Следите за нами",
+      addr: "Ереван, ул. Туманяна, 10", hours: "Ежедневно 11:00–20:00", sample: "(для примера)", map: "Открыть в картах",
+      copy: "Копировать", copied: "Скопировано", selected: "Выделено", foot: "Прототип от WebSpace"
+    },
+    hy: {
+      ribbon: "Գլխավոր էջի նախատիպ · լուսանկարները ժամանակավոր են, գները՝ օրինակի համար",
+      cta_book: "Գրանցվել", tab_book: "Գրանցվել այցի",
+      nav_collection: "Հավաքածու", nav_look: "Ամսվա կերպարը", nav_atelier: "Պատվերով կարում", nav_fabrics: "Գործվածքներ", nav_groom: "Փեսային", nav_guests: "Elite Man-ի հյուրերը", nav_contacts: "Կապ",
+      hero_title: "Աշուն–ձմեռ 2026 հավաքածու", hero_sub: "Իտալական գործվածքներ, երևանյան ատելյե։", hero_btn: "Դիտել հավաքածուն",
+      season: "Աշուն–ձմեռ 2026", prod_title: "Քաղաքային կոստյումներ", quick: "Արագ դիտում",
+      p1: "Կապույտ կոստյում՝ կավճե գծերով", p2: "Ուղտագույն վերարկու՝ քաշմիրով", p3: "«Ուելսի արքայազն» վանդակավոր պիջակ", p4: "Սև սմոքինգ՝ ատլասե օձիքով",
+      p1d: "Երկշարք կոճակներով կոստյում՝ իտալական Super 130S բրդից։ Գործնական հանդիպումների, ընթրիքների և կարևոր օրերի համար։", p2d: "Միաշարք կոճակներով վերարկու՝ բրդից և քաշմիրից։ Տաք է ու թեթև, լավ է պահում ձևը։", p3d: "Պիջակ անգլիական բրդից՝ դասական վանդակով։ Կարելի է կրել և՛ տաբատի, և՛ ջինսի հետ։", p4d: "Սմոքինգ անգլիական բրդից՝ ատլասե օձիքով։ Հարսանիքի և հանդիսավոր երեկոների համար։",
+      p1c: "100% բուրդ Super 130S, Իտալիա", p2c: "90% բուրդ, 10% քաշմիր, Իտալիա", p3c: "100% բուրդ, Անգլիա", p4c: "100% բուրդ Super 130S, Անգլիա",
+      lin_silk: "Մետաքս և վիսկոզա", lin_visc: "Վիսկոզա", btn_horn: "Բնական եղջյուր", btn_satin: "Ատլասապատ",
+      qv_size: "Չափս", qv_ask: "Հարցնել WhatsApp-ով", qv_lining: "Աստառ", qv_buttons: "Կոճակներ", qv_fit: "Հարմարեցում", qv_fit_v: "Բուտիկի ատելյեում", also: "Ձեզ կարող է հետաքրքրել նաև",
+      band_label: "Թումանյան 10 · Երևան", band_title: "Կարում՝ ըստ ձեր չափսերի", band_btn: "Գրանցվել այցի",
+      cat_suits: "Կոստյումներ", cat_tuxedo: "Սմոքինգներ", cat_coats: "Վերնահագուստ", view: "Դիտել",
+      ig_title: "Մենք Instagram-ում", ig_follow: "Հետևել",
+      lk_label: "Ամսվա կերպարը", lk_title: "Կազմեք ձեր կոստյումը", lk_text: "Ընտրեք պիջակի և տաբատի գործվածքը, վերնաշապիկն ու կոշիկները։ Կերպարն անմիջապես կերևա նկարում, իսկ ձեր այցին վարպետը կպատրաստի ընտրված գործվածքները։",
+      lk_jacket: "Պիջակ", lk_trousers: "Տաբատ", lk_shirt: "Վերնաշապիկ", lk_shoes: "Կոշիկներ", lk_total: "Ամբողջ կերպարը", lk_book: "Գրանցվել այս կերպարով",
+      lk_note: "Նախատիպում կերպարը գծանկար է։ Իրական կայքում այստեղ կլինեն իրերի լուսանկարները՝ մոդելի վրա։",
+      lk_note_photo: "Նախատիպում կերպարի լուսանկարները գեներացված են։ Կայքի համար բուտիկի իրերը կնկարենք մոդելի վրա՝ նույն դիրքով։",
+      lk_booknote: "Կերպար՝ պիջակ «{j}», տաբատ «{t}», {s} վերնաշապիկ, {o}",
+      sh_white: "սպիտակ", sh_blue: "երկնագույն", sh_pink: "վարդագույն", sh_black: "սև", sh_ivory: "կաթնագույն",
+      sho_black: "սև օքսֆորդներ", sho_brown: "շագանակագույն օքսֆորդներ", sho_tan: "բաց շագանակագույն լոֆերներ",
+      t1_label: "Թումանյան 10", t1_title: "Բուտիկ", t1_btn: "Ինչպես հասնել",
+      t2_label: "Պատվերով կարում", t2_title: "Ատելյե", t3_label: "Հարսանիք", t3_title: "Փեսայի համար", more: "Մանրամասն",
+      fab_label: "Պատվերով կարում", fab_title: "Գործվածքների ընտրանի",
+      fab_text: "Իտալական, անգլիական և ավստրալիական բուրդ, քաշմիր, վուշ և մետաքս։ Ընտրեք գործվածքը, և մենք դրանից կկարենք կոստյում՝ ըստ ձեր չափսերի։",
+      f_season: "Սեզոն", f_comp: "Բաղադրություն", all: "Բոլորը", aw: "Աշուն–ձմեռ", ss: "Գարուն–ամառ", yr: "Ամբողջ տարին",
+      wool: "Բուրդ", cashmere: "Քաշմիրով", linen: "Վուշ",
+      count: "Գործվածքներ՝ {n}", none: "Այս ընտրությամբ գործվածքներ դեռ չկան։ Փորձեք այլ ֆիլտր։",
+      d_comp: "Բաղադրություն", d_weight: "Քաշ", d_origin: "Երկիր", d_season: "Սեզոն", d_price: "Կոստյում այս գործվածքից", d_book: "Գրանցվել այս գործվածքով",
+      gm: "գ/մ", it: "Իտալիա", en: "Անգլիա", au: "Ավստրալիա", fabric_note: "Գործվածք՝ {name}",
+      g_title: "Elite Man-ի հյուրերը", g_sub: "Տեսանյութեր Instagram-ից", watch: "Դիտել", g_all: "Բոլոր տեսանյութերը Instagram-ում",
+      j1_t: "Բուտիկի բացումը Թումանյան 10-ում", j1_d: "Elite Man-ը պաշտոնապես բացվել է Երևանում։ Գործնական կոստյումներ, ամենօրյա հագուստ, սմոքինգներ և կոշիկներ։",
+      j2_t: "Super 140S բուրդ և եղջյուրե կոճակներ", j3_t: "Քաշմիր և թավիշ", j4_t: "Բուտիկի հյուրը", j5_t: "Դասական և ամենօրյա ոճ",
+      st_words: "Կարված է Երևանում՝ ըստ ձեր չափսերի։", st_label: "Elite Man · Թումանյան 10 · Երևան",
+      b_label: "Գրանցում", b_title: "Գրանցվեք այցի", b_sub: "Ընտրեք օրը և ժամը։ Գրանցումը կհաստատենք WhatsApp-ով։",
+      b_service: "Ծառայություն", o_rtw: "Պատրաստի հավաքածուի փորձում", o_mtm: "Պատվերով կարում", o_wed: "Հարսանեկան կերպար",
+      b_day: "Օր", b_time: "Ժամ", b_name: "Անուն", b_phone: "Հեռախոս", b_note: "Մեկնաբանություն", b_note_ph: "Օրինակ՝ գործվածքը կամ առիթը",
+      b_submit: "Ուղարկել հայտը", e_slot: "Ընտրեք օրը և ժամը։", e_contact: "Նշեք ձեր անունը և հեռախոսահամարը։",
+      b_done: "Շնորհակալություն, {name}։ Ձեր հայտն ընդունված է՝ {date}-ին, ժամը {time}-ին։",
+      b_proto: "Սա նախատիպ է, և հայտը ոչ մի տեղ չի ուղարկվում։ Իրական կայքում այն կստացվի բուտիկի WhatsApp-ում։", b_again: "Նոր հայտ",
+      f_about: "Տղամարդկանց կոստյումներ իտալական, անգլիական և ավստրալիական գործվածքներից։ Պատրաստի հավաքածու և պատվերով կարում։",
+      f_clients: "Հաճախորդներին", f_contacts: "Կապ", f_follow: "Հետևեք մեզ",
+      addr: "Երևան, Թումանյան 10", hours: "Ամեն օր՝ 11:00–20:00", sample: "(օրինակի համար)", map: "Բացել քարտեզում",
+      copy: "Պատճենել", copied: "Պատճենվեց", selected: "Ընտրված է", foot: "Նախատիպը պատրաստել է WebSpace-ը"
+    },
+    en: {
+      ribbon: "Homepage prototype · temporary photos, sample prices",
+      cta_book: "Book", tab_book: "Book a fitting",
+      nav_collection: "Collection", nav_look: "Look of the month", nav_atelier: "Made to measure", nav_fabrics: "Fabrics", nav_groom: "For the groom", nav_guests: "Elite Man guests", nav_contacts: "Contact",
+      hero_title: "Autumn–Winter 2026 Collection", hero_sub: "Italian cloth, an atelier in Yerevan.", hero_btn: "Discover the collection",
+      season: "Autumn–Winter 2026", prod_title: "Tailoring for the city", quick: "Quick view",
+      p1: "Navy chalk-stripe suit", p2: "Camel overcoat with cashmere", p3: "Prince of Wales check jacket", p4: "Black tuxedo with satin lapels",
+      p1d: "A double-breasted suit in Italian Super 130S wool. For meetings, dinners and the days that matter.", p2d: "A single-breasted overcoat in wool and cashmere. Warm and light, and it holds its shape.", p3d: "An English wool jacket in a classic check. Wear it with tailored trousers or with jeans.", p4d: "A tuxedo in English wool with satin lapels. For weddings and black-tie evenings.",
+      p1c: "100% Super 130S wool, Italy", p2c: "90% wool, 10% cashmere, Italy", p3c: "100% wool, England", p4c: "100% Super 130S wool, England",
+      lin_silk: "Silk and viscose", lin_visc: "Viscose", btn_horn: "Natural horn", btn_satin: "Satin-covered",
+      qv_size: "Size", qv_ask: "Ask on WhatsApp", qv_lining: "Lining", qv_buttons: "Buttons", qv_fit: "Alterations", qv_fit_v: "In our boutique atelier", also: "You may also like",
+      band_label: "10 Tumanyan · Yerevan", band_title: "Made to your measurements", band_btn: "Book a fitting",
+      cat_suits: "Suits", cat_tuxedo: "Tuxedos", cat_coats: "Outerwear", view: "View",
+      ig_title: "Follow us on Instagram", ig_follow: "Follow",
+      lk_label: "Look of the month", lk_title: "Build your suit", lk_text: "Choose the cloth for the jacket and trousers, then a shirt and shoes. The look comes together on the figure as you go, and your tailor will have the cloth ready for your visit.",
+      lk_jacket: "Jacket", lk_trousers: "Trousers", lk_shirt: "Shirt", lk_shoes: "Shoes", lk_total: "Complete look", lk_book: "Book with this look",
+      lk_note: "In this prototype the look is an illustration. The live site will show the pieces photographed on a model.",
+      lk_note_photo: "The photos in this prototype are generated. For the live site we will shoot the boutique's own pieces on a model in the same pose.",
+      lk_booknote: "Look: jacket “{j}”, trousers “{t}”, {s} shirt, {o}",
+      sh_white: "white", sh_blue: "light blue", sh_pink: "pink", sh_black: "black", sh_ivory: "ivory",
+      sho_black: "black oxfords", sho_brown: "brown oxfords", sho_tan: "tan loafers",
+      t1_label: "10 Tumanyan", t1_title: "The boutique", t1_btn: "Get directions",
+      t2_label: "Made to measure", t2_title: "The atelier", t3_label: "Weddings", t3_title: "For the groom", more: "Discover",
+      fab_label: "Made to measure", fab_title: "The cloth library",
+      fab_text: "Italian, English and Australian wool, cashmere, linen and silk. Choose your cloth, and we'll make the suit to your measurements.",
+      f_season: "Season", f_comp: "Cloth", all: "All", aw: "Autumn–winter", ss: "Spring–summer", yr: "All year",
+      wool: "Wool", cashmere: "With cashmere", linen: "Linen",
+      count: "Cloths: {n}", none: "Nothing matches these filters yet. Try another one.",
+      d_comp: "Composition", d_weight: "Weight", d_origin: "Origin", d_season: "Season", d_price: "A suit in this cloth", d_book: "Book with this cloth",
+      gm: "g/m", it: "Italy", en: "England", au: "Australia", fabric_note: "Cloth: {name}",
+      g_title: "Elite Man guests", g_sub: "From our Instagram", watch: "Watch", g_all: "All videos on Instagram",
+      j1_t: "The boutique opens at 10 Tumanyan", j1_d: "Elite Man is now officially open in Yerevan, with business suits, casual wear, tuxedos and shoes.",
+      j2_t: "Super 140S wool and horn buttons", j3_t: "Cashmere and velvet", j4_t: "A guest at the boutique", j5_t: "Classic and casual",
+      st_words: "Made in Yerevan, to your measurements.", st_label: "Elite Man · 10 Tumanyan · Yerevan",
+      b_label: "Appointments", b_title: "Book a fitting", b_sub: "Choose a day and time. We'll confirm on WhatsApp.",
+      b_service: "Service", o_rtw: "Ready-to-wear fitting", o_mtm: "Made to measure", o_wed: "Wedding look",
+      b_day: "Day", b_time: "Time", b_name: "Name", b_phone: "Phone", b_note: "Notes", b_note_ph: "A cloth you liked, or the occasion",
+      b_submit: "Send request", e_slot: "Please choose a day and time.", e_contact: "Please add your name and phone number.",
+      b_done: "Thank you, {name}. We've received your request for {date} at {time}.",
+      b_proto: "This is a prototype, so the request isn't sent anywhere. On the live site it will go to the boutique's WhatsApp.", b_again: "New request",
+      f_about: "Men's suits in Italian, English and Australian cloth. Ready-to-wear and made to measure.",
+      f_clients: "Clients", f_contacts: "Contact", f_follow: "Follow us",
+      addr: "10 Tumanyan St, Yerevan", hours: "Daily 11:00–20:00", sample: "(example)", map: "Open in Maps",
+      copy: "Copy", copied: "Copied", selected: "Selected", foot: "Prototype by WebSpace"
+    }
+  };
+  var LOCALE = { ru: "ru-RU", hy: "hy-AM", en: "en-GB" };
+  var HY = {
+    wd: ["Կիր", "Երկ", "Երք", "Չրք", "Հնգ", "Ուրբ", "Շբթ"],
+    wdl: ["կիրակի", "երկուշաբթի", "երեքշաբթի", "չորեքշաբթի", "հինգշաբթի", "ուրբաթ", "շաբաթ"],
+    m: ["հունվ", "փետր", "մարտ", "ապր", "մայ", "հուն", "հուլ", "օգոս", "սեպտ", "հոկտ", "նոյ", "դեկ"],
+    ml: ["հունվարի", "փետրվարի", "մարտի", "ապրիլի", "մայիսի", "հունիսի", "հուլիսի", "օգոստոսի", "սեպտեմբերի", "հոկտեմբերի", "նոյեմբերի", "դեկտեմբերի"]
+  };
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lang = "ru";
+  try { var saved = localStorage.getItem("em-lang"); if (saved && T[saved]) lang = saved; } catch (e) {}
+  function t(k, vars) {
+    var s = (T[lang] && T[lang][k]) || T.ru[k] || k;
+    if (vars) Object.keys(vars).forEach(function (v) { s = s.replace("{" + v + "}", vars[v]); });
+    return s;
+  }
+  function amd(n) {
+    if (lang === "en") return "֏" + new Intl.NumberFormat("en-US").format(n);
+    return new Intl.NumberFormat("ru-RU").format(n).replace(/ | /g, " ") + " ֏";
+  }
+  function from(n) { return lang === "en" ? "from " + amd(n) : lang === "hy" ? amd(n) + "-ից" : "от " + amd(n); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* Photo slots */
+  function watchImg(img) {
+    var box = img.parentElement, mark = function () { box.classList.add("missing"); };
+    if (img.complete && img.naturalWidth === 0 && img.getAttribute("src")) mark();
+    img.addEventListener("error", mark);
+    img.addEventListener("load", function () { box.classList.remove("missing"); });
+  }
+  document.querySelectorAll("img[data-ph]").forEach(watchImg);
+  document.querySelectorAll(".jcard .ph").forEach(function (b) { b.classList.add("missing"); });
+
+  /* Reveal on scroll */
+  var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }) : null;
+  function observe(el) { if (!io || reduce) { el.classList.add("in"); return; } io.observe(el); }
+  document.querySelectorAll(".rv").forEach(observe);
+
+  /* Hero: frames itself as you scroll; band parallax; statement words */
+  var hero = document.getElementById("hero"), heroMedia = document.getElementById("heroMedia"), heroIn = document.getElementById("heroIn");
+  /* Wordmark flies from the hero into the header logo (reference: Represent theme) */
+  var fly = document.getElementById("fly"), heroWord = hero.querySelector(".wordmark"), logoB = document.querySelector(".hdr .logo b"), hdr = document.getElementById("hdr");
+  var flyStart = null, heroSmoke = document.getElementById("heroSmoke");
+  function lerp(a, b, k) { return a + (b - a) * k; }
+  function easeIO(k) { return k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; }
+  function measureFly() {
+    var hadSmooth = heroIn.classList.contains("smooth"); heroIn.classList.remove("smooth");
+    var prev = heroIn.style.transform; heroIn.style.transform = "none";
+    var r = heroWord.getBoundingClientRect(), y = window.scrollY;
+    heroIn.style.transform = prev; void heroIn.offsetWidth; if (hadSmooth) heroIn.classList.add("smooth");
+    flyStart = { cx: r.left + r.width / 2, cy: r.top + y + r.height / 2, fs: parseFloat(getComputedStyle(heroWord).fontSize) };
+  }
+  function flyFrame(y) {
+    if (reduce || !flyStart) return;
+    var p = Math.min(1, Math.max(0, y / (hero.offsetHeight * 0.42))), e = easeIO(p);
+    var lr = logoB.getBoundingClientRect(), tfs = parseFloat(getComputedStyle(logoB).fontSize);
+    var cx = lerp(flyStart.cx, lr.left + lr.width / 2, e), cy = lerp(flyStart.cy, lr.top + lr.height / 2, e), sc = lerp(1, tfs / flyStart.fs, e);
+    fly.style.transform = "translate(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px) translate(-50%,-50%) scale(" + sc.toFixed(4) + ")";
+    hdr.classList.toggle("on-hero", p < 0.96);
+    heroIn.style.opacity = String(Math.max(0, 1 - p * 1.6));
+    heroSmoke.style.opacity = String(Math.max(0, 1 - p * 1.25));
+    heroIn.style.transform = "translateY(" + (-p * 40).toFixed(1) + "px)";
+  }
+  if (reduce) { hdr.classList.remove("on-hero"); }
+  else { document.documentElement.classList.add("has-fly"); fly.hidden = false; }
+  var band = document.getElementById("atelier"), bandImg = band.querySelector("img");
+  var statement = document.getElementById("statement"), words = [];
+  function onScroll() {
+    (function () {
+      if (reduce) return;
+      var vh = window.innerHeight, y = window.scrollY;
+      var hp = Math.min(1, Math.max(0, y / (hero.offsetHeight * 0.9)));
+      heroMedia.style.setProperty("--hs", (1.06 - hp * 0.06).toFixed(3));
+      flyFrame(y);
+      var br = band.getBoundingClientRect();
+      if (br.bottom > 0 && br.top < vh) { var bp = (br.top + br.height / 2 - vh / 2) / vh; bandImg.style.setProperty("--py", (bp * -60).toFixed(1) + "px"); }
+      var sr = statement.getBoundingClientRect();
+      if (sr.top < vh && sr.bottom > 0 && words.length) {
+        var sp = Math.min(1, Math.max(0, (vh * 0.85 - sr.top) / (sr.height * 0.75)));
+        var lit = sp * (words.length + 1);
+        words.forEach(function (w, i) { w.style.setProperty("--o", Math.min(1, Math.max(0.2, lit - i)).toFixed(2)); });
+      }
+    })();
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  function renderWords() {
+    var p = document.getElementById("bigWords"); p.innerHTML = "";
+    words = t("st_words").split(" ").map(function (w) { var s = document.createElement("span"); s.textContent = w + " "; p.appendChild(s); return s; });
+    if (reduce) words.forEach(function (w) { w.style.setProperty("--o", "1"); });
+    onScroll();
+  }
+
+  /* Drawer */
+  var drawer = document.getElementById("drawer"), menuBtn = document.getElementById("menuBtn");
+  function setMenu(open) { drawer.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); }
+  menuBtn.addEventListener("click", function () { setMenu(true); });
+  document.getElementById("menuClose").addEventListener("click", function () { setMenu(false); });
+  document.getElementById("menuScrim").addEventListener("click", function () { setMenu(false); });
+  drawer.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
+
+  /* Procedural cloth */
+  function rng(seed) { var s = seed % 2147483647; if (s <= 0) s += 2147483646; return function () { s = s * 16807 % 2147483647; return (s - 1) / 2147483646; }; }
+  function sizeCanvas(cv, fw, fh) {
+    var r = Math.min(window.devicePixelRatio || 1, 2), w = fw || cv.clientWidth || 300, h = fh || cv.clientHeight || 300;
+    cv.width = Math.round(w * r); cv.height = Math.round(h * r);
+    var ctx = cv.getContext("2d"); ctx.setTransform(r, 0, 0, r, 0, 0); return { ctx: ctx, w: w, h: h };
+  }
+  function noise(ctx, w, h, amt, seed) {
+    var R = rng(seed || 7), n = Math.round(w * h * amt);
+    for (var i = 0; i < n; i++) { var x = R() * w, y = R() * h, l = R();
+      ctx.fillStyle = l > .5 ? "rgba(255,255,255," + (0.03 + R() * 0.05) + ")" : "rgba(0,0,0," + (0.05 + R() * 0.08) + ")";
+      ctx.fillRect(x, y, 1, 1 + R() * 1.6); }
+  }
+  function twill(ctx, w, h, col, step, alpha) {
+    ctx.strokeStyle = col; ctx.globalAlpha = alpha; ctx.lineWidth = 1;
+    for (var x = -h; x < w; x += step) { ctx.beginPath(); ctx.moveTo(x, h); ctx.lineTo(x + h, 0); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  }
+  function drawCloth(cv, f, scale, fw, fh) {
+    var o = sizeCanvas(cv, fw, fh), ctx = o.ctx, w = o.w, h = o.h, s = scale || 1, c = f.c;
+    ctx.fillStyle = c[0]; ctx.fillRect(0, 0, w, h);
+    switch (f.p) {
+      case "herringbone":
+        var col = 14 * s;
+        for (var cx = 0; cx < w; cx += col) { var dir = Math.round(cx / col) % 2 ? 1 : -1;
+          ctx.save(); ctx.beginPath(); ctx.rect(cx, 0, col, h); ctx.clip(); ctx.strokeStyle = c[1]; ctx.lineWidth = 2 * s; ctx.globalAlpha = .55;
+          for (var y = -col; y < h + col; y += 4 * s) { ctx.beginPath(); ctx.moveTo(cx, y); ctx.lineTo(cx + col, y + dir * col * .9); ctx.stroke(); }
+          ctx.restore(); }
+        ctx.globalAlpha = 1; break;
+      case "glen":
+        twill(ctx, w, h, c[1], 3 * s, .25); ctx.fillStyle = c[1]; ctx.globalAlpha = .28; var big = 48 * s;
+        for (var gx = 0; gx < w; gx += big) for (var gy = 0; gy < h; gy += big) { ctx.fillRect(gx, gy, big / 2, big / 2); ctx.fillRect(gx + big / 2, gy + big / 2, big / 2, big / 2); }
+        ctx.globalAlpha = .35; ctx.fillStyle = c[2];
+        for (var lx = 0; lx < w; lx += big) ctx.fillRect(lx + big * .73, 0, 1.2 * s, h);
+        for (var ly = 0; ly < h; ly += big) ctx.fillRect(0, ly + big * .73, w, 1.2 * s);
+        ctx.globalAlpha = 1; break;
+      case "chalk":
+        twill(ctx, w, h, c[1], 3 * s, .18);
+        for (var sx = 10 * s; sx < w; sx += 26 * s) { var gr = ctx.createLinearGradient(sx - 3 * s, 0, sx + 3 * s, 0);
+          gr.addColorStop(0, "rgba(0,0,0,0)"); gr.addColorStop(.5, c[2]); gr.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = gr; ctx.globalAlpha = .55; ctx.fillRect(sx - 3 * s, 0, 6 * s, h); }
+        ctx.globalAlpha = 1; break;
+      case "pin":
+        twill(ctx, w, h, c[1], 3 * s, .2); ctx.fillStyle = c[2]; ctx.globalAlpha = .75;
+        for (var px = 6 * s; px < w; px += 15 * s) for (var py = 0; py < h; py += 3 * s) ctx.fillRect(px, py, 1 * s, 2 * s);
+        ctx.globalAlpha = 1; break;
+      case "flannel": noise(ctx, w, h, 0.9, 11); noise(ctx, w, h, 0.5, 23); break;
+      case "plain": twill(ctx, w, h, c[1], 2.5 * s, .22); break;
+      case "hound":
+        var u = 10 * s; ctx.fillStyle = c[1];
+        for (var ux = -u; ux < w + u; ux += u) for (var uy = -u; uy < h + u; uy += u) { ctx.beginPath();
+          ctx.moveTo(ux, uy); ctx.lineTo(ux + u / 2, uy); ctx.lineTo(ux + u, uy + u / 2); ctx.lineTo(ux + u, uy + u);
+          ctx.lineTo(ux + u / 2, uy + u / 2); ctx.lineTo(ux + u / 2, uy + u); ctx.lineTo(ux, uy + u / 2); ctx.closePath(); ctx.globalAlpha = .55; ctx.fill(); }
+        ctx.globalAlpha = 1; break;
+      case "window":
+        twill(ctx, w, h, c[1], 3 * s, .2); ctx.fillStyle = c[2]; ctx.globalAlpha = .6;
+        for (var wx = 20 * s; wx < w; wx += 56 * s) ctx.fillRect(wx, 0, 1.5 * s, h);
+        for (var wy = 20 * s; wy < h; wy += 56 * s) ctx.fillRect(0, wy, w, 1.5 * s);
+        ctx.globalAlpha = 1; break;
+      case "linen":
+        var R = rng(31);
+        for (var ln = 0; ln < h; ln += 2 * s) { ctx.fillStyle = R() > .5 ? c[1] : c[2]; ctx.globalAlpha = .12 + R() * .2; ctx.fillRect(0, ln, w, (0.6 + R() * 1.2) * s); }
+        for (var lv = 0; lv < w; lv += 2.2 * s) { ctx.fillStyle = c[1]; ctx.globalAlpha = .08 + R() * .12; ctx.fillRect(lv, 0, (0.5 + R()) * s, h); }
+        ctx.globalAlpha = 1; break;
+      case "barathea":
+        for (var bx = 0; bx < w; bx += 3 * s) for (var by = (bx / (3 * s)) % 2 ? 0 : 1.5 * s; by < h; by += 3 * s) { ctx.fillStyle = c[1]; ctx.globalAlpha = .35; ctx.fillRect(bx, by, 1.4 * s, 1.4 * s); }
+        ctx.globalAlpha = 1; break;
+    }
+    noise(ctx, w, h, f.p === "flannel" ? 0.2 : 0.35, 3);
+    var sh = ctx.createLinearGradient(0, 0, w, h); sh.addColorStop(0, "rgba(255,255,255,0.06)"); sh.addColorStop(1, "rgba(0,0,0,0.16)");
+    ctx.fillStyle = sh; ctx.fillRect(0, 0, w, h);
+  }
+  var urlCache = {};
+  function clothURL(f, size) {
+    var key = f.id + "-" + size; if (urlCache[key]) return urlCache[key];
+    var cv = document.createElement("canvas"); drawCloth(cv, f, size / 160, size, size);
+    return (urlCache[key] = cv.toDataURL("image/jpeg", 0.85));
+  }
+  /* Cloth photo img/fabric/<id>.jpg; the drawn cloth stays as the fallback */
+  var fabOk = {};
+  function putCloth(box, f, before) {
+    function drawn(at) { var cv = document.createElement("canvas"); box.insertBefore(cv, at || null); drawCloth(cv, f, 1); }
+    if (fabOk[f.id] === false) return drawn(before);
+    var im = document.createElement("img"); im.alt = ""; im.decoding = "async"; im.draggable = false; im.style.backgroundColor = f.c[0];
+    im.addEventListener("load", function () { fabOk[f.id] = true; });
+    im.addEventListener("error", function () { fabOk[f.id] = false; if (im.parentNode === box) { drawn(im); im.remove(); } });
+    im.src = "img/fabric/" + f.id + ".jpg"; box.insertBefore(im, before || null);
+  }
+
+  /* Fabrics */
+  var FAB = [
+    { id: "f1", p: "herringbone", c: ["#1E2638", "#3A4766"], n: { ru: "Тёмно-синяя ёлочка", hy: "Մուգ կապույտ եղևնանախշ", en: "Navy herringbone" }, comp: "wool", cs: { ru: "100% шерсть, Super 120S", hy: "100% բուրդ, Super 120S", en: "100% wool, Super 120S" }, g: 280, o: "it", s: "aw", price: 690000 },
+    { id: "f2", p: "glen", c: ["#6E6C68", "#3E3C39", "#8B6F55"], n: { ru: "Клетка «Принц Уэльский»", hy: "«Ուելսի արքայազն» վանդակ", en: "Prince of Wales check" }, comp: "wool", cs: { ru: "100% шерсть, Super 110S", hy: "100% բուրդ, Super 110S", en: "100% wool, Super 110S" }, g: 300, o: "en", s: "aw", price: 720000 },
+    { id: "f3", p: "chalk", c: ["#2B2C30", "#1E1F22", "#C9C5BC"], n: { ru: "Графитовая меловая полоска", hy: "Գրաֆիտե՝ կավճե գծով", en: "Charcoal chalk stripe" }, comp: "wool", cs: { ru: "100% шерсть, Super 130S", hy: "100% բուրդ, Super 130S", en: "100% wool, Super 130S" }, g: 270, o: "it", s: "yr", price: 740000 },
+    { id: "f4", p: "pin", c: ["#1A2134", "#0F1422", "#D8D6D0"], n: { ru: "Синяя тонкая полоска", hy: "Կապույտ՝ բարակ գծով", en: "Navy pinstripe" }, comp: "wool", cs: { ru: "100% шерсть, Super 140S", hy: "100% բուրդ, Super 140S", en: "100% wool, Super 140S" }, g: 250, o: "it", s: "yr", price: 790000 },
+    { id: "f5", p: "flannel", c: ["#5A4636"], n: { ru: "Коричневая фланель", hy: "Շագանակագույն ֆլանել", en: "Brown flannel" }, comp: "wool", cs: { ru: "100% шерсть", hy: "100% բուրդ", en: "100% wool" }, g: 340, o: "en", s: "aw", price: 680000 },
+    { id: "f6", p: "plain", c: ["#A9825A", "#7E5E3E"], n: { ru: "Кэмел, шерсть с кашемиром", hy: "Ուղտագույն բուրդ՝ քաշմիրով", en: "Camel wool & cashmere" }, comp: "cashmere", cs: { ru: "90% шерсть, 10% кашемир", hy: "90% բուրդ, 10% քաշմիր", en: "90% wool, 10% cashmere" }, g: 360, o: "it", s: "aw", price: 860000 },
+    { id: "f7", p: "plain", c: ["#141A2C", "#232B44"], n: { ru: "Полночный синий", hy: "Կեսգիշերային կապույտ", en: "Midnight blue" }, comp: "wool", cs: { ru: "100% шерсть мериноса, Super 150S", hy: "100% մերինոսի բուրդ, Super 150S", en: "100% merino wool, Super 150S" }, g: 240, o: "au", s: "yr", price: 890000 },
+    { id: "f8", p: "barathea", c: ["#101012", "#2A2A2E"], n: { ru: "Чёрная смокинговая", hy: "Սև՝ սմոքինգի համար", en: "Black evening barathea" }, comp: "wool", cs: { ru: "100% шерсть, Super 130S", hy: "100% բուրդ, Super 130S", en: "100% wool, Super 130S" }, g: 260, o: "en", s: "yr", price: 850000 },
+    { id: "f9", p: "linen", c: ["#B7B4AD", "#8E8B84", "#D6D3CC"], n: { ru: "Светло-серый лён с шёлком", hy: "Բաց մոխրագույն վուշ մետաքսով", en: "Light grey linen & silk" }, comp: "linen", cs: { ru: "70% лён, 30% шёлк", hy: "70% վուշ, 30% մետաքս", en: "70% linen, 30% silk" }, g: 230, o: "it", s: "ss", price: 650000 },
+    { id: "f10", p: "hound", c: ["#CDBB9C", "#5C4A36"], n: { ru: "Песочная «гусиная лапка»", hy: "Ավազագույն «սագի թաթ»", en: "Sand houndstooth" }, comp: "cashmere", cs: { ru: "85% шерсть, 15% кашемир", hy: "85% բուրդ, 15% քաշմիր", en: "85% wool, 15% cashmere" }, g: 290, o: "it", s: "aw", price: 760000 },
+    { id: "f11", p: "window", c: ["#5D6878", "#3F4856", "#B9A283"], n: { ru: "Серо-голубое «окно»", hy: "Մոխրակապույտ «պատուհան»", en: "Grey-blue windowpane" }, comp: "wool", cs: { ru: "100% шерсть, Super 120S", hy: "100% բուրդ, Super 120S", en: "100% wool, Super 120S" }, g: 260, o: "en", s: "yr", price: 710000 },
+    { id: "f12", p: "linen", c: ["#C9B596", "#A38C69", "#E0D2B8"], n: { ru: "Бежевый лён", hy: "Բեժ վուշ", en: "Beige linen" }, comp: "linen", cs: { ru: "100% лён", hy: "100% վուշ", en: "100% linen" }, g: 250, o: "it", s: "ss", price: 620000 }
+  ];
+  var byId = {}; FAB.forEach(function (f) { byId[f.id] = f; });
+  var fSeason = "all", fComp = "all", current = FAB[0];
+  function chipRow(el, keys, getVal, setVal) {
+    el.querySelectorAll(".chip").forEach(function (c) { c.remove(); });
+    keys.forEach(function (k) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = t(k);
+      b.setAttribute("aria-pressed", String(getVal() === k));
+      b.addEventListener("click", function () { setVal(k); renderFilters(); renderSwatches(true); });
+      el.appendChild(b);
+    });
+  }
+  function renderFilters() {
+    chipRow(document.getElementById("fSeason"), ["all", "aw", "ss", "yr"], function () { return fSeason; }, function (v) { fSeason = v; });
+    chipRow(document.getElementById("fComp"), ["all", "wool", "cashmere", "linen"], function () { return fComp; }, function (v) { fComp = v; });
+  }
+  function renderSwatches(animate) {
+    var grid = document.getElementById("swGrid"); grid.innerHTML = "";
+    var list = FAB.filter(function (f) { return (fSeason === "all" || f.s === fSeason) && (fComp === "all" || f.comp === fComp); });
+    document.getElementById("fCount").textContent = t("count", { n: list.length });
+    if (!list.length) { var e = document.createElement("p"); e.className = "empty"; e.textContent = t("none"); grid.appendChild(e); return; }
+    if (list.indexOf(current) === -1) current = list[0];
+    list.forEach(function (f, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.id = "sw-" + f.id;
+      if (animate) b.style.setProperty("--d", i); else b.style.animation = "none";
+      b.setAttribute("aria-pressed", String(f === current));
+      b.innerHTML = '<small>' + esc(f.n[lang]) + '</small>';
+      b.addEventListener("click", function () { current = f; renderSwatches(false); });
+      grid.appendChild(b); putCloth(b, f, b.firstChild);
+    });
+    var f = current, dc = document.getElementById("dCloth");
+    if (dc.dataset.id !== f.id || !dc.firstChild || dc.firstChild.tagName === "CANVAS") { dc.innerHTML = ""; dc.dataset.id = f.id; putCloth(dc, f); }
+    document.getElementById("dName").textContent = f.n[lang];
+    document.getElementById("dComp").textContent = f.cs[lang];
+    document.getElementById("dWeight").textContent = f.g + " " + t("gm");
+    document.getElementById("dOrigin").textContent = t(f.o);
+    document.getElementById("dSeason").textContent = t(f.s);
+    document.getElementById("dPrice").textContent = from(f.price);
+  }
+  document.getElementById("dBook").addEventListener("click", function () {
+    document.getElementById("fService").value = "mtm";
+    document.getElementById("fNote").value = t("fabric_note", { name: current.n[lang] });
+  });
+  document.getElementById("groomTile").addEventListener("click", function () { document.getElementById("fService").value = "wed"; });
+
+  /* Products + quick view */
+  var PRODUCTS = [
+    { key: "p1", img: "product-suit.jpg", alt: "product-suit-model.jpg", price: 690000, sizes: [46, 48, 50, 52, 54, 56], lin: "lin_silk", btn: "btn_horn" },
+    { key: "p2", img: "product-coat.jpg", alt: "product-coat-model.jpg", price: 620000, sizes: [48, 50, 52, 54, 56], lin: "lin_visc", btn: "btn_horn" },
+    { key: "p3", img: "product-jacket.jpg", alt: "product-jacket-model.jpg", price: 390000, sizes: [46, 48, 50, 52, 54], lin: "lin_visc", btn: "btn_horn" },
+    { key: "p4", img: "product-tuxedo.jpg", alt: "product-tuxedo-model.jpg", price: 560000, sizes: [46, 48, 50, 52, 54, 56], lin: "lin_silk", btn: "btn_satin" }
+  ];
+  function productCard(p, i, small) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "product" + (small ? "" : " rv"); b.style.setProperty("--d", i);
+    b.innerHTML = '<div class="ph"><img data-ph src="img/' + p.img + '" alt=""><span class="ph-label">' + p.img + ' · 3:4</span>' +
+      '<div class="alt"><img data-ph src="img/' + p.alt + '" alt=""><span class="ph-label">' + p.alt + '</span></div><span class="quick">' + esc(t("quick")) + '</span></div>' +
+      '<div class="p-name">' + esc(t(p.key)) + '</div><div class="p-price">' + amd(p.price) + '</div>' +
+      (small ? "" : '<div class="p-sizes">' + p.sizes.map(function (s) { return "<span>" + s + "</span>"; }).join("") + '</div>');
+    b.addEventListener("click", function () { openQV(p); });
+    b.querySelectorAll("img").forEach(watchImg);
+    return b;
+  }
+  function renderProducts() {
+    var g = document.getElementById("products"); g.innerHTML = "";
+    PRODUCTS.forEach(function (p, i) { var c = productCard(p, i, false); g.appendChild(c); observe(c); });
+  }
+  var qv = document.getElementById("qv"), qvP = null, lastFocus = null, qvSize = null;
+  function fillQV() {
+    var p = qvP; if (!p) return;
+    document.getElementById("qvName").textContent = t(p.key);
+    document.getElementById("qvPrice").textContent = amd(p.price);
+    document.getElementById("qvDesc").textContent = t(p.key + "d");
+    document.getElementById("qvComp").textContent = t(p.key + "c");
+    document.getElementById("qvLining").textContent = t(p.lin);
+    document.getElementById("qvButtons").textContent = t(p.btn);
+    var img = document.getElementById("qvImg"); img.parentElement.classList.remove("missing"); img.src = "img/" + p.img;
+    document.getElementById("qvLabel").textContent = p.img + " · 3:4";
+    var img2 = document.getElementById("qvImg2"); img2.parentElement.classList.remove("missing"); img2.src = "img/" + p.alt;
+    document.getElementById("qvLabel2").textContent = p.alt + " · 3:4";
+    document.querySelectorAll("#qvImgs .ph").forEach(function (ph) { ph.style.animation = "none"; void ph.offsetWidth; ph.style.animation = ""; });
+    var sz = document.getElementById("qvSizes"); sz.innerHTML = "";
+    p.sizes.forEach(function (s) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "size"; b.textContent = s; b.setAttribute("aria-pressed", String(qvSize === s));
+      b.addEventListener("click", function () { qvSize = s; fillQV(); });
+      sz.appendChild(b);
+    });
+    var at = document.getElementById("alsoTitle"); at.classList.remove("in"); at.innerHTML = "";
+    Array.from(t("also")).forEach(function (ch, i) { var s = document.createElement("span"); s.textContent = ch; s.style.setProperty("--i", i); at.appendChild(s); });
+    setTimeout(function () { at.classList.add("in"); }, 450);
+    var ag = document.getElementById("alsoGrid"); ag.innerHTML = "";
+    PRODUCTS.filter(function (x) { return x !== p; }).forEach(function (x, i) { ag.appendChild(productCard(x, i, true)); });
+  }
+  function openQV(p) {
+    lastFocus = document.activeElement; qvP = p; qvSize = null;
+    qv.hidden = false; qv.scrollTop = 0; document.body.classList.add("lock");
+    fillQV(); document.getElementById("qvClose").focus();
+  }
+  function closeQV() { qv.hidden = true; document.body.classList.remove("lock"); if (lastFocus) lastFocus.focus(); }
+  document.getElementById("qvClose").addEventListener("click", closeQV);
+  document.getElementById("qvBook").addEventListener("click", function () {
+    document.getElementById("fService").value = "rtw";
+    document.getElementById("fNote").value = t(qvP.key) + (qvSize ? ", " + qvSize : "");
+    closeQV();
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (!qv.hidden) closeQV(); setMenu(false); } });
+
+  /* Look builder: photo layers from img/look/ when base.jpg is there, otherwise the drawn figure */
+  var SHIRTS = [{ k: "sh_white", c: "#F3F2EE" }, { k: "sh_blue", c: "#CBD9EA" }, { k: "sh_pink", c: "#EED8D3" }, { k: "sh_ivory", c: "#EFE6D2" }, { k: "sh_black", c: "#1C1C1E" }];
+  var SHOES = [{ k: "sho_black", c: "#121212" }, { k: "sho_brown", c: "#3B2416" }, { k: "sho_tan", c: "#8A5A36" }];
+  var DRAWN = { j: ["f4", "f1", "f3", "f2", "f6", "f7", "f10", "f9"], t: ["f4", "f3", "f5", "f7", "f8", "f11", "f9", "f12"], s: [0, 1, 2, 3, 4], o: [0, 1, 2] };
+  // Photo set: jacket-N.png / trousers-N.png / shirt-N.png / shoes-N.png follow the order of these lists
+  var PHOTO = { j: ["f4", "f1", "f3", "f2", "f6"], t: ["f4", "f3", "f2", "f7"], s: [0, 1, 4], o: [0, 1] };
+  var LAYER = { j: "jacket", t: "trousers", s: "shirt", o: "shoes" };
+  var photoMode = false, look = { j: "f4", t: "f4", s: 0, o: 0 };
+  function swatchURL(c) { var cv = document.createElement("canvas"); cv.width = cv.height = 60; var x = cv.getContext("2d"); x.fillStyle = c; x.fillRect(0, 0, 60, 60); return cv.toDataURL(); }
+  function layerSrc(key, val, thumb) { return "img/look/" + (thumb ? "thumb-" : "") + LAYER[key] + "-" + (PHOTO[key].indexOf(val) + 1) + (thumb ? ".jpg" : ".png"); }
+  var slots = {};
+  ["j", "t", "s", "o"].forEach(function (k) { slots[k] = { imgs: document.getElementById("lk" + k.toUpperCase()).querySelectorAll("img"), cur: 0, token: 0 }; });
+  function setLayer(key, src) {
+    var s = slots[key], old = s.imgs[s.cur], nx = s.imgs[1 - s.cur];
+    if (old.classList.contains("on") && old.getAttribute("src") === src) return;
+    var tok = ++s.token;
+    function show() {
+      if (tok !== s.token) return;
+      nx.style.zIndex = 2; old.style.zIndex = 1; nx.classList.add("on"); s.cur = 1 - s.cur;
+      setTimeout(function () { if (tok === s.token) old.classList.remove("on"); }, 380);
+    }
+    nx.classList.remove("on");
+    nx.onload = show;
+    nx.onerror = function () { if (tok === s.token) old.classList.remove("on"); };
+    if (nx.getAttribute("src") === src && nx.complete && nx.naturalWidth) show(); else nx.src = src;
+  }
+  function flash(id) { var g = document.getElementById(id); g.classList.remove("flash"); void g.getBBox(); g.classList.add("flash"); }
+  function pop(id) { var g = document.getElementById(id); g.classList.remove("pop"); void g.offsetWidth; g.classList.add("pop"); }
+  function round5(n) { return Math.round(n / 5000) * 5000; }
+  function renderLook(changed) {
+    var j = byId[look.j], tr = byId[look.t], sh = SHIRTS[look.s], so = SHOES[look.o];
+    if (photoMode) {
+      ["j", "t", "s", "o"].forEach(function (k) { setLayer(k, layerSrc(k, look[k])); });
+    } else {
+      document.getElementById("imgJ").setAttribute("href", clothURL(j, 120));
+      document.getElementById("imgT").setAttribute("href", clothURL(tr, 120));
+      document.getElementById("shirtV").setAttribute("fill", sh.c);
+      document.getElementById("collar").setAttribute("fill", sh.c);
+      document.getElementById("shoeL").setAttribute("fill", so.c);
+      document.getElementById("shoeR").setAttribute("fill", so.c);
+      if (changed) flash({ j: "gJacket", t: "gTrousers", s: "gShirt", o: "gShoes" }[changed]);
+    }
+    var icon = function (k, drawn) { return photoMode ? layerSrc(k, look[k], true) : drawn; };
+    var tags = [["tag1", icon("j", clothURL(j, 60)), j.n[lang]], ["tag2", icon("t", clothURL(tr, 60)), tr.n[lang]],
+      ["tag4", swatchURL(sh.c), t(sh.k)], ["tag3", icon("o", swatchURL(so.c)), t(so.k)]];
+    tags.forEach(function (x) { var el = document.getElementById(x[0]); el.querySelector("i").style.backgroundImage = "url(" + x[1] + ")"; el.querySelector(".tv").textContent = x[2]; });
+    if (changed) pop({ j: "tag1", t: "tag2", s: "tag4", o: "tag3" }[changed]);
+    var total = round5(j.price * 0.62) + round5(tr.price * 0.38) + 45000 + 150000;
+    document.getElementById("lkTotal").textContent = from(total);
+  }
+  function rail(id, items, key, makeBg, title) {
+    var r = document.getElementById(id); r.innerHTML = "";
+    items.forEach(function (val, i) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "opt" + (photoMode ? " thumb" : ""); b.id = id + "-" + i;
+      b.style.backgroundImage = "url(" + makeBg(val) + ")";
+      b.setAttribute("aria-pressed", String(look[key] === val));
+      b.setAttribute("aria-label", title(val)); b.title = title(val);
+      b.addEventListener("click", function () { if (look[key] === val) return; look[key] = val; renderRails(); renderLook(key); });
+      r.appendChild(b);
+    });
+  }
+  function renderRails() {
+    var L = photoMode ? PHOTO : DRAWN;
+    rail("railJ", L.j, "j", function (id) { return photoMode ? layerSrc("j", id, true) : clothURL(byId[id], 60); }, function (id) { return byId[id].n[lang]; });
+    rail("railT", L.t, "t", function (id) { return photoMode ? layerSrc("t", id, true) : clothURL(byId[id], 60); }, function (id) { return byId[id].n[lang]; });
+    rail("railS", L.s, "s", function (i) { return swatchURL(SHIRTS[i].c); }, function (i) { return t(SHIRTS[i].k); });
+    rail("railO", L.o, "o", function (i) { return photoMode ? layerSrc("o", i, true) : swatchURL(SHOES[i].c); }, function (i) { return t(SHOES[i].k); });
+  }
+  document.getElementById("lkBook").addEventListener("click", function () {
+    document.getElementById("fService").value = "mtm";
+    document.getElementById("fNote").value = t("lk_booknote", { j: byId[look.j].n[lang], t: byId[look.t].n[lang], s: t(SHIRTS[look.s].k), o: t(SHOES[look.o].k) });
+  });
+  (function () {
+    var probe = new Image();
+    probe.onload = function () {
+      photoMode = true;
+      ["j", "t", "s", "o"].forEach(function (k) { if (PHOTO[k].indexOf(look[k]) === -1) look[k] = PHOTO[k][0]; });
+      document.getElementById("lkBase").src = probe.src;
+      document.getElementById("lkPhoto").hidden = false;
+      document.getElementById("figure").setAttribute("hidden", "");
+      var note = document.querySelector('[data-i18n="lk_note"]');
+      if (note) { note.setAttribute("data-i18n", "lk_note_photo"); note.textContent = t("lk_note_photo"); }
+      renderRails(); renderLook();
+      setTimeout(function () { ["j", "t", "s", "o"].forEach(function (k) { PHOTO[k].forEach(function (v) { new Image().src = layerSrc(k, v); }); }); }, 1500);
+    };
+    probe.src = "img/look/base.jpg";
+  })();
+
+  /* Statement marquee */
+  function renderMarquee() {
+    var tr = document.getElementById("track"); tr.innerHTML = "";
+    FAB.concat(FAB).forEach(function (f) { putCloth(tr, f); });
+  }
+
+  /* Instagram strip with drag to scroll */
+  function renderIG() {
+    var row = document.getElementById("igRow"); row.innerHTML = "";
+    for (var i = 1; i <= 8; i++) {
+      var a = document.createElement("a"); a.className = "ig"; a.href = "https://www.instagram.com/elitemanyerevan/"; a.target = "_blank"; a.rel = "noopener";
+      a.innerHTML = '<div class="ph"><img data-ph src="img/ig-' + i + '.jpg" alt=""><span class="ph-label">ig-' + i + '.jpg</span></div>' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>';
+      row.appendChild(a); watchImg(a.querySelector("img"));
+    }
+  }
+  (function () {
+    var row = document.getElementById("igRow"), down = false, sx = 0, sl = 0, moved = false;
+    row.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse") return; down = true; moved = false; sx = e.clientX; sl = row.scrollLeft; row.classList.add("drag"); });
+    window.addEventListener("pointermove", function (e) { if (!down) return; var dx = e.clientX - sx; if (Math.abs(dx) > 4) moved = true; row.scrollLeft = sl - dx; });
+    window.addEventListener("pointerup", function () { if (!down) return; down = false; row.classList.remove("drag"); });
+    row.addEventListener("click", function (e) { if (moved) { e.preventDefault(); moved = false; } }, true);
+  })();
+
+  /* Booking */
+  var selDay = null, selTime = null, TIMES = ["11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"];
+  function dayOf(i) { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate() + i); }
+  function renderDays() {
+    var box = document.getElementById("days"); box.innerHTML = "";
+    for (var i = 1; i <= 7; i++) {
+      var d = dayOf(i), b = document.createElement("button"), wd, dm;
+      b.type = "button"; b.className = "day"; b.id = "day-" + i;
+      if (lang === "hy") { wd = HY.wd[d.getDay()]; dm = d.getDate() + " " + HY.m[d.getMonth()]; }
+      else try { wd = d.toLocaleDateString(LOCALE[lang], { weekday: "short" }); dm = d.toLocaleDateString(LOCALE[lang], { day: "numeric", month: "short" }); }
+      catch (e) { wd = ""; dm = d.getDate() + "." + (d.getMonth() + 1); }
+      b.innerHTML = "<small>" + wd + "</small>" + dm; b.dataset.i = i; b.setAttribute("aria-pressed", String(selDay === i));
+      b.addEventListener("click", function () { selDay = +this.dataset.i; selTime = null; renderDays(); renderTimes(); });
+      box.appendChild(b);
+    }
+  }
+  function renderTimes() {
+    var box = document.getElementById("times"); box.innerHTML = "";
+    TIMES.forEach(function (tm, k) {
+      var b = document.createElement("button"); b.type = "button"; b.className = "time num"; b.textContent = tm; b.id = "time-" + k;
+      if (selDay && ((selDay * 3 + k) % 5 === 0)) b.disabled = true;
+      b.setAttribute("aria-pressed", String(selTime === tm));
+      b.addEventListener("click", function () { selTime = tm; renderTimes(); });
+      box.appendChild(b);
+    });
+  }
+  function dayLabel(i) {
+    var d = dayOf(i);
+    if (lang === "hy") return HY.wdl[d.getDay()] + ", " + HY.ml[d.getMonth()] + " " + d.getDate();
+    try { return d.toLocaleDateString(LOCALE[lang], { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return d.toDateString(); }
+  }
+  var form = document.getElementById("form"), done = document.getElementById("done"), err = document.getElementById("err");
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var name = document.getElementById("fName").value.trim(), phone = document.getElementById("fPhone").value.trim();
+    if (!selDay || !selTime) { err.textContent = t("e_slot"); return; }
+    if (!name || phone.replace(/\D/g, "").length < 6) { err.textContent = t("e_contact"); return; }
+    err.textContent = "";
+    document.getElementById("doneTitle").textContent = t("b_done", { name: name, date: dayLabel(selDay), time: selTime });
+    form.hidden = true; done.hidden = false;
+  });
+  document.getElementById("again").addEventListener("click", function () {
+    form.reset(); selDay = null; selTime = null; renderDays(); renderTimes(); done.hidden = true; form.hidden = false;
+  });
+
+  /* Copy phone */
+  var copyBtn = document.getElementById("copyPhone");
+  copyBtn.addEventListener("click", function () {
+    var el = document.getElementById("phone"), text = el.textContent.trim();
+    var reset = function () { setTimeout(function () { copyBtn.textContent = t("copy"); }, 1600); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copyBtn.textContent = t("selected"); reset(); };
+    try { navigator.clipboard.writeText(text).then(function () { copyBtn.textContent = t("copied"); reset(); }, fallback); } catch (e) { fallback(); }
+  });
+
+  /* Language */
+  function applyLang() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll("[data-i18n-ph]").forEach(function (el) { el.placeholder = t(el.dataset.i18nPh); });
+    document.querySelectorAll(".langs button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+    renderProducts(); renderFilters(); renderSwatches(false); renderDays(); renderTimes(); renderRails(); renderLook(); renderWords();
+    if (!qv.hidden) fillQV();
+    if (!done.hidden && selDay) document.getElementById("doneTitle").textContent = t("b_done", { name: document.getElementById("fName").value.trim(), date: dayLabel(selDay), time: selTime });
+  }
+  document.querySelectorAll(".langs button").forEach(function (b) {
+    b.addEventListener("click", function () { lang = b.dataset.lang; try { localStorage.setItem("em-lang", lang); } catch (e) {} applyLang(); });
+  });
+
+  applyLang(); renderMarquee(); renderIG(); measureFly(); onScroll();
+  /* Smooth follow: turn on transitions only after the first placement, so the logo does not slide in from a corner */
+  setTimeout(function () { if (!reduce) { fly.classList.add("smooth"); heroIn.classList.add("smooth"); } }, 120);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measureFly(); onScroll(); });
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(function () { renderSwatches(false); renderMarquee(); measureFly(); onScroll(); }, 150); });
+})();
+</script>
