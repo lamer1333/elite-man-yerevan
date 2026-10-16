@@ -191,6 +191,7 @@ section[id], [id].anchor { scroll-margin-top: calc(var(--hh) + 16px); }
 .fld { display: grid; gap: 8px; min-width: 0; }
 .fld > label, .fld > span { font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .fld input, .fld select, .fld textarea { font: 300 15px/1.4 var(--sans); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; padding: 12px 13px; width: 100%; min-width: 0; }
+@media (pointer: coarse) { .fld input, .fld select, .fld textarea { font-size: 16px; } } /* iOS Safari zooms into fields under 16px */
 .fld textarea { min-height: 80px; resize: vertical; }
 .fld input:focus, .fld select:focus, .fld textarea:focus { outline: none; border-color: var(--ink); }
 .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
